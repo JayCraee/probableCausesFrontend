@@ -1,3 +1,5 @@
+Group object example is implemented as an example of uses of the sample API initially.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
