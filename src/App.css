@@ -30,3 +30,8 @@
     transform: rotate(360deg);
   }
 }
+
+/* added later for sample*/
+.container, .container-fluid {
+  margin-top: 20px;
+}
