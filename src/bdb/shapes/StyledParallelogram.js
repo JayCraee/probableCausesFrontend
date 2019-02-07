@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Line} from 'react-konva';
 
-class StyledRect extends Component {
+class StyledParallelogram extends Component {
   render() {
     let points = [
       this.props.shift,
