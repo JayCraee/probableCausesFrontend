@@ -3,21 +3,24 @@ import {Line} from 'react-konva';
 
 class StyledDiamond extends Component {
   render() {
+    let width = 100;
+    let height = 70;
+
     let points = [
-      this.props.width/2,
+      width/2,
       0,
-      this.props.width,
-      this.props.height/2,
-      this.props.width/2,
-      this.props.height,
+      width,
+      height/2,
+      width/2,
+      height,
       0,
-      this.props.height/2
+      height/2
     ];
 
     return (
       <Line
-        x={100}
-        y={100}
+        x={200}
+        y={200}
         points={points}
         tension={0}
         closed
@@ -29,3 +32,5 @@ class StyledDiamond extends Component {
     )
   }
 }
+
+export default StyledDiamond;

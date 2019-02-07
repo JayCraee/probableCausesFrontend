@@ -5,13 +5,15 @@ class StyledEllipse extends Component {
   render() {
     return (
       <Circle
-        x={0}
-        y={0}
+        x={100}
+        y={100}
         radius={1}
         fill="green"
-        xscale={100}
-        yscale={50}
+        scaleX={100}
+        scaleY={50}
       />
     )
   }
 }
+
+export default StyledEllipse;

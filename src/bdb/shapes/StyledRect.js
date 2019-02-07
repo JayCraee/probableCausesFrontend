@@ -5,9 +5,9 @@ class StyledRect extends Component {
   render() {
     return (
       <Rect
-        x={100}
+        x={200}
         y={20}
-        width={100}
+        width={150}
         height={100}
         fill="red"
         shadowBlur={10}
@@ -15,3 +15,5 @@ class StyledRect extends Component {
     )
   }
 }
+
+export default StyledRect;
