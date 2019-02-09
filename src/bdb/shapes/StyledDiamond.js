@@ -29,7 +29,7 @@ class StyledDiamond extends Component {
         fillLinearGradientEndPoint={{ x: 50, y: 50 }}
         fillLinearGradientColorStops={[0, "red", 1, "yellow"]}
       />
-    )
+    );
   }
 }
 

@@ -12,7 +12,7 @@ class StyledRect extends Component {
         fill="red"
         shadowBlur={10}
       />
-    )
+    );
   }
 }
 
