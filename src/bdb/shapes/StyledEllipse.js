@@ -3,16 +3,18 @@ import {Circle} from 'react-konva';
 
 class StyledEllipse extends Component {
   render() {
+    let scaleX = Math.floor(this.props.width*0.5);
+    let scaleY = Math.floor(this.props.height*0.5);
     return (
       <Circle
-        x={100}
-        y={100}
+        x={this.props.x}
+        y={this.props.y}
         radius={1}
         fill="green"
-        scaleX={100}
-        scaleY={50}
+        scaleX={scaleX}
+        scaleY={scaleY}
       />
-    )
+    );
   }
 }
 
