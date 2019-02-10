@@ -4,9 +4,13 @@ import InputPane from "./InputPane";
 class QueryPane extends Component {
   render() {
     return (
-      <div>
-        <InputPane/>
-      </div>
+      <table id="query-pane-table">
+        <tbody>
+          <tr>
+            <InputPane/>
+          </tr>
+        </tbody>
+      </table>
     )
   }
 }

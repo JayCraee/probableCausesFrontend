@@ -11,7 +11,7 @@ class InputPane extends Component {
     const diagramWidth = Math.floor(width*5/6);
 
     return (
-      <table id="input-pane-table">
+      <table>
         <tbody>
           <tr>
             <td><SideMenuPane width={sideMenuWidth} height={height}/></td>

@@ -36,6 +36,7 @@
   margin-top: 20px;
 }
 
-table#input-pane-table {
+table#query-pane-table tr {
   border: 1px solid black;
+  border-collapse: collapse;
 }
