@@ -3,10 +3,10 @@ import {Line} from 'react-konva';
 
 class StyledParallelogram extends Component {
   render() {
-    let width = this.props.width;
-    let height = this.props.height;
-    let shift = Math.floor(width*0.1);
-    let points = [
+    const width = this.props.width;
+    const height = this.props.height;
+    const shift = Math.floor(width*0.1);
+    const points = [
       shift,
       0,
       width + shift,

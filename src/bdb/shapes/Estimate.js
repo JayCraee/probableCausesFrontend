@@ -5,34 +5,34 @@ import Expression from './Expression';
 
 class Estimate extends Component {
   render() {
-    let x=50;
-    let y=50;
-    let width=400;
-    let height=100;
-    let text="ESTIMATE";
+    const x=50;
+    const y=50;
+    const width=400;
+    const height=100;
+    const text="ESTIMATE";
 
-    let textHorizontalIndent=0.06;
-    let textHorizontalOffset=0.1;
-    let textVerticalOffset=0.13;
+    const textHorizontalIndent=0.06;
+    const textHorizontalOffset=0.1;
+    const textVerticalOffset=0.13;
 
 
-    let expressionHorizontalOffset=0.07;
-    let expressionVerticalOffset=0.45;
-    let expressionHorizontalScale=0.9;
-    let expressionVerticalScale=0.5;
+    const expressionHorizontalOffset=0.07;
+    const expressionVerticalOffset=0.45;
+    const expressionHorizontalScale=0.9;
+    const expressionVerticalScale=0.5;
 
-    let parallelogramX=x;
-    let parallelogramY=y;
-    let textX=x+Math.floor(width*textHorizontalOffset);
-    let textY=y+Math.floor(height*textVerticalOffset);
-    let expressionX=x+Math.floor(width*expressionHorizontalOffset);
-    let expressionY=y+Math.floor(height*expressionVerticalOffset);
+    const parallelogramX=x;
+    const parallelogramY=y;
+    const textX=x+Math.floor(width*textHorizontalOffset);
+    const textY=y+Math.floor(height*textVerticalOffset);
+    const expressionX=x+Math.floor(width*expressionHorizontalOffset);
+    const expressionY=y+Math.floor(height*expressionVerticalOffset);
 
-    let parallelogramWidth=width;
-    let parallelogramHeight=height;
-    let textWidth = Math.floor(width*(1-2*textHorizontalIndent));
-    let expressionWidth = Math.floor(width*expressionHorizontalScale);
-    let expressionHeight = Math.floor(height*expressionVerticalScale);
+    const parallelogramWidth=width;
+    const parallelogramHeight=height;
+    const textWidth = Math.floor(width*(1-2*textHorizontalIndent));
+    const expressionWidth = Math.floor(width*expressionHorizontalScale);
+    const expressionHeight = Math.floor(height*expressionVerticalScale);
 
     return (
       <Group>

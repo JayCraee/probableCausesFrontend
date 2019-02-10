@@ -3,10 +3,10 @@ import {Line} from 'react-konva';
 
 class StyledDiamond extends Component {
   render() {
-    let width = 100;
-    let height = 70;
+    const width = 100;
+    const height = 70;
 
-    let points = [
+    const points = [
       width/2,
       0,
       width,

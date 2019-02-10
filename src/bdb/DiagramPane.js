@@ -4,8 +4,8 @@ import Estimate from './shapes/Estimate'
 
 class DiagramPane extends Component {
   render() {
-    let width = this.props.width;
-    let height = this.props.height;
+    const width = this.props.width;
+    const height = this.props.height;
     return (
       <Stage width={width} height={height}>
         <Layer>
