@@ -7,7 +7,7 @@ class QueryPane extends Component {
       <table id="query-pane-table">
         <tbody>
           <tr>
-            <InputPane/>
+            <td><InputPane/></td>
           </tr>
         </tbody>
       </table>
