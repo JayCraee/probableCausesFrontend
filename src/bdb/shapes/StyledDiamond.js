@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
-import {Line} from 'react-konva';
+import {Line, Text, Group} from 'react-konva';
 
 class StyledDiamond extends Component {
   render() {
-    const width = 100;
-    const height = 70;
+    const x = this.props.x;
+    const y = this.props.y;
+    const text = this.props.text;
+    const width = 200;
+    const height = 140;
+
+    const textXOffset = 0.1;
+    const textYOffset = 0.3;
+
+    const textX = x + Math.floor(width*textXOffset);
+    const textY = y + Math.floor(width*textYOffset);
+    const textWidth = Math.floor(width*(1-2*(textXOffset)));
 
     const points = [
       width/2,
@@ -18,17 +28,20 @@ class StyledDiamond extends Component {
     ];
 
     return (
-      <Line
-        x={200}
-        y={200}
-        points={points}
-        tension={0}
-        closed
-        stroke="black"
-        fillLinearGradientStartPoint={{ x: -50, y: -50 }}
-        fillLinearGradientEndPoint={{ x: 50, y: 50 }}
-        fillLinearGradientColorStops={[0, "red", 1, "yellow"]}
-      />
+      <Group>
+        <Line
+          x={x}
+          y={y}
+          points={points}
+          tension={0}
+          closed
+          stroke="black"
+          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
+          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
+          fillLinearGradientColorStops={[0, "red", 1, "yellow"]}
+        />
+        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth} align="center"/>
+      </Group>
     );
   }
 }
