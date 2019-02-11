@@ -30,7 +30,7 @@ class Expression extends Component {
     return (
       <Group>
         <StyledEllipse x={ellipseX} y={ellipseY} width={width} height={height}/>
-        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth}/>
+        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth} align="center"/>
       </Group>
     )
   }
