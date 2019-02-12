@@ -15,7 +15,7 @@ class StyledEllipse extends Component {
         x={this.props.x}
         y={this.props.y}
         radius={1}
-        fill="green"
+        fill="#e3ecf2"
         scaleX={scaleX}
         scaleY={scaleY}
       />

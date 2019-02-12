@@ -41,11 +41,9 @@ class StyledDiamond extends Component {
           tension={0}
           closed
           stroke="black"
-          fillLinearGradientStartPoint={{ x: -50, y: -50 }}
-          fillLinearGradientEndPoint={{ x: 50, y: 50 }}
-          fillLinearGradientColorStops={[0, "red", 1, "yellow"]}
+          fill="#7EBAD9"
         />
-        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth} align="center"/>
+        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth} align="center" fill="#e3ecf2"/>
       </Group>
     );
   }

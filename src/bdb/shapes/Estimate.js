@@ -45,7 +45,7 @@ class Estimate extends Component {
     return (
       <Group>
         <StyledParallelogram x={parallelogramX} y={parallelogramY} width={parallelogramWidth} height={parallelogramHeight}/>
-        <Text x={textX} y={textY} text={text} fontSize={24} fontStyle="bold" fill="white" width={textWidth} align="center"/>
+        <Text x={textX} y={textY} text={text} fontSize={24} fontStyle="bold" fill="#e3ecf2" width={textWidth} align="center"/>
         <Expression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression="HelloHHHHiiiiHHHHHH,worldddddddddd" wrap/>
       </Group>
     );

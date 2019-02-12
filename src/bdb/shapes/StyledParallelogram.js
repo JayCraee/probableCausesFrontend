@@ -27,7 +27,7 @@ class StyledParallelogram extends Component {
         x={this.props.x}
         y={this.props.y}
         points={points}
-        fill="blue"
+        fill="#7EBAD9"
         tension={0}
         closed
         stroke="black"
