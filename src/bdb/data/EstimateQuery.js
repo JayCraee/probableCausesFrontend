@@ -1,3 +1,7 @@
+import Query from './Query';
+import OverwriteError from './error/OverwriteError';
+import UndefinedVariableError from './error/UndefinedVariableError';
+
 class EstimateQuery extends Query {
   constructor() {
     super('ESTIMATE');
@@ -90,3 +94,5 @@ class EstimateQuery extends Query {
     return this._expression.limitSupported;
   }
 }
+
+export default EstimateQuery;

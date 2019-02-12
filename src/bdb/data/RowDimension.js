@@ -1,3 +1,7 @@
+import OverwriteError from "./error/OverwriteError";
+import OptionNotSupportedError from "./error/OptionNotSupportedError";
+import UndefinedVariableError from "./error/UndefinedVariableError";
+
 class RowDimension {
   constructor() {
     this._fixedRows = 0;
@@ -46,14 +50,14 @@ class RowDimension {
     if (this.row1Chosen()) {
       return this._row1Fixed;
     } else {
-      throw new OptionNotSupportedError('row1 has not been chosen')
+      throw new UndefinedVariableError('row1 has not been chosen')
     }
   }
   get row2Fixed() {
     if (this.row2Chosen()) {
       return this._row2Fixed;
     } else {
-      throw new OptionNotSupportedError('row2 has not been chosen')
+      throw new UndefinedVariableError('row2 has not been chosen')
     }
   }
 
@@ -124,3 +128,5 @@ class RowDimension {
   }
 
 }
+
+export default RowDimension;

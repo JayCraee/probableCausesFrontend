@@ -1,3 +1,5 @@
+import RowDimension from "./RowDimension";
+
 class SimilarityExpression extends Expression {
   constructor() {
     super('SIMILARITY');
@@ -74,3 +76,5 @@ class SimilarityExpression extends Expression {
     return this._dimension.limitSupported;
   }
 }
+
+export default SimilarityExpression;

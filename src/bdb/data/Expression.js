@@ -10,3 +10,5 @@ class Expression {
     return this._expression;
   }
 }
+
+export default Expression;

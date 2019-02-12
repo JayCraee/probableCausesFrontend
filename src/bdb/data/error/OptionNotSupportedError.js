@@ -4,3 +4,5 @@ class OptionNotSupportedError extends Error {
     this.name = 'OptionNotSupportedError';
   }
 }
+
+export default OptionNotSupportedError;
