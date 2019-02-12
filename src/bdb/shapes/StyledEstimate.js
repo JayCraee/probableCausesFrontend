@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Group, Text } from 'react-konva';
 import StyledParallelogram from './StyledParallelogram';
-import Expression from './Expression';
+import StyledExpression from './StyledExpression';
 
 /**
- * Konva shape to show the Estimate box
- * Consists of outer parallelogram, text of query-name, inner Expression shape
+ * Konva shape to show the StyledEstimate box
+ * Consists of outer parallelogram, text of query-name, inner StyledExpression shape
  *
  * Currently does not expose any state
  * However, if you need to set its x, y, width, height or text externally you should
  *  pass them in as props and update the render function accordingly
  */
-class Estimate extends Component {
+class StyledEstimate extends Component {
   render() {
     const x=50;
     const y=50;
@@ -46,10 +46,10 @@ class Estimate extends Component {
       <Group>
         <StyledParallelogram x={parallelogramX} y={parallelogramY} width={parallelogramWidth} height={parallelogramHeight}/>
         <Text x={textX} y={textY} text={text} fontSize={24} fontStyle="bold" fill="#e3ecf2" width={textWidth} align="center"/>
-        <Expression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression="HelloHHHHiiiiHHHHHH,worldddddddddd" wrap/>
+        <StyledExpression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression="HelloHHHHiiiiHHHHHH,worldddddddddd" wrap/>
       </Group>
     );
   }
 }
 
-export default Estimate;
+export default StyledEstimate;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Stage, Layer} from 'react-konva';
-import Expression from "./shapes/Expression";
+import StyledExpression from "./shapes/StyledExpression";
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 /**
@@ -34,7 +34,7 @@ class SideMenuPane extends Component {
         <Stage width={this.props.width} height={this.props.height}>
           <Layer>
             {expressions.map((expression, index) => (
-              <Expression key={index} x={expressionX} y={verticalSpacing*(index+0.5)} width={expressionWidth} height={expressionHeight} expression={expression}/>
+              <StyledExpression key={index} x={expressionX} y={verticalSpacing*(index+0.5)} width={expressionWidth} height={expressionHeight} expression={expression}/>
               ))}
           </Layer>
         </Stage>

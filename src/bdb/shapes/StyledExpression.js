@@ -8,7 +8,7 @@ import StyledEllipse from './StyledEllipse';
  * expression is the name of the expression
  * set wrap to true if the text goes onto two lines
  */
-class Expression extends Component {
+class StyledExpression extends Component {
   render() {
     const x = this.props.x;
     const y = this.props.y;
@@ -41,4 +41,4 @@ class Expression extends Component {
   }
 }
 
-export default Expression;
+export default StyledExpression;
