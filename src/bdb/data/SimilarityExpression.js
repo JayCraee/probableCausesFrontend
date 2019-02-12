@@ -1,4 +1,5 @@
 import RowDimension from "./RowDimension";
+import Expression from "./Expression";
 
 class SimilarityExpression extends Expression {
   constructor() {
