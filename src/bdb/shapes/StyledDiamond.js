@@ -11,14 +11,14 @@ class StyledDiamond extends Component {
     const x = this.props.x;
     const y = this.props.y;
     const text = this.props.text;
-    const width = 200;
-    const height = 140;
+    const width = 150;
+    const height = 70;
 
     const textXOffset = 0.1;
-    const textYOffset = 0.3;
+    const textYOffset = 0.35;
 
     const textX = x + Math.floor(width*textXOffset);
-    const textY = y + Math.floor(width*textYOffset);
+    const textY = y + Math.floor(height*textYOffset);
     const textWidth = Math.floor(width*(1-2*(textXOffset)));
 
     const points = [
@@ -43,7 +43,7 @@ class StyledDiamond extends Component {
           stroke="black"
           fill="#7EBAD9"
         />
-        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth} align="center" fill="#e3ecf2"/>
+        <Text x={textX} y={textY} text={text} fontSize={20} fontStyle="bold" width={textWidth} align="center" fill="#e3ecf2"/>
       </Group>
     );
   }

@@ -13,11 +13,12 @@ import StyledExpression from './StyledExpression';
  */
 class StyledEstimate extends Component {
   render() {
-    const x=50;
-    const y=50;
-    const width=400;
+    const x=125;
+    const y=200;
+    const width=250;
     const height=100;
     const text="ESTIMATE";
+    const expression=this.props.expression;
 
     const textHorizontalIndent=0.06;
     const textHorizontalOffset=0.1;
@@ -46,7 +47,7 @@ class StyledEstimate extends Component {
       <Group>
         <StyledParallelogram x={parallelogramX} y={parallelogramY} width={parallelogramWidth} height={parallelogramHeight}/>
         <Text x={textX} y={textY} text={text} fontSize={24} fontStyle="bold" fill="#e3ecf2" width={textWidth} align="center"/>
-        <StyledExpression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression="HelloHHHHiiiiHHHHHH,worldddddddddd" wrap/>
+        <StyledExpression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression={expression}/>
       </Group>
     );
   }
