@@ -16,11 +16,15 @@ class SideMenuPane extends Component {
     }
   }
 
+  wrap(expression) {
+    return (String(expression).split(" ").length > 1);
+  }
+
   renderChooseExpression() {
     //TODO: get expressions passed in from outside
     //TODO: add onClick
 
-    let expressions = ["SIMILARITY", "CORRELATION", "hello world", "hi"];
+    let expressions = ["SIMILARITY", "CORRELATION", "PREDICTIVE PROBABILITY", "DEPENDENCE"];
 
     let parentWidth = this.props.width;
     let expressionXOffsetScale = 0.1;
@@ -28,13 +32,13 @@ class SideMenuPane extends Component {
     let expressionWidth = (1-2*expressionXOffsetScale) * parentWidth;
 
     let expressionX = expressionXOffsetScale * parentWidth;
-    let verticalSpacing = Math.floor(expressionHeight*1.2);
+    let verticalSpacing = Math.floor(expressionHeight*1.4);
 
     return (
         <Stage width={this.props.width} height={this.props.height}>
           <Layer>
             {expressions.map((expression, index) => (
-              <StyledExpression key={index} x={expressionX} y={verticalSpacing*(index+0.5)} width={expressionWidth} height={expressionHeight} expression={expression}/>
+              <StyledExpression key={index} x={expressionX} y={verticalSpacing*(index+0.5)} width={expressionWidth} height={expressionHeight} expression={expression} wrap={this.wrap(expression)}/>
               ))}
           </Layer>
         </Stage>

@@ -4,11 +4,10 @@ import SideMenuPane from './SideMenuPane';
 
 class InputPane extends Component {
   render() {
-    const width = 1500;
-    const height = 500;
+    const sideMenuWidth = 250;
+    const diagramWidth = 500;
 
-    const sideMenuWidth = Math.floor(width/6);
-    const diagramWidth = Math.floor(width*5/6);
+    const height = 600;
 
     return (
       <table>
