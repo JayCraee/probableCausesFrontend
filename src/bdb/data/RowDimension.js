@@ -47,14 +47,14 @@ class RowDimension {
   }
 
   get row1Fixed() {
-    if (this.row1Chosen()) {
+    if (this.row1Chosen) {
       return this._row1Fixed;
     } else {
       throw new UndefinedVariableError('row1 has not been chosen')
     }
   }
   get row2Fixed() {
-    if (this.row2Chosen()) {
+    if (this.row2Chosen) {
       return this._row2Fixed;
     } else {
       throw new UndefinedVariableError('row2 has not been chosen')

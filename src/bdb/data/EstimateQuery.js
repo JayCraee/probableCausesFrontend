@@ -8,7 +8,7 @@ class EstimateQuery extends Query {
   }
 
   set expression(expression) {
-    if (expression === undefined) {
+    if (this._expression === undefined) {
       this._expression = expression;
     } else {
       throw new OverwriteError('expression');
@@ -20,6 +20,9 @@ class EstimateQuery extends Query {
     } else {
       return this._expression;
     }
+  }
+  get expressionName() {
+    return this._expression.expression;
   }
   get expressionChosen() {
     return !(this._expression === undefined);
@@ -52,6 +55,9 @@ class EstimateQuery extends Query {
   }
   get row2Chosen() {
     return this._expression.row2Chosen;
+  }
+  get rowsComplete() {
+    return this._expression.rowsComplete;
   }
 
   get row1Fixed() {
