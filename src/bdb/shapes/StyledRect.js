@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {Rect} from 'react-konva';
 
+/**
+ * Konva shape
+ * exposes no props currently
+ * expose the state you need as props if you want to use this...
+ */
 class StyledRect extends Component {
   render() {
     return (

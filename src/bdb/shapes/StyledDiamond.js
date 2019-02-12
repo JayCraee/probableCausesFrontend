@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {Line, Text, Group} from 'react-konva';
 
+/**
+ * Konva shape creating a diamond with corners of at the midpoints of the bounding rectangle
+ * The size of the bounding rectangle is defined by width and height
+ * Currently x, y and text are exposed as props
+ */
 class StyledDiamond extends Component {
   render() {
     const x = this.props.x;

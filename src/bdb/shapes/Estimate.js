@@ -3,6 +3,14 @@ import { Group, Text } from 'react-konva';
 import StyledParallelogram from './StyledParallelogram';
 import Expression from './Expression';
 
+/**
+ * Konva shape to show the Estimate box
+ * Consists of outer parallelogram, text of query-name, inner Expression shape
+ *
+ * Currently does not expose any state
+ * However, if you need to set its x, y, width, height or text externally you should
+ *  pass them in as props and update the render function accordingly
+ */
 class Estimate extends Component {
   render() {
     const x=50;

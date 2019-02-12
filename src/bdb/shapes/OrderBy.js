@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import StyledDiamond from './StyledDiamond'
 
+/**
+ * Konva shape
+ * Diamond that says ORDER
+ * exposes x and y as props
+ */
 class OrderBy extends Component {
   render() {
     const x = this.props.x;

@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Group, Text } from 'react-konva';
 import StyledEllipse from './StyledEllipse';
 
-
+/**
+ * Konva shape consisting of ellipse and text of expression name
+ * currently exposes x, y, width, height, expression, wrap as props
+ * expression is the name of the expression
+ * set wrap to true if the text goes onto two lines
+ */
 class Expression extends Component {
   render() {
     const x = this.props.x;

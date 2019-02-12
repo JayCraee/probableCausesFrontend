@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import StyledDiamond from './StyledDiamond'
 
+/**
+ * Konva shape
+ * Diamond that says LIMIT
+ * exposes x and y as props
+ */
 class Limit extends Component {
   render() {
     const x = this.props.x;

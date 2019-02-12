@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import {Stage, Layer} from 'react-konva';
 import Expression from "./shapes/Expression";
 
+/**
+ * Side Menu of the input pane
+ * Will show different things depending on which shape is clicked on the diagram
+ * Need to get the currently selected field from parent
+ */
 class SideMenuPane extends Component {
   renderChooseExpression() {
     let expressions = ["SIMILARITY", "CORRELATION", "hello world", "hi"];

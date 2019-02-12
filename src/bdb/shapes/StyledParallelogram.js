@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {Line} from 'react-konva';
 
+/**
+ * Konva shape
+ * Exposes x, y, width, height as props
+ * Actual width is a bit wider as it adds a lean depending on how wide the parallelogram is
+ */
 class StyledParallelogram extends Component {
   render() {
     const width = this.props.width;
