@@ -10,3 +10,5 @@ class Query {
     return this._query;
   }
 }
+
+export default Query;

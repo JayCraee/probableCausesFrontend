@@ -4,3 +4,5 @@ class OverwriteError extends Error {
     this.name = 'OverwriteError';
   }
 }
+
+export default OverwriteError;

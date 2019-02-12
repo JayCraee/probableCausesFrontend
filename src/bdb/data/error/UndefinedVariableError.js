@@ -4,3 +4,5 @@ class UndefinedVariableError extends Error {
     this.name = 'UndefinedVariableError'
   }
 }
+
+export default UndefinedVariableError;
