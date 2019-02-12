@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Stage, Layer} from 'react-konva';
 import Expression from "./shapes/Expression";
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 /**
  * Side Menu of the input pane
@@ -8,7 +9,17 @@ import Expression from "./shapes/Expression";
  * Need to get the currently selected field from parent
  */
 class SideMenuPane extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contextChosen: '',
+    }
+  }
+
   renderChooseExpression() {
+    //TODO: get expressions passed in from outside
+    //TODO: add onClick
+
     let expressions = ["SIMILARITY", "CORRELATION", "hello world", "hi"];
 
     let parentWidth = this.props.width;
@@ -30,14 +41,52 @@ class SideMenuPane extends Component {
     )
   }
 
+  /**
+   * Currently drop down is not linked to anything
+   */
+  renderInTheContextOf() {
+    //need text to show 'in the context of'
+    //and a drop down menu to show column options
+    //and an on click to update the query state
+
+    //TODO: get drop down options from schema
+    //TODO: update current query state when new dropdown item clicked
+
+    let ddOptions = ['column1', 'column2'];
+
+    return (
+      <div>
+        In the context of:
+        <UncontrolledDropdown>
+          <DropdownToggle caret>
+            {this.state.contextChosen}
+          </DropdownToggle>
+          <DropdownMenu>
+            {ddOptions.map((columnName, index) => (
+              <DropdownItem key={index} onClick={() =>
+                this.setState({
+                  contextChosen: columnName,
+                })
+              }>
+                {columnName}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </div>
+    );
+  }
+
   render() {
     const divStyle = {
       height: this.props.height+'px',
       width: this.props.width+'px',
-      backgroundColor: 'powderblue',
+      backgroundColor: '#7EBAD9',
     };
 
     const expressionButtons = this.renderChooseExpression();
+
+    // const expressionButtons = this.renderInTheContextOf();
 
     return (
       <div style={divStyle}>
