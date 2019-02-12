@@ -36,6 +36,9 @@ class SimilarityExpression extends Expression {
   get row2Chosen() {
     return this._dimension.row2Chosen;
   }
+  get rowsComplete() {
+    return this.row1Chosen && this.row2Chosen;
+  }
 
   get row1Fixed() {
     return this._dimension.row1Fixed;
