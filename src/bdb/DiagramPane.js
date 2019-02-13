@@ -3,12 +3,12 @@ import {Stage, Layer, Group, Arrow} from 'react-konva';
 import EstimateQuery from './data/EstimateQuery';
 import SimilarityExpression from "./data/SimilarityExpression";
 import StyledEstimate from "./shapes/StyledEstimate";
-import FixedFreeRect from "./shapes/FixedFreeRect";
 import StyledRect from "./shapes/StyledRect";
 import OrderBy from "./shapes/OrderBy";
 import Limit from "./shapes/Limit";
 
 class DiagramPane extends Component {
+
   renderDiagram(query) {
     const row1X = 100;
     const rowY = 30;
@@ -41,25 +41,25 @@ class DiagramPane extends Component {
           let estimate;
           if (query.contextChosen) {
             // draw estimate with expression
-            estimate = <StyledEstimate expression={query.expressionName}/>;
+            estimate = <StyledEstimate expression={query.expressionName} onClick={()=>this.props.onClick(2)}/>;
           } else {
             // draw estimate with expression plus showing that they need to complete query
-            estimate = <StyledEstimate expression={query.expressionName + " todo "}/>
+            estimate = <StyledEstimate expression={query.expressionName + " todo "} onClick={()=>this.props.onClick(2)}/>
           }
           let row1;
           if (query.row1Chosen) {
             if (query.row1Fixed) {
               // draw row1 as fixed
-              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"}/>
+              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.onClick(3)}/>
             } else {
               // draw row1 as free
-              row1 = <StyledRect x={row1X} y={rowY} text={"EVERY ROW"}/>
+              row1 = <StyledRect x={row1X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.onClick(0)}/>
             }
           } else {
             // draw row1 as an option
             row1 = <StyledRect x={row1X} y={rowY}/>
           }
-          //TODO: draw arrow to row1
+          // draw arrow to row1
           let arrowToRow1= <Arrow
             x={arrowToRow1X}
             y={arrowToRowY}
@@ -71,10 +71,10 @@ class DiagramPane extends Component {
           if (query.row2Chosen) {
             if (query.row2Fixed) {
               // draw row2 as fixed
-              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"}/>
+              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.onClick(3)}/>
             } else {
-              //TODO: draw row2 as free
-              row2 = <StyledRect x={row2X} y={rowY} text={"EVERY ROW"}/>
+              // draw row2 as free
+              row2 = <StyledRect x={row2X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.onClick(0)}/>
             }
           } else {
             // draw row2 as an option
@@ -95,7 +95,7 @@ class DiagramPane extends Component {
           if (query.rowsComplete) {
 
             // draw order by
-            let orderBy = <OrderBy x={orderByX} y={orderByY}/>;
+            let orderBy = <OrderBy x={orderByX} y={orderByY} onClick={()=>this.props.onClick(4)}/>;
 
             // draw arrow to order by
             let arrowToOrderBy = <Arrow
@@ -107,7 +107,7 @@ class DiagramPane extends Component {
             />;
 
             // draw limit
-            let limit = <Limit x={limitX} y={limitY}/>;
+            let limit = <Limit x={limitX} y={limitY} onClick={()=>this.props.onClick(5)}/>;
 
             // draw arrow to limit
             let arrowToLimit = <Arrow
@@ -142,7 +142,7 @@ class DiagramPane extends Component {
         }
       } else {
         // draw estimate without expression
-        diagram = <StyledEstimate/>;
+        diagram = <StyledEstimate onClick={()=>this.props.onClick(1)}/>;
       }
     }
     return diagram;
@@ -153,16 +153,10 @@ class DiagramPane extends Component {
     const width = this.props.width;
     const height = this.props.height;
 
-    let query = new EstimateQuery();
-    query.expression = new SimilarityExpression();
-    query.context = "column1";
-    query.row1Fixed = true;
-    query.row2Fixed = false;
-
     return (
       <Stage width={width} height={height}>
         <Layer>
-          {this.renderDiagram(query)}
+          {this.renderDiagram(this.props.query)}
         </Layer>
       </Stage>
     )
