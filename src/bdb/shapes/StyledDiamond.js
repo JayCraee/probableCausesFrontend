@@ -42,8 +42,18 @@ class StyledDiamond extends Component {
           closed
           stroke="black"
           fill="#7EBAD9"
+          onClick={this.props.onClick}
         />
-        <Text x={textX} y={textY} text={text} fontSize={20} fontStyle="bold" width={textWidth} align="center" fill="#e3ecf2"/>
+        <Text
+          x={textX}
+          y={textY}
+          text={text}
+          fontSize={20}
+          fontStyle="bold"
+          width={textWidth}
+          align="center"
+          fill="#e3ecf2"
+          onClick={this.props.onClick}/>
       </Group>
     );
   }

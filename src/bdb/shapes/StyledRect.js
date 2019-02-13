@@ -17,8 +17,18 @@ class StyledRect extends Component {
           height={100}
           stroke="black"
           fill="#7EBAD9"
+          onClick={this.props.onClick}
         />
-        <Text x={this.props.x+5} y={this.props.y+30} width={90} wrap text={this.props.text} fontSize={20} align="center" fill="#e3ecf2"/>
+        <Text
+          x={this.props.x+5}
+          y={this.props.y+30}
+          width={90}
+          wrap
+          text={this.props.text}
+          fontSize={20}
+          align="center"
+          fill="#e3ecf2"
+          onClick={this.props.onClick}/>
       </Group>
     );
   }

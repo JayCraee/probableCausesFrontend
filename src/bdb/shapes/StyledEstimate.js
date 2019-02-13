@@ -47,7 +47,7 @@ class StyledEstimate extends Component {
       <Group>
         <StyledParallelogram x={parallelogramX} y={parallelogramY} width={parallelogramWidth} height={parallelogramHeight}/>
         <Text x={textX} y={textY} text={text} fontSize={24} fontStyle="bold" fill="#e3ecf2" width={textWidth} align="center"/>
-        <StyledExpression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression={expression}/>
+        <StyledExpression x={expressionX} y={expressionY} width={expressionWidth} height={expressionHeight} expression={expression} onClick={this.props.onClick}/>
       </Group>
     );
   }

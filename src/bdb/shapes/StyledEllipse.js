@@ -18,6 +18,7 @@ class StyledEllipse extends Component {
         fill="#e3ecf2"
         scaleX={scaleX}
         scaleY={scaleY}
+        onClick={this.props.onClick}
       />
     );
   }

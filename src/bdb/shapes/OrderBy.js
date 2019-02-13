@@ -13,7 +13,7 @@ class OrderBy extends Component {
     const text = "ORDER";
 
     return (
-      <StyledDiamond x={x} y={y} text={text}/>
+      <StyledDiamond x={x} y={y} text={text} onClick={this.props.onClick}/>
     );
   }
 }
