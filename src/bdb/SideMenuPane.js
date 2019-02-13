@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Stage, Layer} from 'react-konva';
 import StyledExpression from "./shapes/StyledExpression";
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import UnsupportedSideMenuError from "./error/UnsupportedSideMenuError";
 
 /**
  * Side Menu of the input pane
@@ -16,7 +17,7 @@ class SideMenuPane extends Component {
     }
   }
 
-  wrap(expression) {
+  static wrap(expression) {
     return (String(expression).split(" ").length > 1);
   }
 
@@ -38,7 +39,16 @@ class SideMenuPane extends Component {
         <Stage width={this.props.width} height={this.props.height}>
           <Layer>
             {expressions.map((expression, index) => (
-              <StyledExpression key={index} x={expressionX} y={verticalSpacing*(index+0.5)} width={expressionWidth} height={expressionHeight} expression={expression} wrap={this.wrap(expression)}/>
+              <StyledExpression
+                key={index}
+                x={expressionX}
+                y={verticalSpacing*(index+0.5)}
+                width={expressionWidth}
+                height={expressionHeight}
+                expression={expression}
+                wrap={SideMenuPane.wrap(expression)}
+                onClick={()=>this.props.onClick(index)}
+              />
               ))}
           </Layer>
         </Stage>
@@ -81,6 +91,57 @@ class SideMenuPane extends Component {
     );
   }
 
+  renderRowBoolexpr(rowNum) {
+    return <div>RowBoolexpr{rowNum}</div>
+  }
+
+  renderOrderBy() {
+    return <div>OrderByPane</div>
+  }
+
+  renderLimit() {
+    return <div>LimitPane</div>
+  }
+
+  renderOptionPane(currentlySelected) {
+    let optionPane;
+
+    switch (currentlySelected) {
+      case 0:
+        //empty
+        optionPane = "";
+        break;
+      case 1:
+        //expression select
+        optionPane = this.renderChooseExpression();
+        break;
+      case 2:
+        //in the context of
+        optionPane = this.renderInTheContextOf();
+        break;
+      case 3:
+        //render row1 boolexpr
+        optionPane = this.renderRowBoolexpr(1);
+        break;
+      case 4:
+        //render order
+        optionPane = this.renderOrderBy();
+        break;
+      case 5:
+        //limit
+        optionPane = this.renderLimit();
+        break;
+      case 6:
+        //render row2 boolexpr
+        optionPane = this.renderRowBoolexpr(2);
+        break;
+      default:
+        throw new UnsupportedSideMenuError(currentlySelected);
+    }
+
+    return optionPane;
+  }
+
   render() {
     const divStyle = {
       height: this.props.height+'px',
@@ -88,13 +149,9 @@ class SideMenuPane extends Component {
       backgroundColor: '#7EBAD9',
     };
 
-    const expressionButtons = this.renderChooseExpression();
-
-    // const expressionButtons = this.renderInTheContextOf();
-
     return (
       <div style={divStyle}>
-        {expressionButtons}
+        {this.renderOptionPane(this.props.currentlySelected)}
       </div>
     );
 
