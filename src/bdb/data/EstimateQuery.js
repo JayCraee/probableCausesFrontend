@@ -67,6 +67,12 @@ class EstimateQuery extends Query {
     return this._expression.row2Fixed;
   }
 
+  get row1ConditionChosen() {
+    return this._expression.row1ConditionChosen;
+  }
+  get row2ConditionChosen() {
+    return this._expression.row2ConditionChosen;
+  }
   set row1Condition(condition) {
     this._expression.row1Condition = condition;
   }

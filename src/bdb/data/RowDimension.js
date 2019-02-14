@@ -8,6 +8,9 @@ class RowDimension {
 
     this._limit = 50;
     this._orderBy = 'ASC';
+
+    this._row1Condition = '';
+    this._row1Condition = '';
   }
 
   get dimensions() {
@@ -61,6 +64,12 @@ class RowDimension {
     }
   }
 
+  get row1ConditionChosen() {
+    return (this._row1Condition !== '' && this._row1Condition !== undefined);
+  }
+  get row2ConditionChosen() {
+    return (this._row2Condition !== '' && this._row2Condition !== undefined);
+  }
 
   set row1Condition(condition) {
     if (this.row1Fixed) {

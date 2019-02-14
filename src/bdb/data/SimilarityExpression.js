@@ -37,9 +37,15 @@ class SimilarityExpression extends Expression {
     return this._dimension.row2Chosen;
   }
   get rowsComplete() {
-    return this.row1Chosen && this.row2Chosen;
+    return (this.row1Chosen && (!this.row1Fixed || this.row1ConditionChosen) && this.row2Chosen && (!this.row2Fixed || this.row2ConditionChosen));
   }
 
+  get row1ConditionChosen() {
+    return this._dimension.row1ConditionChosen;
+  }
+  get row2ConditionChosen() {
+    return this._dimension.row2ConditionChosen;
+  }
   get row1Fixed() {
     return this._dimension.row1Fixed;
   }
