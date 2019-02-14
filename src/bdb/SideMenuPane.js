@@ -24,6 +24,8 @@ class SideMenuPane extends Component {
       contextChosen: '',
       limitChosen: '',
       orderChosen: '',
+      row1BoolExpr: '',
+      row2BoolExpr: '',
     };
   }
 
@@ -102,9 +104,62 @@ class SideMenuPane extends Component {
     );
   }
 
-  renderRowBoolexpr(rowNum) {
-    //TODO
-    return <div>RowBoolexpr{rowNum}</div>
+  renderRow1BoolExpr() {
+    let rowBoolExpr = '';
+    if (this.props.query.row1ConditionChosen) {
+      rowBoolExpr = this.props.query.row1Condition;
+    }
+    return (
+      <div>
+        ROW 1
+        <br/>
+        The single row that you are comparing against will be the first row of the table that matches the boolean
+        expression that you write here
+        <InputGroup className='row1Input' onChange={
+          evt=>{
+            this.setState({
+              row1BoolExpr: evt.target.value,
+            })
+          }
+        }>
+          <Input defaultValue={rowBoolExpr}/>
+        </InputGroup>
+        <Button onClick={
+          ()=>this.props.onClick(this.state.row1BoolExpr)
+        }>
+          Update
+        </Button>
+      </div>
+    )
+  }
+
+  renderRow2BoolExpr() {
+    let rowBoolExpr = '';
+    if (this.props.query.row2ConditionChosen) {
+      rowBoolExpr = this.props.query.row2Condition;
+    }
+    return (
+      <div>
+        ROW 2
+        <br/>
+        The single row that you are comparing against will be the first row of the table that matches the boolean
+        expression that you write here
+        <InputGroup className='row2Input' onChange={
+          evt=>{
+            this.setState({
+              row2BoolExpr: evt.target.value,
+            })
+          }
+        }>
+          <Input defaultValue={rowBoolExpr}/>
+        </InputGroup>
+        <Button onClick={
+          ()=>this.props.onClick(this.state.row2BoolExpr)
+        }>
+          Update
+        </Button>
+      </div>
+    )
   }
 
   renderOrderBy() {
@@ -140,7 +195,7 @@ class SideMenuPane extends Component {
         LIMIT:
         <br/>
         Enter the new number of rows of results you would like returned.
-        <InputGroup onChange={
+        <InputGroup className='limitInput' onChange={
           evt=>{
             this.setState({
               limitChosen: evt.target.value,
@@ -175,8 +230,8 @@ class SideMenuPane extends Component {
         optionPane = this.renderInTheContextOf();
         break;
       case 3:
-        //render row1 boolexpr
-        optionPane = this.renderRowBoolexpr(1);
+        //render row1 boolExpr
+        optionPane = this.renderRow1BoolExpr();
         break;
       case 4:
         //render order
@@ -187,8 +242,8 @@ class SideMenuPane extends Component {
         optionPane = this.renderLimit();
         break;
       case 6:
-        //render row2 boolexpr
-        optionPane = this.renderRowBoolexpr(2);
+        //render row2 boolExpr
+        optionPane = this.renderRow2BoolExpr();
         break;
       default:
         throw new UnsupportedSideMenuError(currentlySelected);

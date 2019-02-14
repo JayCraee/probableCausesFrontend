@@ -62,6 +62,18 @@ class QueryPane extends Component {
     });
   }
 
+  handleChangeRowBoolExpr(rowNum, boolExpr) {
+    let query = this.state.query;
+    if (rowNum === 1) {
+      query.row1Condition = boolExpr;
+    } else if (rowNum === 2) {
+      query.row2Condition = boolExpr;
+    }
+    this.setState({
+      query: query,
+    });
+  }
+
   render() {
     return (
       <table id="query-pane-table">
@@ -75,6 +87,7 @@ class QueryPane extends Component {
                 handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
                 handleChangeLimit={limit=>this.handleChangeLimit(limit)}
                 handleChangeOrderBy={order=>this.handleChangeOrderBy(order)}
+                handleChangeRowBoolExpr={(rowNum, boolExpr)=>this.handleChangeRowBoolExpr(rowNum, boolExpr)}
               />
             </td>
           </tr>

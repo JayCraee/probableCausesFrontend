@@ -15,6 +15,9 @@ class DiagramPane extends Component {
     const rowY = 30;
     const row2X = 330;
 
+    const row1Todo = (query.expressionChosen && query.row1Chosen && query.row1Fixed && !query.row1ConditionChosen);
+    const row2Todo = (query.expressionChosen && query.row2Chosen && query.row2Fixed && !query.row2ConditionChosen);
+
     const arrowToRow1X = 150;
     const arrowToRowY = 130;
     const arrowToRow1Points = [0,0,65,65];
@@ -46,13 +49,13 @@ class DiagramPane extends Component {
             estimate = <StyledEstimate expression={query.expressionName} onClick={()=>this.props.handleSelectBlock(2)}/>;
           } else {
             // draw estimate with expression plus showing that they need to complete query
-            estimate = <StyledEstimate expression={query.expressionName + " todo "} onClick={()=>this.props.handleSelectBlock(2)}/>
+            estimate = <StyledEstimate expression={query.expressionName} todo onClick={()=>this.props.handleSelectBlock(2)}/>
           }
           let row1;
           if (query.row1Chosen) {
             if (query.row1Fixed) {
               // draw row1 as fixed
-              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.handleSelectBlock(3)}/>
+              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"} todo={row1Todo} onClick={()=>this.props.handleSelectBlock(3)}/>
             } else {
               // draw row1 as free
               row1 = <StyledRect x={row1X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.handleSelectBlock(0)}/>
@@ -73,7 +76,7 @@ class DiagramPane extends Component {
           if (query.row2Chosen) {
             if (query.row2Fixed) {
               // draw row2 as fixed
-              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.handleSelectBlock(6)}/>
+              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"} todo={row2Todo} onClick={()=>this.props.handleSelectBlock(6)}/>
             } else {
               // draw row2 as free
               row2 = <StyledRect x={row2X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.handleSelectBlock(0)}/>
@@ -174,7 +177,7 @@ class DiagramPane extends Component {
         }
       } else {
         // draw estimate without expression
-        diagram = <StyledEstimate onClick={()=>this.props.handleSelectBlock(1)}/>;
+        diagram = <StyledEstimate todo onClick={()=>this.props.handleSelectBlock(1)}/>;
       }
     }
     return diagram;

@@ -28,8 +28,8 @@ class InputPane extends Component {
         //in the context of
         return (columnName => {this.props.handleChangeSimilarityContext(2, columnName)});
       case 3:
-        //TODO
-        return (() => {});
+        //row 1 boolExpr
+        return (boolExpr => {this.props.handleChangeRowBoolExpr(1, boolExpr)});
       case 4:
         //order by
         return (order => {this.props.handleChangeOrderBy(order)});
@@ -37,8 +37,8 @@ class InputPane extends Component {
         //limit
         return (value => {this.props.handleChangeLimit(value)});
       case 6:
-        //TODO
-        return (() => {});
+        //row 2 boolExpr
+        return (boolExpr => {this.props.handleChangeRowBoolExpr(2, boolExpr)});
       default:
         throw new UnsupportedSideMenuError(currentlySelected);
     }
