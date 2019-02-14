@@ -7,32 +7,35 @@ class InputPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentlySelected: 5,
+      currentlySelected: 0,
     }
-  }
-
-  handleChooseExpressionClick(expressionNumClicked) {
-    this.props.onClick(0, expressionNumClicked);
   }
 
   getSideMenuHandler(currentlySelected) {
     switch (currentlySelected) {
       case 0:
+        //empty
         return (() => {});
       case 1:
-        return (expressionNumClicked => {this.props.onClick(0, expressionNumClicked)});
+        //choose expression
+        return (expressionNumClicked => {
+          this.setState({
+            currentlySelected: 0
+          });
+          this.props.handleChooseExpression(0, expressionNumClicked);
+        });
       case 2:
-        //TODO
-        return (() => {});
+        //in the context of
+        return (columnName => {this.props.handleChangeSimilarityContext(2, columnName)});
       case 3:
         //TODO
         return (() => {});
       case 4:
-        //TODO
-        return (() => {});
+        //order by
+        return (order => {this.props.handleChangeOrderBy(order)});
       case 5:
-        //TODO
-        return (() => {});
+        //limit
+        return (value => {this.props.handleChangeLimit(value)});
       case 6:
         //TODO
         return (() => {});
@@ -41,10 +44,17 @@ class InputPane extends Component {
     }
   }
 
-  handleDiagramClick(currentlySelected) {
+  handleSelectBlock(currentlySelected) {
     this.setState({
       currentlySelected: currentlySelected,
-    })
+    });
+  }
+
+  handleFixRow(rowNum, fixed) {
+    this.setState({
+      currentlySelected: 0,
+    });
+    this.props.handleFixRow(rowNum, fixed);
   }
 
   render() {
@@ -57,18 +67,23 @@ class InputPane extends Component {
       <table>
         <tbody>
           <tr>
-            <td><SideMenuPane
-              width={sideMenuWidth}
-              height={height}
-              currentlySelected={this.state.currentlySelected}
-              onClick={this.getSideMenuHandler(this.state.currentlySelected)}
-            />
+            <td>
+              <SideMenuPane
+                width={sideMenuWidth}
+                height={height}
+                query={this.props.query}
+                currentlySelected={this.state.currentlySelected}
+                onClick={this.getSideMenuHandler(this.state.currentlySelected)}
+              />
             </td>
-            <td><DiagramPane
-              width={diagramWidth}
-              height={height}
-              onClick={i => this.handleDiagramClick(i)}
-              query={this.props.query}/>
+            <td>
+              <DiagramPane
+                width={diagramWidth}
+                height={height}
+                query={this.props.query}
+                handleSelectBlock={currentlySelected=>this.handleSelectBlock(currentlySelected)}
+                handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
+              />
             </td>
           </tr>
         </tbody>

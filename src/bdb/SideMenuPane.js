@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import {Stage, Layer} from 'react-konva';
 import StyledExpression from "./shapes/StyledExpression";
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  InputGroup,
+  Input,
+  Button
+} from 'reactstrap';
 import UnsupportedSideMenuError from "./error/UnsupportedSideMenuError";
 
 /**
@@ -14,7 +22,9 @@ class SideMenuPane extends Component {
     super(props);
     this.state = {
       contextChosen: '',
-    }
+      limitChosen: '',
+      orderChosen: '',
+    };
   }
 
   static wrap(expression) {
@@ -77,11 +87,12 @@ class SideMenuPane extends Component {
           </DropdownToggle>
           <DropdownMenu>
             {ddOptions.map((columnName, index) => (
-              <DropdownItem key={index} onClick={() =>
+              <DropdownItem key={index} onClick={() => {
                 this.setState({
                   contextChosen: columnName,
-                })
-              }>
+                });
+                this.props.onClick(columnName);
+              }}>
                 {columnName}
               </DropdownItem>
             ))}
@@ -92,15 +103,59 @@ class SideMenuPane extends Component {
   }
 
   renderRowBoolexpr(rowNum) {
+    //TODO
     return <div>RowBoolexpr{rowNum}</div>
   }
 
   renderOrderBy() {
-    return <div>OrderByPane</div>
+    let orderOptions = ['ASC', 'DESC'];
+    return (
+      <div>
+        ORDER BY:
+        <br/>
+        Enter the new direction you would like to order the rows in.
+        <UncontrolledDropdown>
+          <DropdownToggle caret>
+            {this.props.query.orderBy}
+          </DropdownToggle>
+          <DropdownMenu>
+            {orderOptions.map((order, index) => (
+              <DropdownItem key={index} onClick={() => {
+                this.setState({
+                  orderChosen: order,
+                });
+                this.props.onClick(order);
+              }}>
+                {order}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </div>)
   }
 
   renderLimit() {
-    return <div>LimitPane</div>
+    return (
+      <div>
+        LIMIT:
+        <br/>
+        Enter the new number of rows of results you would like returned.
+        <InputGroup onChange={
+          evt=>{
+            this.setState({
+              limitChosen: evt.target.value,
+            })
+          }
+        }>
+          <Input type='number' step='1' defaultValue={this.props.query.limit}/>
+        </InputGroup>
+        <Button onClick={
+          ()=>this.props.onClick(this.state.limitChosen)
+        }>
+          Update
+        </Button>
+      </div>
+    )
   }
 
   renderOptionPane(currentlySelected) {
