@@ -10,7 +10,7 @@ class Limit extends Component {
   render() {
     const x = this.props.x;
     const y = this.props.y;
-    const text = "LIMIT";
+    const text = "LIMIT to "+this.props.limit;
 
     return (
       <StyledDiamond x={x} y={y} text={text} onClick={this.props.onClick}/>

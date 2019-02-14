@@ -11,7 +11,7 @@ class StyledDiamond extends Component {
     const x = this.props.x;
     const y = this.props.y;
     const text = this.props.text;
-    const width = 150;
+    const width = 180;
     const height = 70;
 
     const textXOffset = 0.1;

@@ -10,7 +10,7 @@ class OrderBy extends Component {
   render() {
     const x = this.props.x;
     const y = this.props.y;
-    const text = "ORDER";
+    const text = "ORDER "+this.props.order;
 
     return (
       <StyledDiamond x={x} y={y} text={text} onClick={this.props.onClick}/>
