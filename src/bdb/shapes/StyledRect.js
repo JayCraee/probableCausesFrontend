@@ -8,6 +8,12 @@ import { Rect, Group, Text} from 'react-konva';
  */
 class StyledRect extends Component {
   render() {
+    let fill;
+    if (this.props.todo) {
+      fill='#ff9b9b';
+    } else {
+      fill='#7EBAD9';
+    }
     return (
       <Group>
         <Rect
@@ -16,7 +22,7 @@ class StyledRect extends Component {
           width={100}
           height={100}
           stroke="black"
-          fill="#7EBAD9"
+          fill={fill}
           onClick={this.props.onClick}
         />
         <Text
@@ -27,7 +33,7 @@ class StyledRect extends Component {
           text={this.props.text}
           fontSize={20}
           align="center"
-          fill="#e3ecf2"
+          fill='#e3ecf2'
           onClick={this.props.onClick}/>
       </Group>
     );
