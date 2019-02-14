@@ -17,6 +17,7 @@ class QueryPane extends Component {
 
     //compulsory fields
     let queryType= "", mode="", expression="", expname="ExpName", population="AFRICAN_DATA";
+    let limit="", orderBy="";
 
     if (query instanceof EstimateQuery) {
       queryType="estimate";
@@ -51,7 +52,7 @@ class QueryPane extends Component {
               if (query.row2Fixed) {
 
                 // row 1 free, row2 fixed
-                mode="FROM"
+                mode="FROM";
                 expression="SIMILARITY’TO’"+boolexpr2+"’IN’THE’CONTEXT’OF’"+column;
 
               } else {

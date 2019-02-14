@@ -8,12 +8,7 @@ import { Rect, Group, Text} from 'react-konva';
  */
 class StyledRect extends Component {
   render() {
-    let fill;
-    if (this.props.todo) {
-      fill='#ff9b9b';
-    } else {
-      fill='#7EBAD9';
-    }
+    let fill='#7EBAD9';
     return (
       <Group>
         <Rect

@@ -15,9 +15,6 @@ class DiagramPane extends Component {
     const rowY = 30;
     const row2X = 330;
 
-    const row1Todo = (query.expressionChosen && query.row1Chosen && query.row1Fixed && !query.row1ConditionChosen);
-    const row2Todo = (query.expressionChosen && query.row2Chosen && query.row2Fixed && !query.row2ConditionChosen);
-
     const arrowToRow1X = 150;
     const arrowToRowY = 130;
     const arrowToRow1Points = [0,0,65,65];
@@ -55,7 +52,7 @@ class DiagramPane extends Component {
           if (query.row1Chosen) {
             if (query.row1Fixed) {
               // draw row1 as fixed
-              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"} todo={row1Todo} onClick={()=>this.props.handleSelectBlock(3)}/>
+              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.handleSelectBlock(3)}/>
             } else {
               // draw row1 as free
               row1 = <StyledRect x={row1X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.handleSelectBlock(0)}/>
@@ -76,7 +73,7 @@ class DiagramPane extends Component {
           if (query.row2Chosen) {
             if (query.row2Fixed) {
               // draw row2 as fixed
-              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"} todo={row2Todo} onClick={()=>this.props.handleSelectBlock(6)}/>
+              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.handleSelectBlock(6)}/>
             } else {
               // draw row2 as free
               row2 = <StyledRect x={row2X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.handleSelectBlock(0)}/>

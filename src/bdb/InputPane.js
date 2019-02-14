@@ -7,7 +7,7 @@ class InputPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentlySelected: 0,
+      currentlySelected: 1,
     }
   }
 

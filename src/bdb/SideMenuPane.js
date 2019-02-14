@@ -47,7 +47,16 @@ class SideMenuPane extends Component {
     let expressionX = expressionXOffsetScale * parentWidth;
     let verticalSpacing = Math.floor(expressionHeight*1.4);
 
+    let divStyle = {
+      textAlign: 'center',
+      color: '#e3ecf2'
+    };
+
     return (
+      <div>
+        <div style={divStyle}>
+          Select a statistic
+        </div>
         <Stage width={this.props.width} height={this.props.height}>
           <Layer>
             {expressions.map((expression, index) => (
@@ -64,6 +73,7 @@ class SideMenuPane extends Component {
               ))}
           </Layer>
         </Stage>
+      </div>
     )
   }
 
