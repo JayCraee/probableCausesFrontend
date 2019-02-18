@@ -31,7 +31,7 @@ class StyledParallelogram extends Component {
         tension={0}
         closed
         stroke="black"
-        onClick={this.props.onClick}
+        //onClick={this.props.onClick}
       />
     );
   }

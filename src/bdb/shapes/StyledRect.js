@@ -18,7 +18,7 @@ class StyledRect extends Component {
           height={100}
           stroke="black"
           fill={fill}
-          onClick={this.props.onClick}
+          //onClick={this.props.onClick}
         />
         <Text
           x={this.props.x+5}
@@ -29,7 +29,8 @@ class StyledRect extends Component {
           fontSize={20}
           align="center"
           fill='#e3ecf2'
-          onClick={this.props.onClick}/>
+          //onClick={this.props.onClick}
+        />
       </Group>
     );
   }

@@ -34,8 +34,23 @@ class StyledExpression extends Component {
 
     return (
       <Group>
-        <StyledEllipse x={ellipseX} y={ellipseY} width={width} height={height} onClick={this.props.onClick}/>
-        <Text x={textX} y={textY} text={text} fontSize={20} width={textWidth} align="center" fill="#2F6690" onClick={this.props.onClick}/>
+        <StyledEllipse
+          x={ellipseX}
+          y={ellipseY}
+          width={width}
+          height={height}
+          onClick={this.props.onClick}
+        />
+        <Text
+          x={textX}
+          y={textY}
+          text={text}
+          fontSize={20}
+          width={textWidth}
+          align="center"
+          fill="#2F6690"
+          onClick={this.props.onClick}
+        />
       </Group>
     )
   }

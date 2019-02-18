@@ -42,7 +42,7 @@ class StyledDiamond extends Component {
           closed
           stroke="black"
           fill="#7EBAD9"
-          onClick={this.props.onClick}
+          //onClick={this.props.onClick}
         />
         <Text
           x={textX}
@@ -53,7 +53,8 @@ class StyledDiamond extends Component {
           width={textWidth}
           align="center"
           fill="#e3ecf2"
-          onClick={this.props.onClick}/>
+          //onClick={this.props.onClick}
+        />
       </Group>
     );
   }
