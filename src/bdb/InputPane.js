@@ -72,8 +72,13 @@ class InputPane extends Component {
                 width={sideMenuWidth}
                 height={height}
                 query={this.props.query}
-                currentlySelected={this.state.currentlySelected}
-                onClick={this.getSideMenuHandler(this.state.currentlySelected)}
+                setExpression={this.props.handleChooseExpression}
+                setContext={this.props.handleChangeSimilarityContext}
+                fixRow={this.props.handleFixRow}
+                setRow1Condition={boolExpr=>this.props.handleChangeRowBoolExpr(1, boolExpr)}
+                setRow2Condition={boolExpr=>this.props.handleChangeRowBoolExpr(2, boolExpr)}
+                setOrderBy={this.props.handleChangeOrderBy}
+                setLimit={this.props.handleChangeLimit}
               />
             </td>
             <td>
@@ -81,8 +86,8 @@ class InputPane extends Component {
                 width={diagramWidth}
                 height={height}
                 query={this.props.query}
-                handleSelectBlock={currentlySelected=>this.handleSelectBlock(currentlySelected)}
-                handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
+                //handleSelectBlock={currentlySelected=>this.handleSelectBlock(currentlySelected)}
+                //handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
               />
             </td>
           </tr>

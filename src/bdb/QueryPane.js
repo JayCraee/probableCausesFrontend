@@ -82,17 +82,17 @@ class QueryPane extends Component {
   }
 
 
-  handleChooseExpression(expressionNum) {
+  handleChooseExpression(expression) {
     let query = this.state.query;
-    switch (expressionNum) {
-      case 0:
+    switch (expression) {
+      case 'SIMILARITY':
         query.expression = new SimilarityExpression();
         this.setState({
           query: query,
         });
         break;
       default:
-        throw new UnsupportedExpressionError(expressionNum);
+        throw new UnsupportedExpressionError(expression);
     }
   }
 
@@ -152,7 +152,7 @@ class QueryPane extends Component {
           <td>
             <InputPane
               query={this.state.query}
-              handleChooseExpression={expressionNum=>this.handleChooseExpression(expressionNum)}
+              handleChooseExpression={expression=>this.handleChooseExpression(expression)}
               handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
               handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
               handleChangeLimit={limit=>this.handleChangeLimit(limit)}

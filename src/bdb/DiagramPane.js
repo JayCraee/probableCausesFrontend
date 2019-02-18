@@ -6,11 +6,12 @@ import StyledEstimate from "./shapes/StyledEstimate";
 import StyledRect from "./shapes/StyledRect";
 import OrderBy from "./shapes/OrderBy";
 import Limit from "./shapes/Limit";
-import RowChoice from "./shapes/RowChoice";
 
 class DiagramPane extends Component {
 
   renderDiagram(query) {
+    //TODO: draw context
+
     const row1X = 100;
     const rowY = 30;
     const row2X = 330;
@@ -43,23 +44,45 @@ class DiagramPane extends Component {
           let estimate;
           if (query.contextChosen) {
             // draw estimate with expression
-            estimate = <StyledEstimate expression={query.expressionName} onClick={()=>this.props.handleSelectBlock(2)}/>;
+            estimate = <StyledEstimate
+              expression={query.expressionName}
+              //onClick={()=>this.props.handleSelectBlock(2)}
+              onClick={()=>{}}
+            />;
           } else {
             // draw estimate with expression plus showing that they need to complete query
-            estimate = <StyledEstimate expression={query.expressionName} todo onClick={()=>this.props.handleSelectBlock(2)}/>
+            estimate = <StyledEstimate
+              expression={query.expressionName}
+              todo
+              //onClick={()=>this.props.handleSelectBlock(2)}
+              onClick={()=>{}}
+            />
           }
           let row1;
           if (query.row1Chosen) {
             if (query.row1Fixed) {
               // draw row1 as fixed
-              row1 = <StyledRect x={row1X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.handleSelectBlock(3)}/>
+              row1 = <StyledRect
+                x={row1X}
+                y={rowY}
+                text={"SINGLE ROW"}
+                //onClick={()=>this.props.handleSelectBlock(3)}
+              />
             } else {
               // draw row1 as free
-              row1 = <StyledRect x={row1X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.handleSelectBlock(0)}/>
+              row1 = <StyledRect
+                x={row1X}
+                y={rowY}
+                text={"EVERY ROW"}
+                //onClick={()=>this.props.handleSelectBlock(0)}
+              />
             }
           } else {
             // draw row1 as an option
-            row1 = <RowChoice x={row1X} y={rowY} onClick={fixed => this.props.handleFixRow(1, fixed)}/>
+            row1 = (<StyledRect
+              x={row1X}
+              y={rowY}
+            />)
           }
           // draw arrow to row1
           let arrowToRow1= <Arrow
@@ -73,14 +96,27 @@ class DiagramPane extends Component {
           if (query.row2Chosen) {
             if (query.row2Fixed) {
               // draw row2 as fixed
-              row2 = <StyledRect x={row2X} y={rowY} text={"SINGLE ROW"} onClick={()=>this.props.handleSelectBlock(6)}/>
+              row2 = <StyledRect
+                x={row2X}
+                y={rowY}
+                text={"SINGLE ROW"}
+                //onClick={()=>this.props.handleSelectBlock(6)}
+              />
             } else {
               // draw row2 as free
-              row2 = <StyledRect x={row2X} y={rowY} text={"EVERY ROW"} onClick={()=>this.props.handleSelectBlock(0)}/>
+              row2 = <StyledRect
+                x={row2X}
+                y={rowY}
+                text={"EVERY ROW"}
+                //onClick={()=>this.props.handleSelectBlock(0)}
+              />
             }
           } else {
             // draw row2 as an option
-            row2 = <RowChoice x={row2X} y={rowY} onClick={fixed => this.props.handleFixRow(2, fixed)}/>
+            row2 = (<StyledRect
+              x={row2X}
+              y={rowY}
+            />)
           }
 
           // draw arrow to row2
@@ -102,7 +138,7 @@ class DiagramPane extends Component {
               orderBy = <OrderBy
                 x={diamondX}
                 y={orderByY}
-                onClick={()=>this.props.handleSelectBlock(4)}
+                //onClick={()=>this.props.handleSelectBlock(4)}
                 order={this.props.query.orderBy}
               />;
 
@@ -128,7 +164,8 @@ class DiagramPane extends Component {
                 x={diamondX}
                 y={limitY}
                 limit={query.limit}
-                onClick={()=>this.props.handleSelectBlock(5)}/>;
+                //onClick={()=>this.props.handleSelectBlock(5)}
+                />;
 
               // draw arrow to limit
               arrowToLimit = <Arrow
@@ -174,7 +211,11 @@ class DiagramPane extends Component {
         }
       } else {
         // draw estimate without expression
-        diagram = <StyledEstimate todo onClick={()=>this.props.handleSelectBlock(1)}/>;
+        diagram = <StyledEstimate
+          todo
+          onClick={()=>{}}
+          //onClick={()=>this.props.handleSelectBlock(1)}
+        />;
       }
     }
     return diagram;
