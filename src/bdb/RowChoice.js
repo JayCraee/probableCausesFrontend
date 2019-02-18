@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Group } from 'react-konva';
-import StyledRect from './StyledRect';
-import ButtonShape from './ButtonShape';
+import { Button } from 'reactstrap';
 
 class RowChoice extends Component {
   render() {
@@ -17,11 +15,18 @@ class RowChoice extends Component {
     const button2Text = 'SINGLE ROW';
 
     return (
-      <Group>
-        <StyledRect x={rectX} y={rectY}/>
-        <ButtonShape x={button1X} y={button1Y} text={button1Text} onClick={()=>this.props.onClick(false)}/>
-        <ButtonShape x={button2X} y={button2Y} text={button2Text} onClick={()=>this.props.onClick(true)}/>
-      </Group>
+      <div>
+        <Button onClick={
+          () => this.props.onClick(false)
+        }>
+          {button1Text}
+        </Button>
+        <Button onClick={
+          () => this.props.onClick(true)
+        }>
+          {button2Text}
+        </Button>
+      </div>
     )
   }
 }
