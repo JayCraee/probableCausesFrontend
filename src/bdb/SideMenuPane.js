@@ -13,6 +13,7 @@ import {
 import EstimateQuery from "./data/EstimateQuery";
 import RowChoice from "./RowChoice";
 import BqlStudio from "./BqlStudio";
+import SimilarityExpression from "./data/SimilarityExpression";
 
 /**
  * Side Menu of the input pane
@@ -104,206 +105,208 @@ class SideMenuPane extends Component {
         //   </UncontrolledDropdown>
         // );
 
-        let contextText = <div className='side-menu-h2'>Context:</div>;
-        let context = '';
-        if (this.props.query.contextChosen) {
-          context = this.props.query.context;
-        }
-        let contextDropDown = (
-          <UncontrolledDropdown>
-            <DropdownToggle caret>
-              {context}
-            </DropdownToggle>
-            <DropdownMenu>
-              {SideMenuPane.getContexts().map((columnName, index) => (
-                <DropdownItem key={index} onClick={() => {
-                  this.props.setContext(columnName);
-                }}>
-                  {columnName}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        );
-
-        let inputText = <div className='side-menu-h2'>Input:</div>;
-        let input1Text = <div className='side-menu-h3'>First row:</div>;
-        let row1;
-        if (this.props.query.row1Chosen) {
-          let input1Type;
-          if (this.props.query.row1Fixed) {
-            input1Type = <div>SINGLE ROW</div>;
-            let row1Condition = '';
-            if (this.props.query.row1ConditionChosen) {
-              row1Condition = this.props.query.row1Condition;
-            }
-            let row1Input = (
-              <div>
-                <InputGroup className='row1Input' onChange={
-                  evt=>{
-                    this.setState({
-                      row1BoolExpr: evt.target.value,
-                    })
-                  }
-                }>
-                  <Input defaultValue={row1Condition}/>
-                </InputGroup>
-                <Button onClick={
-                  ()=>this.props.setRow1Condition(this.state.row1BoolExpr)
-                }>
-                  Update
-                </Button>
-              </div>
-            );
-            row1 = (
-              <div>
-                {input1Type}
-                {row1Input}
-              </div>
-            )
-          } else {
-            input1Type = <div>EVERY ROW</div>;
-            row1 = (
-              <div>
-                {input1Type}
-              </div>
-            )
+        if (this.props.query.expression instanceof SimilarityExpression) {
+          let contextText = <div className='side-menu-h2'>Context:</div>;
+          let context = '';
+          if (this.props.query.contextChosen) {
+            context = this.props.query.context;
           }
-        } else {
-          row1 = <RowChoice onClick={fixed => this.props.fixRow(1, fixed)}/>
-        }
+          let contextDropDown = (
+            <UncontrolledDropdown>
+              <DropdownToggle caret>
+                {context}
+              </DropdownToggle>
+              <DropdownMenu>
+                {SideMenuPane.getContexts().map((columnName, index) => (
+                  <DropdownItem key={index} onClick={() => {
+                    this.props.setContext(columnName);
+                  }}>
+                    {columnName}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          );
 
-        let input2Text = <div className='side-menu-h3'>Second row:</div>;
-        let row2;
-        if (this.props.query.row2Chosen) {
-          let input2Type;
-          if (this.props.query.row2Fixed) {
-            input2Type = <div>SINGLE ROW</div>;
-            let row2Condition = '';
-            if (this.props.query.row2ConditionChosen) {
-              row2Condition = this.props.query.row2Condition;
-            }
-            //The single row that you are comparing against will be the first row of the table that matches the boolean
-            //                 expression that you write here
-            let row2Input = (
-              <div>
-                <InputGroup className='row2Input' onChange={
-                  evt=>{
-                    this.setState({
-                      row2BoolExpr: evt.target.value,
-                    })
-                  }
-                }>
-                  <Input defaultValue={row2Condition}/>
-                </InputGroup>
-                <Button onClick={
-                  ()=>this.props.setRow2Condition(this.state.row2BoolExpr)
-                }>
-                  Update
-                </Button>
-              </div>
-            );
-            row2 = (
-              <div>
-                {input2Type}
-                {row2Input}
-              </div>
-            )
-          } else {
-            input2Type = <div>EVERY ROW</div>;
-            row2 = (
-              <div>
-                {input2Type}
-              </div>
-            )
-          }
-        } else {
-          row2 = <RowChoice onClick={fixed => this.props.fixRow(2, fixed)}/>
-        }
-
-        let optional;
-        if (this.props.query.rowsComplete) {
-          let orderBy;
-          if (this.props.query.orderBySupported) {
-            //Enter the new direction you would like to order the rows in.
-            orderBy = (
-              <div>
-                <div className='side-menu-h2'>
-                ORDER BY:
+          let inputText = <div className='side-menu-h2'>Input:</div>;
+          let input1Text = <div className='side-menu-h3'>First row:</div>;
+          let row1;
+          if (this.props.query.row1Chosen) {
+            let input1Type;
+            if (this.props.query.row1Fixed) {
+              input1Type = <div>SINGLE ROW</div>;
+              let row1Condition = '';
+              if (this.props.query.row1ConditionChosen) {
+                row1Condition = this.props.query.row1Condition;
+              }
+              let row1Input = (
+                <div>
+                  <InputGroup className='row1Input' onChange={
+                    evt => {
+                      this.setState({
+                        row1BoolExpr: evt.target.value,
+                      })
+                    }
+                  }>
+                    <Input defaultValue={row1Condition}/>
+                  </InputGroup>
+                  <Button onClick={
+                    () => this.props.setRow1Condition(this.state.row1BoolExpr)
+                  }>
+                    Update
+                  </Button>
                 </div>
-                <UncontrolledDropdown>
-                  <DropdownToggle caret>
-                    {this.props.query.orderBy}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    {SideMenuPane.getOrderOptions().map((order, index) => (
-                      <DropdownItem key={index} onClick={() => {
-                        this.setState({
-                          orderChosen: order,
-                        });
-                        this.props.setOrderBy(order);
-                      }}>
-                        {order}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </div>
-            );
-          }
-
-          let limit;
-          if (this.props.query.limitSupported) {
-            //Enter the new number of rows of results you would like returned.
-            limit = (
-              <div>
-                <div className='side-menu-h2'>
-                LIMIT:
+              );
+              row1 = (
+                <div>
+                  {input1Type}
+                  {row1Input}
                 </div>
-                <InputGroup className='limitInput' onChange={
-                  evt=>{
-                    this.setState({
-                      limitChosen: evt.target.value,
-                    })
-                  }
-                }>
-                  <Input type='number' step='1' defaultValue={this.props.query.limit}/>
-                </InputGroup>
-                <Button onClick={
-                  ()=> {
-                    let limitReturn = (this.state.limitChosen !== '') ? this.state.limitChosen : this.props.query.limit;
-                    this.props.setLimit(limitReturn);
-                  }
-                }>
-                  Update
-                </Button>
-              </div>
-            );
+              )
+            } else {
+              input1Type = <div>EVERY ROW</div>;
+              row1 = (
+                <div>
+                  {input1Type}
+                </div>
+              )
+            }
+          } else {
+            row1 = <RowChoice onClick={fixed => this.props.fixRow(1, fixed)}/>
           }
 
-          optional = (
+          let input2Text = <div className='side-menu-h3'>Second row:</div>;
+          let row2;
+          if (this.props.query.row2Chosen) {
+            let input2Type;
+            if (this.props.query.row2Fixed) {
+              input2Type = <div>SINGLE ROW</div>;
+              let row2Condition = '';
+              if (this.props.query.row2ConditionChosen) {
+                row2Condition = this.props.query.row2Condition;
+              }
+              //The single row that you are comparing against will be the first row of the table that matches the boolean
+              //                 expression that you write here
+              let row2Input = (
+                <div>
+                  <InputGroup className='row2Input' onChange={
+                    evt => {
+                      this.setState({
+                        row2BoolExpr: evt.target.value,
+                      })
+                    }
+                  }>
+                    <Input defaultValue={row2Condition}/>
+                  </InputGroup>
+                  <Button onClick={
+                    () => this.props.setRow2Condition(this.state.row2BoolExpr)
+                  }>
+                    Update
+                  </Button>
+                </div>
+              );
+              row2 = (
+                <div>
+                  {input2Type}
+                  {row2Input}
+                </div>
+              )
+            } else {
+              input2Type = <div>EVERY ROW</div>;
+              row2 = (
+                <div>
+                  {input2Type}
+                </div>
+              )
+            }
+          } else {
+            row2 = <RowChoice onClick={fixed => this.props.fixRow(2, fixed)}/>
+          }
+
+          let optional;
+          if (this.props.query.rowsComplete) {
+            let orderBy;
+            if (this.props.query.orderBySupported) {
+              //Enter the new direction you would like to order the rows in.
+              orderBy = (
+                <div>
+                  <div className='side-menu-h2'>
+                    ORDER BY:
+                  </div>
+                  <UncontrolledDropdown>
+                    <DropdownToggle caret>
+                      {this.props.query.orderBy}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      {SideMenuPane.getOrderOptions().map((order, index) => (
+                        <DropdownItem key={index} onClick={() => {
+                          this.setState({
+                            orderChosen: order,
+                          });
+                          this.props.setOrderBy(order);
+                        }}>
+                          {order}
+                        </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </div>
+              );
+            }
+
+            let limit;
+            if (this.props.query.limitSupported) {
+              //Enter the new number of rows of results you would like returned.
+              limit = (
+                <div>
+                  <div className='side-menu-h2'>
+                    LIMIT:
+                  </div>
+                  <InputGroup className='limitInput' onChange={
+                    evt => {
+                      this.setState({
+                        limitChosen: evt.target.value,
+                      })
+                    }
+                  }>
+                    <Input type='number' step='1' defaultValue={this.props.query.limit}/>
+                  </InputGroup>
+                  <Button onClick={
+                    () => {
+                      let limitReturn = (this.state.limitChosen !== '') ? this.state.limitChosen : this.props.query.limit;
+                      this.props.setLimit(limitReturn);
+                    }
+                  }>
+                    Update
+                  </Button>
+                </div>
+              );
+            }
+
+            optional = (
+              <div>
+                {orderBy}
+                {limit}
+              </div>
+            )
+          }
+
+          sideMenu = (
             <div>
-              {orderBy}
-              {limit}
+              {statisticText}
+              {contextText}
+              {contextDropDown}
+              {inputText}
+              {input1Text}
+              {row1}
+              {input2Text}
+              {row2}
+              {optional}
             </div>
-          )
+          );
+
+          return sideMenu;
         }
-
-        sideMenu = (
-          <div>
-            {statisticText}
-            {contextText}
-            {contextDropDown}
-            {inputText}
-            {input1Text}
-            {row1}
-            {input2Text}
-            {row2}
-            {optional}
-          </div>
-        );
-
-        return sideMenu;
       } else {
         return this.renderChooseExpression();
       }
