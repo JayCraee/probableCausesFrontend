@@ -10,7 +10,7 @@ class RowDimension {
     this._orderBy = 'ASC';
 
     this._row1Condition = '';
-    this._row1Condition = '';
+    this._row2Condition = '';
   }
 
   get dimensions() {
