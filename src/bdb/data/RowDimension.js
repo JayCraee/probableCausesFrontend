@@ -101,21 +101,21 @@ class RowDimension {
   }
 
   set orderBy(orderBy) {
-    if (this._fixedRows < 2) {
+    if (this.orderBySupported) {
       this._orderBy = orderBy;
     } else {
       throw new OptionNotSupportedError('order by');
     }
   }
   get orderBy() {
-    if (this._fixedRows < 2) {
+    if (this.orderBySupported) {
       return this._orderBy;
     } else {
       throw new OptionNotSupportedError('order by');
     }
   }
   get orderBySupported() {
-    return (this._fixedRows < 2);
+    return false;
   }
 
   set limit(limit) {
