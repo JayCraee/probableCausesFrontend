@@ -4,6 +4,7 @@ import EstimateQuery from "./data/EstimateQuery";
 import SimilarityExpression from "./data/SimilarityExpression";
 import UnsupportedExpressionError from "./error/UnsupportedExpressionError";
 import QueryNotFinishedError from './data/error/QueryNotFinishedError';
+import CorrelationExpression from "./data/CorrelationExpression";
 
 class QueryPane extends Component {
   constructor(props) {
@@ -87,6 +88,12 @@ class QueryPane extends Component {
     switch (expression) {
       case 'SIMILARITY':
         query.expression = new SimilarityExpression();
+        this.setState({
+          query: query,
+        });
+        break;
+      case 'CORRELATION':
+        query.expression = new CorrelationExpression();
         this.setState({
           query: query,
         });
