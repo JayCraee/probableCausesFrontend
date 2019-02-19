@@ -28,7 +28,12 @@ class EstimateQuery extends Query {
     return !(this._expression === undefined);
   }
 
-  //Pass ons
+  //multi-use pass ons
+  get dimensions() {
+    return this._expression.dimensions;
+  }
+
+  //Pass ons to SimilarityExpression
   set context(column) {
     this._expression._context = column;
   }
@@ -39,9 +44,7 @@ class EstimateQuery extends Query {
     return !(this._expression._context === undefined);
   }
 
-  get dimensions() {
-    return this._expression.dimensions;
-  }
+  //getDimensions in multi-use
 
   set row1Fixed(fixed) {
     this._expression.row1Fixed = fixed;
@@ -104,6 +107,52 @@ class EstimateQuery extends Query {
   }
   get limitSupported() {
     return this._expression.limitSupported;
+  }
+
+  //Pass ons to CorrelationExpression
+  get col1Chosen() {
+    return this._expression.getColChosen(1);
+  }
+  get col2Chosen() {
+    return this._expression.getColChosen(2);
+  }
+
+  set col1Fixed(fixed) {
+    return this._expression.setColFixed(1, fixed);
+  }
+  set col2Fixed(fixed) {
+    return this._expression.setColFixed(2, fixed);
+  }
+  get col1Fixed() {
+    return this._expression.getColFixed(1);
+  }
+  get col2Fixed() {
+    return this._expression.getColFixed(2);
+  }
+
+  get col1NameChosen() {
+    return this._expression.getColNameChosen(1);
+  }
+  get col2NameChosen() {
+    return this._expression.getColNameChosen(2);
+  }
+
+  get colsComplete() {
+    return this._expression.colsComplete;
+  }
+
+  set col1Name(name) {
+    this._expression.setColName(1, name);
+  }
+  set col2Name(name) {
+    this._expression.setColName(2, name);
+  }
+
+  get co1lName() {
+    return this._expression.getColName(1);
+  }
+  get co12Name() {
+    return this._expression.getColName(2);
   }
 }
 
