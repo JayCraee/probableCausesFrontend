@@ -35,7 +35,7 @@ class CorrelationExpression extends Expression{
     this._dimension.setColName(num, name);
   }
   getColName(num) {
-    this._dimension.getColName(num);
+    return this._dimension.getColName(num);
   }
 }
 
