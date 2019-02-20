@@ -79,6 +79,8 @@ class InputPane extends Component {
                 setRow2Condition={boolExpr=>this.props.handleChangeRowBoolExpr(2, boolExpr)}
                 setOrderBy={this.props.handleChangeOrderBy}
                 setLimit={this.props.handleChangeLimit}
+                fixCol={this.props.handleFixCol}
+                setColName={this.props.handleChangeColName}
               />
             </td>
             <td>

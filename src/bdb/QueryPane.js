@@ -151,7 +151,32 @@ class QueryPane extends Component {
     });
   }
 
+  handleFixCol(colNum, fixed) {
+    let query = this.state.query;
+    if (colNum === 1) {
+      query.col1Fixed = fixed;
+    } else {
+      query.col2Fixed = fixed;
+    }
+    this.setState({
+      query: query,
+    });
+  }
+
+  handleChangeColName(colNum, name) {
+    let query = this.state.query;
+    if (colNum === 1) {
+      query.col1Name = name;
+    } else if (colNum === 2) {
+      query.col2Name = name;
+    }
+    this.setState({
+      query: query,
+    });
+  }
+
   render() {
+    //TODO make it clearer what they need to complete
     return (
       <table id="query-pane-table">
         <tbody>
@@ -165,6 +190,8 @@ class QueryPane extends Component {
               handleChangeLimit={limit=>this.handleChangeLimit(limit)}
               handleChangeOrderBy={order=>this.handleChangeOrderBy(order)}
               handleChangeRowBoolExpr={(rowNum, boolExpr)=>this.handleChangeRowBoolExpr(rowNum, boolExpr)}
+              handleFixCol={(colNum, fixed)=>this.handleFixCol(colNum, fixed)}
+              handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
             />
           </td>
         </tr>
