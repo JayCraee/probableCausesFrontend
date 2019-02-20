@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import DimensionChoice from "./DimensionChoice";
 
-class RowChoice extends Component {
+class ColChoice extends Component {
   render() {
-    const button1Text = 'EVERY ROW';
-    const button2Text = 'SINGLE ROW';
+    const button1Text = 'EVERY COLUMN';
+    const button2Text = 'SINGLE COLUMN';
 
     return (
       <DimensionChoice
@@ -16,4 +16,4 @@ class RowChoice extends Component {
   }
 }
 
-export default RowChoice;
+export default ColChoice;
