@@ -65,16 +65,22 @@ class DiagramPane extends Component {
           let estimate;
           if (query.contextChosen) {
             // draw estimate with expression
+            const extraText = "in the context of " + query.context;
             estimate = <StyledEstimate
               expression={query.expressionName}
+              extra
+              extraText={extraText}
               //onClick={()=>this.props.handleSelectBlock(2)}
               onClick={()=>{}}
             />;
           } else {
             // draw estimate with expression plus showing that they need to complete query
+            const extraText = "in the context of ";
             estimate = <StyledEstimate
               expression={query.expressionName}
               todo
+              extra
+              extraText={extraText}
               //onClick={()=>this.props.handleSelectBlock(2)}
               onClick={()=>{}}
             />

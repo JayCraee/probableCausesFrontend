@@ -24,7 +24,6 @@ class StyledEstimate extends Component {
     const textHorizontalOffset=0.1;
     const textVerticalOffset=0.13;
 
-    //TODO: add second optional text field
     const expressionHorizontalOffset=0.07;
     const expressionVerticalOffset=0.45;
     const expressionHorizontalScale=0.9;
@@ -38,10 +37,16 @@ class StyledEstimate extends Component {
     const expressionY=y+Math.floor(height*expressionVerticalOffset);
 
     const parallelogramWidth=width;
-    const parallelogramHeight=height;
+    let parallelogramHeight=height;
     const textWidth = Math.floor(width*(1-2*textHorizontalIndent));
     const expressionWidth = Math.floor(width*expressionHorizontalScale);
     const expressionHeight = Math.floor(height*expressionVerticalScale);
+
+    if (this.props.extra) {
+      parallelogramHeight*=1.5;
+    }
+    const extraTextX=x+Math.floor(width*0.1);
+    const extraTextY=y+Math.floor(height*1.0);
 
     return (
       <Group>
@@ -68,6 +73,15 @@ class StyledEstimate extends Component {
           expression={expression}
           //onClick={this.props.onClick}
         />
+        <Text
+          x={extraTextX}
+          y={extraTextY}
+          text={this.props.extraText}
+          fontSize={24}
+          fontStyle="bold"
+          fill="#e3ecf2"
+          width={textWidth}
+          align="center"/>
       </Group>
     );
   }
