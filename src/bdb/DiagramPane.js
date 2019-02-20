@@ -6,25 +6,46 @@ import StyledEstimate from "./shapes/StyledEstimate";
 import StyledRect from "./shapes/StyledRect";
 import OrderBy from "./shapes/OrderBy";
 import Limit from "./shapes/Limit";
+import CorrelationExpression from "./data/CorrelationExpression";
 
 class DiagramPane extends Component {
+
+  renderArrowToInput(X, points, colour) {
+    const arrowToInputY = 130;
+
+    return <Arrow
+      x={X}
+      y={arrowToInputY}
+      points={points}
+      fill={colour}
+      stroke={colour}/>;
+  }
+
+  renderArrowToInput1(colour) {
+    const arrowToInput1X = 150;
+    const arrowToInput1Points = [0,0,65,65];
+
+    return this.renderArrowToInput(arrowToInput1X, arrowToInput1Points, colour);
+  }
+
+  renderArrowToInput2(colour) {
+    const arrowToInput2X = 370;
+    const arrowToInput2Points = [0,0,-65,65];
+
+    return this.renderArrowToInput(arrowToInput2X, arrowToInput2Points, colour);
+  }
 
   renderDiagram(query) {
     //TODO: draw context
 
-    const row1X = 100;
-    const rowY = 30;
-    const row2X = 330;
-
-    const arrowToRow1X = 150;
-    const arrowToRowY = 130;
-    const arrowToRow1Points = [0,0,65,65];
-    const arrowColour = "black";
-    const arrowToRow2X = 370;
-    const arrowToRow2Points = [0,0,-65,65];
+    const input1X = 100;
+    const inputY = 30;
+    const input2X = 330;
 
     const diamondX = 165;
     const orderByY = 350;
+
+    const arrowColour = "black";
 
     const arrowX = 255;
 
@@ -63,16 +84,16 @@ class DiagramPane extends Component {
             if (query.row1Fixed) {
               // draw row1 as fixed
               row1 = <StyledRect
-                x={row1X}
-                y={rowY}
+                x={input1X}
+                y={inputY}
                 text={"SINGLE ROW"}
                 //onClick={()=>this.props.handleSelectBlock(3)}
               />
             } else {
               // draw row1 as free
               row1 = <StyledRect
-                x={row1X}
-                y={rowY}
+                x={input1X}
+                y={inputY}
                 text={"EVERY ROW"}
                 //onClick={()=>this.props.handleSelectBlock(0)}
               />
@@ -80,33 +101,28 @@ class DiagramPane extends Component {
           } else {
             // draw row1 as an option
             row1 = (<StyledRect
-              x={row1X}
-              y={rowY}
+              x={input1X}
+              y={inputY}
             />)
           }
-          // draw arrow to row1
-          let arrowToRow1= <Arrow
-            x={arrowToRow1X}
-            y={arrowToRowY}
-            points={arrowToRow1Points}
-            fill={arrowColour}
-            stroke={arrowColour}/>;
+          // draw arrow to input1
+          let arrowToInput1= this.renderArrowToInput1(arrowColour);
 
           let row2;
           if (query.row2Chosen) {
             if (query.row2Fixed) {
               // draw row2 as fixed
               row2 = <StyledRect
-                x={row2X}
-                y={rowY}
+                x={input2X}
+                y={inputY}
                 text={"SINGLE ROW"}
                 //onClick={()=>this.props.handleSelectBlock(6)}
               />
             } else {
               // draw row2 as free
               row2 = <StyledRect
-                x={row2X}
-                y={rowY}
+                x={input2X}
+                y={inputY}
                 text={"EVERY ROW"}
                 //onClick={()=>this.props.handleSelectBlock(0)}
               />
@@ -114,19 +130,13 @@ class DiagramPane extends Component {
           } else {
             // draw row2 as an option
             row2 = (<StyledRect
-              x={row2X}
-              y={rowY}
+              x={input2X}
+              y={inputY}
             />)
           }
 
           // draw arrow to row2
-          let arrowToRow2 = <Arrow
-            x={arrowToRow2X}
-            y={arrowToRowY}
-            points={arrowToRow2Points}
-            fill={arrowColour}
-            stroke={arrowColour}
-          />;
+          let arrowToInput2 = this.renderArrowToInput2(arrowColour);
 
           let optionalGroup;
 
@@ -202,12 +212,84 @@ class DiagramPane extends Component {
             <Group>
               {estimate}
               {row1}
-              {arrowToRow1}
+              {arrowToInput1}
               {row2}
-              {arrowToRow2}
+              {arrowToInput2}
               {optionalGroup}
             </Group>
+          );
+        } else if (query.expression instanceof CorrelationExpression) {
+          let estimate;
+          estimate = <StyledEstimate
+            expression={query.expressionName}
+            onClick={()=>{}}
+          />;
+          let col1;
+          if (query.col1Chosen) {
+            if (query.col1Fixed) {
+              col1 = <StyledRect
+                x={input1X}
+                y={inputY}
+                text="SINGLE COLUMN"
+              />
+            } else {
+              col1 = <StyledRect
+                x={input1X}
+                y={inputY}
+                text="EVERY COLUMN"
+              />
+            }
+          } else {
+            col1 = <StyledRect
+              x={input1X}
+              y={inputY}
+            />
+          }
+          let arrowToInput1 = this.renderArrowToInput1(arrowColour);
+          let col2;
+          if (query.col2Chosen) {
+            if (query.col2Fixed) {
+              col2 = <StyledRect
+                x={input2X}
+                y={inputY}
+                text="SINGLE COLUMN"
+              />
+            } else {
+              col2 = <StyledRect
+                x={input2X}
+                y={inputY}
+                text="EVERY COLUMN"
+              />
+            }
+          } else {
+            col2 = <StyledRect
+              x={input2X}
+              y={inputY}
+            />
+          }
+          let arrowToInput2 = this.renderArrowToInput2(arrowColour);
+
+          let outputArrow;
+          if (query.colsComplete) {
+            outputArrow=<Arrow
+              x={arrowX}
+              y={arrowToOrderByY}
+              points={arrowBetweenDiamondsPoints}
+              fill={arrowColour}
+              stroke={arrowColour}
+            />
+          }
+          diagram = (
+            <Group>
+              {estimate}
+              {col1}
+              {arrowToInput1}
+              {col2}
+              {arrowToInput2}
+              {outputArrow}
+            </Group>
           )
+
         }
       } else {
         // draw estimate without expression
