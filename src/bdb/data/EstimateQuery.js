@@ -148,10 +148,10 @@ class EstimateQuery extends Query {
     this._expression.setColName(2, name);
   }
 
-  get co1lName() {
+  get col1Name() {
     return this._expression.getColName(1);
   }
-  get co12Name() {
+  get col2Name() {
     return this._expression.getColName(2);
   }
 }
