@@ -16,6 +16,7 @@ import BqlStudio from "./BqlStudio";
 import SimilarityExpression from "./data/SimilarityExpression";
 import CorrelationExpression from "./data/CorrelationExpression";
 import ColChoice from "./ColChoice";
+import SimulateQuery from "./data/SimulateQuery";
 
 /**
  * Side Menu of the input pane
@@ -74,6 +75,10 @@ class SideMenuPane extends Component {
 
   static getContexts() {
     return ['columnA', 'columnB'];
+  }
+
+  static getNominalFields() {
+    return ['nominal-column'];
   }
 
   static getOrderOptions() {
@@ -383,6 +388,54 @@ class SideMenuPane extends Component {
     )
   }
 
+  renderSimulate() {
+    let constraints;
+    let constraintsText = <div className='side-menu-h2'>Known facts about new row</div>
+
+    //display existing constraints
+    let existingConstraints = (
+      <div>
+        {this.props.query.constraints.forEach((constraint, key, arr)=>(
+          //dropdown
+          <div>
+            <UncontrolledDropdown key={key}>
+              <DropdownToggle caret>
+                {constraint.field}
+              </DropdownToggle>
+              <DropdownMenu>
+                {SideMenuPane.getNominalFields().map((columnName, index) => (
+                  <DropdownItem key={index} onClick={() => {
+                    //TODO: implement changeConstraint
+                    this.props.changeConstraint(key, columnName, constraint.value);
+                  }}>
+                    {columnName}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            =
+            <InputGroup key={-key} onChange={
+              evt => {
+                this.props.changeConstraint(key, constraint.field, evt.target.value)
+              }
+            }>
+              <Input defaultValue={constraint.value}/>
+            </InputGroup>
+          </div>
+        ))}
+      </div>
+    );
+
+    constraints = (
+      <div>
+        {constraintsText}
+        {existingConstraints}
+      </div>
+    );
+
+    return constraints;
+  }
+
   renderSideMenu() {
     if (this.props.query instanceof EstimateQuery) {
       let sideMenu;
@@ -402,6 +455,8 @@ class SideMenuPane extends Component {
       } else {
         return this.renderChooseExpression();
       }
+    } else if (this.props.query instanceof SimulateQuery) {
+      return this.renderSimulate();
     }
   }
 
@@ -419,6 +474,7 @@ class SideMenuPane extends Component {
     );
 
   }
+
 }
 
 export default SideMenuPane;
