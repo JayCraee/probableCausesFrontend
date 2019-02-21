@@ -28,7 +28,7 @@ class SimulateQuery extends Query {
     return this._fieldsToSimulate.slice();
   }
 
-  changeConstraintField(index, field, value) {
+  changeConstraint(index, field, value) {
     this._constraints[index].field = field;
     this._constraints[index].value = value;
   }
