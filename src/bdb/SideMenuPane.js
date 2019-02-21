@@ -390,15 +390,15 @@ class SideMenuPane extends Component {
 
   renderSimulate() {
     let constraints;
-    let constraintsText = <div className='side-menu-h2'>Known facts about new row</div>
+    let constraintsText = <div className='side-menu-h2'>Known facts about new row</div>;
 
     //display existing constraints
     let existingConstraints = (
       <div>
-        {this.props.query.constraints.forEach((constraint, key, arr)=>(
+        {this.props.query.constraints.map((constraint, key)=>(
           //dropdown
-          <div>
-            <UncontrolledDropdown key={key}>
+          <div key={key}>
+            <UncontrolledDropdown>
               <DropdownToggle caret>
                 {constraint.field}
               </DropdownToggle>
@@ -414,7 +414,7 @@ class SideMenuPane extends Component {
               </DropdownMenu>
             </UncontrolledDropdown>
             =
-            <InputGroup key={-key} onChange={
+            <InputGroup onChange={
               evt => {
                 this.props.changeConstraint(key, constraint.field, evt.target.value)
               }
