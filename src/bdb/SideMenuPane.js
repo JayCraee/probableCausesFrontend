@@ -32,6 +32,8 @@ class SideMenuPane extends Component {
       orderChosen: '',
       row1BoolExpr: '',
       row2BoolExpr: '',
+      nextConstraintField: '',
+      nextConstraintValue: '',
     };
   }
 
@@ -405,7 +407,6 @@ class SideMenuPane extends Component {
               <DropdownMenu>
                 {SideMenuPane.getNominalFields().map((columnName, index) => (
                   <DropdownItem key={index} onClick={() => {
-                    //TODO: implement changeConstraint
                     this.props.changeConstraint(key, columnName, constraint.value);
                   }}>
                     {columnName}
@@ -419,17 +420,59 @@ class SideMenuPane extends Component {
                 this.props.changeConstraint(key, constraint.field, evt.target.value)
               }
             }>
-              <Input defaultValue={constraint.value}/>
+              <Input id={"existing"+key} key={"existing"+key} defaultValue={constraint.value}/>
             </InputGroup>
           </div>
         ))}
       </div>
     );
 
+    let nextConstraint = (
+      <div>
+        <UncontrolledDropdown>
+          <DropdownToggle caret>
+            {this.state.nextConstraintField}
+          </DropdownToggle>
+          <DropdownMenu>
+            {SideMenuPane.getNominalFields().map((columnName, index) => (
+              <DropdownItem key={index} onClick={() => {
+                this.setState({
+                  nextConstraintField: columnName,
+                })
+              }}>
+                {columnName}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </UncontrolledDropdown>
+        =
+        <Input id="not-the-same" key="not-the-same" value={this.state.nextConstraintValue} onChange={
+          evt => {
+            this.setState({
+              nextConstraintValue: evt.target.value,
+            })
+          }}
+          />
+        <Button
+          onClick={()=>{
+            this.props.addConstraint(this.state.nextConstraintField, this.state.nextConstraintValue);
+            this.setState({
+              nextConstraintValue: '',
+              nextConstraintField: '',
+            });
+          }}
+        >
+          Add
+        </Button>
+      </div>
+    );
+
+
     constraints = (
       <div>
         {constraintsText}
         {existingConstraints}
+        {nextConstraint}
       </div>
     );
 

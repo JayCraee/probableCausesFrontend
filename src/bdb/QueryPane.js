@@ -5,12 +5,19 @@ import SimilarityExpression from "./data/SimilarityExpression";
 import UnsupportedExpressionError from "./error/UnsupportedExpressionError";
 import QueryNotFinishedError from './data/error/QueryNotFinishedError';
 import CorrelationExpression from "./data/CorrelationExpression";
+import SimulateQuery from "./data/SimulateQuery";
 
 class QueryPane extends Component {
+
+
   constructor(props) {
     super(props);
+    let q = new SimulateQuery();
+    q.addNewConstraint('columnA', 'big');
+    q.addNewConstraint('columnB', 'small');
     this.state = {
-      query: new EstimateQuery(),
+      query: q,
+      //query: new EstimateQuery(),
     }
   }
 
@@ -183,6 +190,14 @@ class QueryPane extends Component {
     })
   }
 
+  handleAddConstraint(field, value) {
+    let query = this.state.query;
+    query.addNewConstraint(field, value);
+    this.setState({
+      query: query
+    })
+  }
+
   render() {
     //TODO make it clearer what they need to complete
     return (
@@ -201,6 +216,7 @@ class QueryPane extends Component {
               handleFixCol={(colNum, fixed)=>this.handleFixCol(colNum, fixed)}
               handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
               handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
+              handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
             />
           </td>
         </tr>
