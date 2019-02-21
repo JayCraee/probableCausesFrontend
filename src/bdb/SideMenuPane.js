@@ -488,6 +488,24 @@ class SideMenuPane extends Component {
       </div>
     );
 
+    let nextField = (
+      <div>
+        Add new:
+        <UncontrolledDropdown>
+          <DropdownToggle caret/>
+          <DropdownMenu>
+            {SideMenuPane.getNominalFields().map((columnName, index) => (
+              <DropdownItem key={index} onClick={() => {
+                this.props.addFieldToSimulate(columnName);
+              }}>
+                {columnName}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </div>
+    );
+
     let simulateSideMenu = (
       <div>
         {constraintsText}
@@ -495,6 +513,7 @@ class SideMenuPane extends Component {
         {nextConstraint}
         {existingFieldsText}
         {existingFields}
+        {nextField}
       </div>
     );
 

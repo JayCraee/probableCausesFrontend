@@ -208,6 +208,14 @@ class QueryPane extends Component {
     })
   }
 
+  handleAddFieldToSimulate(field) {
+    let query = this.state.query;
+    query.addNewFieldToSimulate(field);
+    this.setState({
+      query: query
+    })
+  }
+
   render() {
     //TODO make it clearer what they need to complete
     return (
@@ -228,6 +236,7 @@ class QueryPane extends Component {
               handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
               handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
               handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
+              handleAddFieldToSimulate={field=>this.handleAddFieldToSimulate(field)}
             />
           </td>
         </tr>
