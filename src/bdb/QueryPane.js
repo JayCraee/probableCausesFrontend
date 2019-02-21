@@ -175,6 +175,14 @@ class QueryPane extends Component {
     });
   }
 
+  handleChangeConstraint(key, field, value) {
+    let query = this.state.query;
+    query.changeConstraint(key, field, value);
+    this.setState({
+      query: query,
+    })
+  }
+
   render() {
     //TODO make it clearer what they need to complete
     return (
@@ -192,6 +200,7 @@ class QueryPane extends Component {
               handleChangeRowBoolExpr={(rowNum, boolExpr)=>this.handleChangeRowBoolExpr(rowNum, boolExpr)}
               handleFixCol={(colNum, fixed)=>this.handleFixCol(colNum, fixed)}
               handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
+              handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
             />
           </td>
         </tr>

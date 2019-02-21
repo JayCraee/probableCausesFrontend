@@ -81,6 +81,7 @@ class InputPane extends Component {
                 setLimit={this.props.handleChangeLimit}
                 fixCol={this.props.handleFixCol}
                 setColName={this.props.handleChangeColName}
+                changeConstraint={this.props.handleChangeConstraint}
               />
             </td>
             <td>
