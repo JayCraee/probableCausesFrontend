@@ -15,6 +15,8 @@ class QueryPane extends Component {
     let q = new SimulateQuery();
     q.addNewConstraint('columnA', 'big');
     q.addNewConstraint('columnB', 'small');
+    q.addNewFieldToSimulate('columnC');
+    q.addNewFieldToSimulate('columnD');
     this.state = {
       query: q,
       //query: new EstimateQuery(),
@@ -198,6 +200,14 @@ class QueryPane extends Component {
     })
   }
 
+  handleChangeFieldToSimulate(key, field) {
+    let query = this.state.query;
+    query.changeFieldToSimulate(key, field);
+    this.setState({
+      query: query
+    })
+  }
+
   render() {
     //TODO make it clearer what they need to complete
     return (
@@ -217,6 +227,7 @@ class QueryPane extends Component {
               handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
               handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
               handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
+              handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
             />
           </td>
         </tr>

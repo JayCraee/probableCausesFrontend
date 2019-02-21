@@ -83,6 +83,7 @@ class InputPane extends Component {
                 setColName={this.props.handleChangeColName}
                 changeConstraint={this.props.handleChangeConstraint}
                 addConstraint={this.props.handleAddConstraint}
+                changeFieldToSimulate={this.props.handleChangeFieldToSimulate}
               />
             </td>
             <td>

@@ -391,7 +391,6 @@ class SideMenuPane extends Component {
   }
 
   renderSimulate() {
-    let constraints;
     let constraintsText = <div className='side-menu-h2'>Known facts about new row</div>;
 
     //display existing constraints
@@ -434,7 +433,7 @@ class SideMenuPane extends Component {
             {this.state.nextConstraintField}
           </DropdownToggle>
           <DropdownMenu>
-            {SideMenuPane.getNominalFields().map((columnName, index) => (
+            {SideMenuPane.getContexts().map((columnName, index) => (
               <DropdownItem key={index} onClick={() => {
                 this.setState({
                   nextConstraintField: columnName,
@@ -467,16 +466,39 @@ class SideMenuPane extends Component {
       </div>
     );
 
+    let existingFieldsText = <div className='side-menu-h2'>Fields to be predicted</div>;
+    let existingFields = (
+      <div>
+        {this.props.query.fieldsToSimulate.map((field, key)=>(
+          <UncontrolledDropdown key={key}>
+            <DropdownToggle caret>
+              {field}
+            </DropdownToggle>
+            <DropdownMenu>
+              {SideMenuPane.getNominalFields().map((columnName, index) => (
+                <DropdownItem key={index} onClick={() => {
+                  this.props.changeFieldToSimulate(key, columnName);
+                }}>
+                  {columnName}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        ))}
+      </div>
+    );
 
-    constraints = (
+    let simulateSideMenu = (
       <div>
         {constraintsText}
         {existingConstraints}
         {nextConstraint}
+        {existingFieldsText}
+        {existingFields}
       </div>
     );
 
-    return constraints;
+    return simulateSideMenu;
   }
 
   renderSideMenu() {
