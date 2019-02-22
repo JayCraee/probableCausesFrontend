@@ -5,21 +5,16 @@ import SimilarityExpression from "./data/SimilarityExpression";
 import UnsupportedExpressionError from "./error/UnsupportedExpressionError";
 import QueryNotFinishedError from './data/error/QueryNotFinishedError';
 import CorrelationExpression from "./data/CorrelationExpression";
-import SimulateQuery from "./data/SimulateQuery";
 
 class QueryPane extends Component {
 
-
   constructor(props) {
     super(props);
-    let q = new SimulateQuery();
-    q.addNewConstraint('columnA', 'big');
-    q.addNewConstraint('columnB', 'small');
-    q.addNewFieldToSimulate('columnC');
-    q.addNewFieldToSimulate('columnD');
+
+
+
     this.state = {
-      query: q,
-      //query: new EstimateQuery(),
+      query: new EstimateQuery(),
     }
   }
 
