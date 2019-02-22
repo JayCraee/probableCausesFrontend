@@ -36,9 +36,22 @@
   margin-top: 20px;
 }
 
-table#query-pane-table tr {
+td#context {
+  vertical-align: middle;
+}
+
+table#query-pane-table {
   border: 1px solid black;
   border-collapse: collapse;
+}
+
+table#input-choice {
+  margin-left: 5px;
+  width: 50%;
+}
+
+table#every-row {
+  table-layout: fixed;
 }
 
 .side-menu-h1 {
@@ -46,15 +59,36 @@ table#query-pane-table tr {
   color: #e3ecf2;
   font-weight: bold;
   padding-top: 10px;
+  padding-bottom: 10px;
   font-size: larger;
 }
 
 .side-menu-h2 {
   color: #e3ecf2;
   font-weight: bold;
-  padding-top: 10px;
+  padding-left: 5px;
 }
 
 .side-menu-h3 {
   color: #e3ecf2;
+  padding-left: 5px;
+}
+
+.context {
+  padding-left: 0;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-bottom: dashed #e3ecf2;
+  border-top: dashed #e3ecf2;
+}
+.todo {
+  padding-left: 0;
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.input {
+  padding-left: 5px ;
 }

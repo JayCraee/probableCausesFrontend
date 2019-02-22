@@ -18,8 +18,8 @@ class QueryPane extends Component {
     q.addNewFieldToSimulate('columnC');
     q.addNewFieldToSimulate('columnD');
     this.state = {
-      query: q,
-      //query: new EstimateQuery(),
+      //query: q,
+      query: new EstimateQuery(),
     }
   }
 

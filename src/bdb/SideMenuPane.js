@@ -88,11 +88,15 @@ class SideMenuPane extends Component {
   }
 
   renderSimilarity(statisticText) {
-    let contextText = <div className='side-menu-h2'>Context:</div>;
+    let processingText = <div className='side-menu-h2'>Processing:</div>
+    let contextText = <div className='side-menu-h3'>Context:</div>;
     let context = '';
     if (this.props.query.contextChosen) {
       context = this.props.query.context;
+    } else {
+      context = 'add context';
     }
+
     let contextDropDown = (
       <UncontrolledDropdown>
         <DropdownToggle caret>
@@ -110,13 +114,38 @@ class SideMenuPane extends Component {
       </UncontrolledDropdown>
     );
 
+    let contextTable = (
+      <table>
+        <tbody>
+          <tr>
+            <td id='context'>{contextText}</td>
+            <td>{contextDropDown}</td>
+          </tr>
+        </tbody>
+      </table>
+    );
+    let contextDiv = this.props.query.contextChosen ? (
+      <div>
+        {contextTable}
+      </div>
+    ) : (
+      <div className='todo'>
+        {contextTable}
+      </div>
+    );
+    let processing = (
+      <div className='context'>
+        {processingText}
+        {contextDiv}
+      </div>
+    )
+
     let inputText = <div className='side-menu-h2'>Input:</div>;
     let input1Text = <div className='side-menu-h3'>First row:</div>;
     let row1;
     if (this.props.query.row1Chosen) {
       let input1Type;
       if (this.props.query.row1Fixed) {
-        input1Type = <div>SINGLE ROW</div>;
         let row1Condition = '';
         if (this.props.query.row1ConditionChosen) {
           row1Condition = this.props.query.row1Condition;
@@ -139,23 +168,54 @@ class SideMenuPane extends Component {
             </Button>
           </div>
         );
-        row1 = (
-          <div>
-            {input1Type}
-            {row1Input}
-          </div>
+
+        let row1Table = (
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                {input1Text}
+              </td>
+              <td>
+                {row1Input}
+              </td>
+            </tr>
+            </tbody>
+          </table>
         )
+
+        row1 = this.props.query.row1ConditionChosen ? (
+          <div>{row1Table}</div>
+        ) : (
+          <div className="todo">{row1Table}</div>
+        );
       } else {
         input1Type = <div>EVERY ROW</div>;
         row1 = (
-          <div>
-            {input1Type}
-          </div>
+          <table id='every-row'>
+            <tbody>
+            <tr>
+              <td>
+                {input1Text}
+              </td>
+              <td>
+                {input1Type}
+              </td>
+            </tr>
+            </tbody>
+          </table>
         )
       }
     } else {
-      row1 = <RowChoice onClick={fixed => this.props.fixRow(1, fixed)}/>
+      row1 = (
+        <div className='todo'>
+          {input1Text}
+          <RowChoice onClick={fixed => this.props.fixRow(1, fixed)}/>
+        </div>
+      )
     }
+
+
 
     let input2Text = <div className='side-menu-h3'>Second row:</div>;
     let row2;
@@ -205,15 +265,25 @@ class SideMenuPane extends Component {
       row2 = <RowChoice onClick={fixed => this.props.fixRow(2, fixed)}/>
     }
 
+    let inputDiv = (
+      <div className='context'>
+        {inputText}
+        {row1}
+        {input2Text}
+        {row2}
+      </div>
+    );
+
     let optional;
+    let optionalText = <div className='side-menu-h2'>Output</div>;
     if (this.props.query.rowsComplete) {
       let orderBy;
       if (this.props.query.orderBySupported) {
         //Enter the new direction you would like to order the rows in.
         orderBy = (
           <div>
-            <div className='side-menu-h2'>
-              ORDER BY:
+            <div className='side-menu-h3'>
+              Order by:
             </div>
             <UncontrolledDropdown>
               <DropdownToggle caret>
@@ -241,8 +311,8 @@ class SideMenuPane extends Component {
         //Enter the new number of rows of results you would like returned.
         limit = (
           <div>
-            <div className='side-menu-h2'>
-              LIMIT:
+            <div className='side-menu-h3'>
+              Limit:
             </div>
             <InputGroup className='limitInput' onChange={
               evt => {
@@ -266,7 +336,8 @@ class SideMenuPane extends Component {
       }
 
       optional = (
-        <div>
+        <div className='context'>
+          {optionalText}
           {orderBy}
           {limit}
         </div>
@@ -276,13 +347,8 @@ class SideMenuPane extends Component {
     return (
       <div>
         {statisticText}
-        {contextText}
-        {contextDropDown}
-        {inputText}
-        {input1Text}
-        {row1}
-        {input2Text}
-        {row2}
+        {inputDiv}
+        {processing}
         {optional}
       </div>
     );
