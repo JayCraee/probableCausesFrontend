@@ -27,6 +27,8 @@ class SideMenuPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      allColumns: this.getAllColumns(),
+      nominalColumns: this.getNominalColumns(),
       contextChosen: '',
       limitChosen: '',
       orderChosen: '',
@@ -35,6 +37,14 @@ class SideMenuPane extends Component {
       nextConstraintField: '',
       nextConstraintValue: '',
     };
+  }
+
+  getAllColumns() {
+    return ['columnA', ['columnB']];
+  }
+
+  getNominalColumns() {
+    return ['columnB'];
   }
 
   static wrap(expression) {
@@ -75,14 +85,6 @@ class SideMenuPane extends Component {
     )
   }
 
-  static getContexts() {
-    return ['columnA', 'columnB'];
-  }
-
-  static getNominalFields() {
-    return ['nominal-column'];
-  }
-
   static getOrderOptions() {
     return ['ASC', 'DESC'];
   }
@@ -99,7 +101,7 @@ class SideMenuPane extends Component {
           {context}
         </DropdownToggle>
         <DropdownMenu>
-          {SideMenuPane.getContexts().map((columnName, index) => (
+          {this.state.allColumns.map((columnName, index) => (
             <DropdownItem key={index} onClick={() => {
               this.props.setContext(columnName);
             }}>
@@ -306,7 +308,7 @@ class SideMenuPane extends Component {
               {col1Name}
             </DropdownToggle>
             <DropdownMenu>
-              {SideMenuPane.getContexts().map((columnName, index) => (
+              {this.state.allColumns.map((columnName, index) => (
                 <DropdownItem key={index} onClick={() => {
                   this.props.setColName(1, columnName);
                 }}>
@@ -349,7 +351,7 @@ class SideMenuPane extends Component {
               {col2Name}
             </DropdownToggle>
             <DropdownMenu>
-              {SideMenuPane.getContexts().map((columnName, index) => (
+              {this.state.allColumns.map((columnName, index) => (
                 <DropdownItem key={index} onClick={() => {
                   this.props.setColName(2, columnName);
                 }}>
@@ -404,7 +406,7 @@ class SideMenuPane extends Component {
                 {constraint.field}
               </DropdownToggle>
               <DropdownMenu>
-                {SideMenuPane.getNominalFields().map((columnName, index) => (
+                {this.state.nominalColumns.map((columnName, index) => (
                   <DropdownItem key={index} onClick={() => {
                     this.props.changeConstraint(key, columnName, constraint.value);
                   }}>
@@ -433,7 +435,7 @@ class SideMenuPane extends Component {
             {this.state.nextConstraintField}
           </DropdownToggle>
           <DropdownMenu>
-            {SideMenuPane.getContexts().map((columnName, index) => (
+            {this.state.allColumns.map((columnName, index) => (
               <DropdownItem key={index} onClick={() => {
                 this.setState({
                   nextConstraintField: columnName,
@@ -475,7 +477,7 @@ class SideMenuPane extends Component {
               {field}
             </DropdownToggle>
             <DropdownMenu>
-              {SideMenuPane.getNominalFields().map((columnName, index) => (
+              {this.state.nominalColumns.map((columnName, index) => (
                 <DropdownItem key={index} onClick={() => {
                   this.props.changeFieldToSimulate(key, columnName);
                 }}>
@@ -494,7 +496,7 @@ class SideMenuPane extends Component {
         <UncontrolledDropdown>
           <DropdownToggle caret/>
           <DropdownMenu>
-            {SideMenuPane.getNominalFields().map((columnName, index) => (
+            {this.state.nominalColumns.map((columnName, index) => (
               <DropdownItem key={index} onClick={() => {
                 this.props.addFieldToSimulate(columnName);
               }}>
