@@ -87,6 +87,95 @@ class SideMenuPane extends Component {
     return ['ASC', 'DESC'];
   }
 
+  renderInput(
+    inputChosen,
+    inputFixed,
+    inputConditionChosen,
+    inputCondition,
+    onChangeAction,
+    fixAction,
+    num,
+    inputText
+  ) {
+
+    let input1Text = <div className='side-menu-h3'>{inputText}</div>;
+    let input1;
+    if (inputChosen()) {
+      let input1Type;
+      if (inputFixed()) {
+        let row1Condition = '';
+        if (inputConditionChosen()) {
+          row1Condition = inputCondition();
+        }
+        let row1Input = (
+          <div>
+            <InputGroup className='row1Input' onChange={
+              evt => {
+                onChangeAction(evt.target.value)
+              }
+            }>
+              <Input defaultValue={row1Condition}/>
+            </InputGroup>
+          </div>
+        );
+
+        let input1Table = (
+          <table>
+            <tbody>
+            <tr>
+              <td id='input-name'>
+                {input1Text}
+              </td>
+              <td id='input-value'>
+                {row1Input}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        );
+
+        input1 = inputConditionChosen() ? (
+          <div>{input1Table}</div>
+        ) : (
+          <div className="todo">{input1Table}</div>
+        );
+      } else {
+        input1Type = <div>Every Row</div>;
+        input1 = (
+          <table>
+            <tbody>
+            <tr>
+              <td id='input-name'>
+                {input1Text}
+              </td>
+              <td id='input-value'>
+                {input1Type}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        )
+      }
+    } else {
+      input1 = (
+        <div className='todo'>
+          <table>
+            <tbody>
+            <tr>
+              <td id='input-name'>
+                {input1Text}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <RowChoice onClick={fixed => fixAction(num, fixed)}/>
+        </div>
+      )
+    }
+
+    return input1;
+  }
+
   renderSimilarity(statisticText) {
     let processingText = <div className='side-menu-h2'>Processing:</div>
     let contextText = <div className='side-menu-h3'>Context:</div>;
@@ -143,138 +232,34 @@ class SideMenuPane extends Component {
     );
 
     let inputText = <div className='side-menu-h2'>Input:</div>;
-    let input1Text = <div className='side-menu-h3'>First row:</div>;
-    let input1;
-    if (this.props.query.row1Chosen) {
-      let input1Type;
-      if (this.props.query.row1Fixed) {
-        let row1Condition = '';
-        if (this.props.query.row1ConditionChosen) {
-          row1Condition = this.props.query.row1Condition;
-        }
-        let row1Input = (
-          <div>
-            <InputGroup className='row1Input' onChange={
-              evt => {
-                this.props.setRow1Condition(evt.target.value)
-              }
-            }>
-              <Input defaultValue={row1Condition}/>
-            </InputGroup>
-          </div>
-        );
+    let input1 = this.renderInput(
+      ()=>{return this.props.query.row1Chosen},
+      ()=>{return this.props.query.row1Fixed},
+      ()=>{return this.props.query.row1ConditionChosen},
+      ()=>{return this.props.query.row1Condition},
+      this.props.setRow1Condition,
+      this.props.fixRow,
+      1,
+      'First row:'
+    );
 
-        let input1Table = (
-          <table>
-            <tbody>
-            <tr>
-              <td id='input-name'>
-                {input1Text}
-              </td>
-              <td id='input-value'>
-                {row1Input}
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        );
-
-        input1 = this.props.query.row1ConditionChosen ? (
-          <div>{input1Table}</div>
-        ) : (
-          <div className="todo">{input1Table}</div>
-        );
-      } else {
-        input1Type = <div>Every Row</div>;
-        input1 = (
-          <table>
-            <tbody>
-            <tr>
-              <td id='input-name'>
-                {input1Text}
-              </td>
-              <td id='input-value'>
-                {input1Type}
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        )
-      }
-    } else {
-      input1 = (
-        <div className='todo'>
-          <table>
-            <tbody>
-              <tr>
-                <td id='input-name'>
-                  {input1Text}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <RowChoice onClick={fixed => this.props.fixRow(1, fixed)}/>
-        </div>
-      )
-    }
-
-
-
-    let input2Text = <div className='side-menu-h3'>Second row:</div>;
-    let row2;
-    if (this.props.query.row2Chosen) {
-      let input2Type;
-      if (this.props.query.row2Fixed) {
-        input2Type = <div>SINGLE ROW</div>;
-        let row2Condition = '';
-        if (this.props.query.row2ConditionChosen) {
-          row2Condition = this.props.query.row2Condition;
-        }
-        //The single row that you are comparing against will be the first row of the table that matches the boolean
-        //                 expression that you write here
-        let row2Input = (
-          <div>
-            <InputGroup className='row2Input' onChange={
-              evt => {
-                this.setState({
-                  row2BoolExpr: evt.target.value,
-                })
-              }
-            }>
-              <Input defaultValue={row2Condition}/>
-            </InputGroup>
-            <Button onClick={
-              () => this.props.setRow2Condition(this.state.row2BoolExpr)
-            }>
-              Update
-            </Button>
-          </div>
-        );
-        row2 = (
-          <div>
-            {input2Type}
-            {row2Input}
-          </div>
-        )
-      } else {
-        input2Type = <div>EVERY ROW</div>;
-        row2 = (
-          <div>
-            {input2Type}
-          </div>
-        )
-      }
-    } else {
-      row2 = <RowChoice onClick={fixed => this.props.fixRow(2, fixed)}/>
-    }
+    let input2 = this.renderInput(
+      ()=>{return this.props.query.row2Chosen},
+      ()=>{return this.props.query.row2Fixed},
+      ()=>{return this.props.query.row2ConditionChosen},
+      ()=>{return this.props.query.row2Condition},
+      this.props.setRow2Condition,
+      this.props.fixRow,
+      2,
+      'Second row:'
+    );
 
     let inputDiv = (
       <div className='side-menu-block'>
         <div class="input">
           {inputText}
           {input1}
-          {input2Text}
-          {row2}
+          {input2}
         </div>
       </div>
     );
