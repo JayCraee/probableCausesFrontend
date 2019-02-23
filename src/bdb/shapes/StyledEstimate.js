@@ -24,7 +24,7 @@ class StyledEstimate extends Component {
     const textHorizontalOffset=0.1;
     const textVerticalOffset=0.13;
 
-    const expressionHorizontalOffset=0.07;
+    let expressionHorizontalOffset=(this.props.extra)?0.1:0.07;
     const expressionVerticalOffset=0.45;
     const expressionHorizontalScale=0.9;
     const expressionVerticalScale=0.5;
