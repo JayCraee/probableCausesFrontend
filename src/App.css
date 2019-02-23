@@ -36,10 +36,6 @@
   margin-top: 20px;
 }
 
-td#context {
-  vertical-align: middle;
-}
-
 table#query-pane-table {
   border: 1px solid black;
   border-collapse: collapse;
@@ -50,8 +46,18 @@ table#input-choice {
   width: 50%;
 }
 
-table#every-row {
-  table-layout: fixed;
+td#context {
+  vertical-align: middle;
+}
+
+td#input-name {
+  width: 100px;
+  text-align: right;
+  padding-right: 4px;
+}
+
+td#input-value {
+  width: 200px;
 }
 
 .side-menu-h1 {
@@ -74,7 +80,7 @@ table#every-row {
   padding-left: 5px;
 }
 
-.context {
+.side-menu-block {
   padding-left: 0;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -90,5 +96,13 @@ table#every-row {
 }
 
 .input {
-  padding-left: 5px ;
+  height: 160px;
+}
+
+.processing {
+  height: 160px;
+}
+
+.output {
+  height: 160px;
 }

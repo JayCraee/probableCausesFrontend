@@ -118,7 +118,7 @@ class SideMenuPane extends Component {
       <table>
         <tbody>
           <tr>
-            <td id='context'>{contextText}</td>
+            <td id='input-name'>{contextText}</td>
             <td>{contextDropDown}</td>
           </tr>
         </tbody>
@@ -134,15 +134,17 @@ class SideMenuPane extends Component {
       </div>
     );
     let processing = (
-      <div className='context'>
+      <div className='side-menu-block'>
+        <div className='processing'>
         {processingText}
         {contextDiv}
+        </div>
       </div>
-    )
+    );
 
     let inputText = <div className='side-menu-h2'>Input:</div>;
     let input1Text = <div className='side-menu-h3'>First row:</div>;
-    let row1;
+    let input1;
     if (this.props.query.row1Chosen) {
       let input1Type;
       if (this.props.query.row1Fixed) {
@@ -154,51 +156,44 @@ class SideMenuPane extends Component {
           <div>
             <InputGroup className='row1Input' onChange={
               evt => {
-                this.setState({
-                  row1BoolExpr: evt.target.value,
-                })
+                this.props.setRow1Condition(evt.target.value)
               }
             }>
               <Input defaultValue={row1Condition}/>
             </InputGroup>
-            <Button onClick={
-              () => this.props.setRow1Condition(this.state.row1BoolExpr)
-            }>
-              Update
-            </Button>
           </div>
         );
 
-        let row1Table = (
+        let input1Table = (
           <table>
             <tbody>
             <tr>
-              <td>
+              <td id='input-name'>
                 {input1Text}
               </td>
-              <td>
+              <td id='input-value'>
                 {row1Input}
               </td>
             </tr>
             </tbody>
           </table>
-        )
+        );
 
-        row1 = this.props.query.row1ConditionChosen ? (
-          <div>{row1Table}</div>
+        input1 = this.props.query.row1ConditionChosen ? (
+          <div>{input1Table}</div>
         ) : (
-          <div className="todo">{row1Table}</div>
+          <div className="todo">{input1Table}</div>
         );
       } else {
-        input1Type = <div>EVERY ROW</div>;
-        row1 = (
-          <table id='every-row'>
+        input1Type = <div>Every Row</div>;
+        input1 = (
+          <table>
             <tbody>
             <tr>
-              <td>
+              <td id='input-name'>
                 {input1Text}
               </td>
-              <td>
+              <td id='input-value'>
                 {input1Type}
               </td>
             </tr>
@@ -207,9 +202,17 @@ class SideMenuPane extends Component {
         )
       }
     } else {
-      row1 = (
+      input1 = (
         <div className='todo'>
-          {input1Text}
+          <table>
+            <tbody>
+              <tr>
+                <td id='input-name'>
+                  {input1Text}
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <RowChoice onClick={fixed => this.props.fixRow(1, fixed)}/>
         </div>
       )
@@ -266,16 +269,18 @@ class SideMenuPane extends Component {
     }
 
     let inputDiv = (
-      <div className='context'>
-        {inputText}
-        {row1}
-        {input2Text}
-        {row2}
+      <div className='side-menu-block'>
+        <div class="input">
+          {inputText}
+          {input1}
+          {input2Text}
+          {row2}
+        </div>
       </div>
     );
 
-    let optional;
-    let optionalText = <div className='side-menu-h2'>Output</div>;
+    let output;
+    let outputText = <div className='side-menu-h2'>Output</div>;
     if (this.props.query.rowsComplete) {
       let orderBy;
       if (this.props.query.orderBySupported) {
@@ -310,36 +315,36 @@ class SideMenuPane extends Component {
       if (this.props.query.limitSupported) {
         //Enter the new number of rows of results you would like returned.
         limit = (
-          <div>
-            <div className='side-menu-h3'>
-              Limit:
-            </div>
-            <InputGroup className='limitInput' onChange={
-              evt => {
-                this.setState({
-                  limitChosen: evt.target.value,
-                })
-              }
-            }>
-              <Input type='number' step='1' defaultValue={this.props.query.limit}/>
-            </InputGroup>
-            <Button onClick={
-              () => {
-                let limitReturn = (this.state.limitChosen !== '') ? this.state.limitChosen : this.props.query.limit;
-                this.props.setLimit(limitReturn);
-              }
-            }>
-              Update
-            </Button>
-          </div>
+          <table>
+            <tbody>
+            <tr>
+              <td id='input-name'>
+                <div className='side-menu-h3'>
+                  Limit:
+                </div>
+              </td>
+              <td>
+                <InputGroup className='limitInput' onChange={
+                  evt => {
+                    this.props.setLimit(evt.target.value)
+                  }
+                }>
+                  <Input type='number' step='1' defaultValue={this.props.query.limit}/>
+                </InputGroup>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         );
       }
 
-      optional = (
-        <div className='context'>
-          {optionalText}
-          {orderBy}
-          {limit}
+      output = (
+        <div className='side-menu-block'>
+          <div className='output'>
+            {outputText}
+            {orderBy}
+            {limit}
+          </div>
         </div>
       )
     }
@@ -349,7 +354,7 @@ class SideMenuPane extends Component {
         {statisticText}
         {inputDiv}
         {processing}
-        {optional}
+        {output}
       </div>
     );
   }
