@@ -102,7 +102,7 @@ class SideMenuPane extends Component {
       row1Condition = inputCondition();
     }
 
-    let inputHtml = (
+    let input = (()=> {return (
       <div>
         <InputGroup className='row1Input' onChange={
           evt => {
@@ -112,18 +112,68 @@ class SideMenuPane extends Component {
           <Input defaultValue={row1Condition}/>
         </InputGroup>
       </div>
-    );
+    )});
+
+    let choice = <RowChoice onClick={fixed => fixAction(num, fixed)}/>;
+    let every = 'Every Row';
 
     return this.renderInput(
       inputChosen,
       inputFixed,
       inputConditionChosen,
       inputCondition,
-      inputHtml,
-      fixAction,
-      num,
-      inputText
+      input,
+      inputText,
+      choice,
+      every
     )
+  }
+
+  renderColumnInput (
+    inputChosen,
+    inputFixed,
+    inputConditionChosen,
+    inputCondition,
+    onChangeAction,
+    fixAction,
+    num,
+    inputText
+  ) {
+    let input = () => {
+      let col1Name = '';
+      if (inputConditionChosen()) {
+        col1Name = inputCondition();
+      }
+
+      return (<UncontrolledDropdown>
+        <DropdownToggle caret>
+          {col1Name}
+        </DropdownToggle>
+        <DropdownMenu>
+          {SideMenuPane.getContexts().map((columnName, index) => (
+            <DropdownItem key={index} onClick={() => {
+              onChangeAction(num, columnName);
+            }}>
+              {columnName}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </UncontrolledDropdown>);
+    }
+
+    let choice = <ColChoice onClick={fixed => fixAction(num, fixed)}/>;
+    let every = 'Every Column';
+
+    return this.renderInput(
+      inputChosen,
+      inputFixed,
+      inputConditionChosen,
+      inputCondition,
+      input,
+      inputText,
+      choice,
+      every
+    );
   }
 
   renderInput(
@@ -131,10 +181,10 @@ class SideMenuPane extends Component {
     inputFixed,
     inputConditionChosen,
     inputCondition,
-    inputHtml,
-    fixAction,
-    num,
-    inputText
+    input,
+    inputText,
+    choice,
+    every
   ) {
 
     let input1Text = <div className='side-menu-h3'>{inputText}</div>;
@@ -142,7 +192,7 @@ class SideMenuPane extends Component {
     if (inputChosen()) {
       let input1Type;
       if (inputFixed()) {
-        let row1Input = inputHtml;
+        let row1Input = input();
 
         let input1Table = (
           <table>
@@ -165,7 +215,7 @@ class SideMenuPane extends Component {
           <div className="todo">{input1Table}</div>
         );
       } else {
-        input1Type = <div>Every Row</div>;
+        input1Type = <div>{every}</div>;
         input1 = (
           <table>
             <tbody>
@@ -193,7 +243,7 @@ class SideMenuPane extends Component {
             </tr>
             </tbody>
           </table>
-          <RowChoice onClick={fixed => fixAction(num, fixed)}/>
+          {choice}
         </div>
       )
     }
@@ -372,100 +422,79 @@ class SideMenuPane extends Component {
   renderCorrelation(statisticText) {
     let inputText = <div className='side-menu-h2'>Input:</div>;
     let input1Text = <div className='side-menu-h3'>First column:</div>;
-    let col1;
-    if (this.props.query.col1Chosen) {
-      let input1Type;
-      if (this.props.query.col1Fixed) {
-        input1Type = <div>SINGLE COLUMN</div>;
-        let col1Name = '';
-        if (this.props.query.col1NameChosen) {
-          col1Name = this.props.query.col1Name;
-        }
-        let col1Input = (
-          <UncontrolledDropdown>
-            <DropdownToggle caret>
-              {col1Name}
-            </DropdownToggle>
-            <DropdownMenu>
-              {SideMenuPane.getContexts().map((columnName, index) => (
-                <DropdownItem key={index} onClick={() => {
-                  this.props.setColName(1, columnName);
-                }}>
-                  {columnName}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        );
-        col1 = (
-          <div>
-            {input1Type}
-            {col1Input}
-          </div>
-        )
-      } else {
-        input1Type = <div>EVERY COLUMN</div>;
-        col1 = (
-          <div>
-            {input1Type}
-          </div>
-        )
-      }
-    } else {
-      col1 = <ColChoice onClick={fixed => this.props.fixCol(1, fixed)}/>
-    }
-    let input2Text = <div className='side-menu-h3'>Second column:</div>;
-    let col2;
-    if (this.props.query.col2Chosen) {
-      let input2Type;
-      if (this.props.query.col2Fixed) {
-        input2Type = <div>SINGLE COLUMN</div>;
-        let col2Name = '';
-        if (this.props.query.col2NameChosen) {
-          col2Name = this.props.query.col2Name;
-        }
-        let col2Input = (
-          <UncontrolledDropdown>
-            <DropdownToggle caret>
-              {col2Name}
-            </DropdownToggle>
-            <DropdownMenu>
-              {SideMenuPane.getContexts().map((columnName, index) => (
-                <DropdownItem key={index} onClick={() => {
-                  this.props.setColName(2, columnName);
-                }}>
-                  {columnName}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        );
-        col2 = (
-          <div>
-            {input2Type}
-            {col2Input}
-          </div>
-        )
-      } else {
-        input2Type = <div>EVERY COLUMN</div>;
-        col2 = (
-          <div>
-            {input2Type}
-          </div>
-        )
-      }
-    } else {
-      col2 = <ColChoice onClick={fixed => this.props.fixCol(2, fixed)}/>
-    }
+    let col1 = this.renderColumnInput(
+      ()=>{return this.props.query.col1Chosen},
+      ()=>{return this.props.query.col1Fixed},
+      ()=>{return this.props.query.col1NameChosen},
+      ()=>{return this.props.query.col1Name},
+      this.props.setColName,
+      this.props.fixCol,
+      1,
+      'First column:'
+    );
+
+    let col2 = this.renderColumnInput(
+      ()=>{return this.props.query.col2Chosen},
+      ()=>{return this.props.query.col2Fixed},
+      ()=>{return this.props.query.col2NameChosen},
+      ()=>{return this.props.query.col2Name},
+      this.props.setColName,
+      this.props.fixCol,
+      2,
+      'Second column:'
+    );
+
+    // let input2Text = <div className='side-menu-h3'>Second column:</div>;
+    // let col2;
+    // if (this.props.query.col2Chosen) {
+    //   let input2Type;
+    //   if (this.props.query.col2Fixed) {
+    //     input2Type = <div>SINGLE COLUMN</div>;
+    //     let col2Name = '';
+    //     if (this.props.query.col2NameChosen) {
+    //       col2Name = this.props.query.col2Name;
+    //     }
+    //     let col2Input = (
+    //       <UncontrolledDropdown>
+    //         <DropdownToggle caret>
+    //           {col2Name}
+    //         </DropdownToggle>
+    //         <DropdownMenu>
+    //           {SideMenuPane.getContexts().map((columnName, index) => (
+    //             <DropdownItem key={index} onClick={() => {
+    //               this.props.setColName(2, columnName);
+    //             }}>
+    //               {columnName}
+    //             </DropdownItem>
+    //           ))}
+    //         </DropdownMenu>
+    //       </UncontrolledDropdown>
+    //     );
+    //     col2 = (
+    //       <div>
+    //         {input2Type}
+    //         {col2Input}
+    //       </div>
+    //     )
+    //   } else {
+    //     input2Type = <div>EVERY COLUMN</div>;
+    //     col2 = (
+    //       <div>
+    //         {input2Type}
+    //       </div>
+    //     )
+    //   }
+    // } else {
+    //   col2 = <ColChoice onClick={fixed => this.props.fixCol(2, fixed)}/>
+    // }
 
 
     return (
       <div>
         {statisticText}
         {inputText}
-        {input1Text}
         {col1}
-        {input2Text}
+        {/*{input2Text}*/}
         {col2}
       </div>
     )
