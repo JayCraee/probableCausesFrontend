@@ -87,12 +87,51 @@ class SideMenuPane extends Component {
     return ['ASC', 'DESC'];
   }
 
-  renderInput(
+  renderRowInput(
     inputChosen,
     inputFixed,
     inputConditionChosen,
     inputCondition,
     onChangeAction,
+    fixAction,
+    num,
+    inputText
+  ) {
+    let row1Condition = '';
+    if (inputConditionChosen()) {
+      row1Condition = inputCondition();
+    }
+
+    let inputHtml = (
+      <div>
+        <InputGroup className='row1Input' onChange={
+          evt => {
+            onChangeAction(evt.target.value)
+          }
+        }>
+          <Input defaultValue={row1Condition}/>
+        </InputGroup>
+      </div>
+    );
+
+    return this.renderInput(
+      inputChosen,
+      inputFixed,
+      inputConditionChosen,
+      inputCondition,
+      inputHtml,
+      fixAction,
+      num,
+      inputText
+    )
+  }
+
+  renderInput(
+    inputChosen,
+    inputFixed,
+    inputConditionChosen,
+    inputCondition,
+    inputHtml,
     fixAction,
     num,
     inputText
@@ -103,21 +142,7 @@ class SideMenuPane extends Component {
     if (inputChosen()) {
       let input1Type;
       if (inputFixed()) {
-        let row1Condition = '';
-        if (inputConditionChosen()) {
-          row1Condition = inputCondition();
-        }
-        let row1Input = (
-          <div>
-            <InputGroup className='row1Input' onChange={
-              evt => {
-                onChangeAction(evt.target.value)
-              }
-            }>
-              <Input defaultValue={row1Condition}/>
-            </InputGroup>
-          </div>
-        );
+        let row1Input = inputHtml;
 
         let input1Table = (
           <table>
@@ -232,7 +257,7 @@ class SideMenuPane extends Component {
     );
 
     let inputText = <div className='side-menu-h2'>Input:</div>;
-    let input1 = this.renderInput(
+    let input1 = this.renderRowInput(
       ()=>{return this.props.query.row1Chosen},
       ()=>{return this.props.query.row1Fixed},
       ()=>{return this.props.query.row1ConditionChosen},
@@ -243,7 +268,7 @@ class SideMenuPane extends Component {
       'First row:'
     );
 
-    let input2 = this.renderInput(
+    let input2 = this.renderRowInput(
       ()=>{return this.props.query.row2Chosen},
       ()=>{return this.props.query.row2Fixed},
       ()=>{return this.props.query.row2ConditionChosen},
