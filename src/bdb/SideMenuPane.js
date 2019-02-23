@@ -44,7 +44,7 @@ class SideMenuPane extends Component {
   renderChooseExpression() {
     let parentWidth = this.props.width;
     let expressionXOffsetScale = 0.1;
-    let expressionHeight = 50;
+    let expressionHeight = 60;
     let expressionWidth = (1-2*expressionXOffsetScale) * parentWidth;
 
     let expressionX = expressionXOffsetScale * parentWidth;
@@ -61,7 +61,7 @@ class SideMenuPane extends Component {
               <StyledExpression
                 key={index}
                 x={expressionX}
-                y={verticalSpacing*(index+0.5)}
+                y={verticalSpacing*(index+0.2)}
                 width={expressionWidth}
                 height={expressionHeight}
                 expression={expression}

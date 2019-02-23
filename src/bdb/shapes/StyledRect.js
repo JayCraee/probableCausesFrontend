@@ -14,8 +14,8 @@ class StyledRect extends Component {
         <Rect
           x={this.props.x}
           y={this.props.y}
-          width={100}
-          height={100}
+          width={this.props.length}
+          height={this.props.length}
           stroke="black"
           fill={fill}
           //onClick={this.props.onClick}
