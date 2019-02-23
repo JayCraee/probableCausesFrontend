@@ -97,21 +97,22 @@ class SideMenuPane extends Component {
     num,
     inputText
   ) {
-    let row1Condition = '';
-    if (inputConditionChosen()) {
-      row1Condition = inputCondition();
-    }
+    let input = (()=> {
+      let row1Condition = '';
+      if (inputConditionChosen()) {
+        row1Condition = inputCondition();
+      }
 
-    let input = (()=> {return (
-      <div>
-        <InputGroup className='row1Input' onChange={
-          evt => {
-            onChangeAction(evt.target.value)
-          }
-        }>
-          <Input defaultValue={row1Condition}/>
-        </InputGroup>
-      </div>
+      return (
+        <div>
+          <InputGroup className='row1Input' onChange={
+            evt => {
+              onChangeAction(evt.target.value)
+            }
+          }>
+            <Input defaultValue={row1Condition}/>
+          </InputGroup>
+        </div>
     )});
 
     let choice = <RowChoice onClick={fixed => fixAction(num, fixed)}/>;
@@ -251,61 +252,33 @@ class SideMenuPane extends Component {
     return input1;
   }
 
-  renderSimilarity(statisticText) {
-    let processingText = <div className='side-menu-h2'>Processing:</div>
-    let contextText = <div className='side-menu-h3'>Context:</div>;
-    let context = '';
-    if (this.props.query.contextChosen) {
-      context = this.props.query.context;
-    } else {
-      context = 'add context';
-    }
-
-    let contextDropDown = (
-      <UncontrolledDropdown>
-        <DropdownToggle caret>
-          {context}
-        </DropdownToggle>
-        <DropdownMenu>
-          {SideMenuPane.getContexts().map((columnName, index) => (
-            <DropdownItem key={index} onClick={() => {
-              this.props.setContext(columnName);
-            }}>
-              {columnName}
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </UncontrolledDropdown>
-    );
-
-    let contextTable = (
-      <table>
-        <tbody>
-          <tr>
-            <td id='input-name'>{contextText}</td>
-            <td>{contextDropDown}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-    let contextDiv = this.props.query.contextChosen ? (
-      <div>
-        {contextTable}
-      </div>
-    ) : (
-      <div className='todo'>
-        {contextTable}
-      </div>
-    );
-    let processing = (
+  renderEstimate(statisticText, input, processing, output) {
+    let inputDiv = (input !== undefined) ? (
       <div className='side-menu-block'>
-        <div className='processing'>
-        {processingText}
-        {contextDiv}
-        </div>
+        {input}
+      </div>
+    ) : undefined;
+    let processingDiv = (processing !== undefined) ? (
+      <div className='side-menu-block'>
+        {processing}
+      </div>
+    ) : undefined;
+    let outputDiv = (output !== undefined) ? (
+      <div className='side-menu-block'>
+        {output}
+      </div>
+    ) : undefined;
+    return (
+      <div>
+        {statisticText}
+        {inputDiv}
+        {processingDiv}
+        {outputDiv}
       </div>
     );
+  }
 
+  renderSimilarity(statisticText) {
     let inputText = <div className='side-menu-h2'>Input:</div>;
     let input1 = this.renderRowInput(
       ()=>{return this.props.query.row1Chosen},
@@ -329,13 +302,61 @@ class SideMenuPane extends Component {
       'Second row:'
     );
 
-    let inputDiv = (
-      <div className='side-menu-block'>
-        <div class="input">
-          {inputText}
-          {input1}
-          {input2}
-        </div>
+    let input = (
+      <div className="input">
+        {inputText}
+        {input1}
+        {input2}
+      </div>
+    );
+
+    let processingText = <div className='side-menu-h2'>Processing:</div>
+    let contextText = <div className='side-menu-h3'>Context:</div>;
+    let context = '';
+    if (this.props.query.contextChosen) {
+      context = this.props.query.context;
+    } else {
+      context = 'add context';
+    }
+    let contextDropDown = (
+      <UncontrolledDropdown>
+        <DropdownToggle caret>
+          {context}
+        </DropdownToggle>
+        <DropdownMenu>
+          {SideMenuPane.getContexts().map((columnName, index) => (
+            <DropdownItem key={index} onClick={() => {
+              this.props.setContext(columnName);
+            }}>
+              {columnName}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    );
+    let contextTable = (
+      <table>
+        <tbody>
+          <tr>
+            <td id='input-name'>{contextText}</td>
+            <td>{contextDropDown}</td>
+          </tr>
+        </tbody>
+      </table>
+    );
+    let contextDiv = this.props.query.contextChosen ? (
+      <div>
+        {contextTable}
+      </div>
+    ) : (
+      <div className='todo'>
+        {contextTable}
+      </div>
+    );
+    let processing = (
+      <div className='processing'>
+        {processingText}
+        {contextDiv}
       </div>
     );
 
@@ -399,24 +420,15 @@ class SideMenuPane extends Component {
       }
 
       output = (
-        <div className='side-menu-block'>
-          <div className='output'>
-            {outputText}
-            {orderBy}
-            {limit}
-          </div>
+        <div className='output'>
+          {outputText}
+          {orderBy}
+          {limit}
         </div>
       )
     }
 
-    return (
-      <div>
-        {statisticText}
-        {inputDiv}
-        {processing}
-        {output}
-      </div>
-    );
+    return this.renderEstimate(statisticText, input, processing, output);
   }
 
   renderCorrelation(statisticText) {
@@ -444,60 +456,15 @@ class SideMenuPane extends Component {
       'Second column:'
     );
 
-    // let input2Text = <div className='side-menu-h3'>Second column:</div>;
-    // let col2;
-    // if (this.props.query.col2Chosen) {
-    //   let input2Type;
-    //   if (this.props.query.col2Fixed) {
-    //     input2Type = <div>SINGLE COLUMN</div>;
-    //     let col2Name = '';
-    //     if (this.props.query.col2NameChosen) {
-    //       col2Name = this.props.query.col2Name;
-    //     }
-    //     let col2Input = (
-    //       <UncontrolledDropdown>
-    //         <DropdownToggle caret>
-    //           {col2Name}
-    //         </DropdownToggle>
-    //         <DropdownMenu>
-    //           {SideMenuPane.getContexts().map((columnName, index) => (
-    //             <DropdownItem key={index} onClick={() => {
-    //               this.props.setColName(2, columnName);
-    //             }}>
-    //               {columnName}
-    //             </DropdownItem>
-    //           ))}
-    //         </DropdownMenu>
-    //       </UncontrolledDropdown>
-    //     );
-    //     col2 = (
-    //       <div>
-    //         {input2Type}
-    //         {col2Input}
-    //       </div>
-    //     )
-    //   } else {
-    //     input2Type = <div>EVERY COLUMN</div>;
-    //     col2 = (
-    //       <div>
-    //         {input2Type}
-    //       </div>
-    //     )
-    //   }
-    // } else {
-    //   col2 = <ColChoice onClick={fixed => this.props.fixCol(2, fixed)}/>
-    // }
-
-
-    return (
-      <div>
-        {statisticText}
+    let input = (
+      <div className='input'>
         {inputText}
         {col1}
-        {/*{input2Text}*/}
         {col2}
       </div>
-    )
+    );
+
+    return this.renderEstimate(statisticText, input, undefined, undefined);
   }
 
   renderSimulate() {
