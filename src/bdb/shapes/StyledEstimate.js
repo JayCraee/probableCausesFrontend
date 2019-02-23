@@ -13,26 +13,26 @@ import StyledExpression from './StyledExpression';
  */
 class StyledEstimate extends Component {
   render() {
-    const x=125;
-    const y=200;
+    const x=this.props.x;
+    const y=this.props.y;
     const width=250;
-    const height=100;
+    const height=80;
     const text="ESTIMATE";
     const expression=this.props.expression;
 
     const textHorizontalIndent=0.06;
-    const textHorizontalOffset=0.1;
-    const textVerticalOffset=0.13;
+    // const textHorizontalOffset=0.1;
+    // const textVerticalOffset=0.13;
 
-    const expressionHorizontalOffset=0.07;
-    const expressionVerticalOffset=0.45;
+    let expressionHorizontalOffset=(this.props.extra)?0.12:0.1;
+    const expressionVerticalOffset=0.1;
     const expressionHorizontalScale=0.9;
-    const expressionVerticalScale=0.5;
+    const expressionVerticalScale=(this.props.extra)?0.7:0.8;
 
     const parallelogramX=x;
     const parallelogramY=y;
-    const textX=x+Math.floor(width*textHorizontalOffset);
-    const textY=y+Math.floor(height*textVerticalOffset);
+    // const textX=x+Math.floor(width*textHorizontalOffset);
+    // const textY=y+Math.floor(height*textVerticalOffset);
     const expressionX=x+Math.floor(width*expressionHorizontalOffset);
     const expressionY=y+Math.floor(height*expressionVerticalOffset);
 
@@ -46,7 +46,7 @@ class StyledEstimate extends Component {
       parallelogramHeight*=1.5;
     }
     const extraTextX=x+Math.floor(width*0.1);
-    const extraTextY=y+Math.floor(height*1.0);
+    const extraTextY=y+Math.floor(height*0.85);
 
     return (
       <Group>
@@ -56,15 +56,15 @@ class StyledEstimate extends Component {
           width={parallelogramWidth}
           height={parallelogramHeight}
         />
-        <Text
-          x={textX}
-          y={textY}
-          text={text}
-          fontSize={24}
-          fontStyle="bold"
-          fill="#e3ecf2"
-          width={textWidth}
-          align="center"/>
+        {/*<Text*/}
+          {/*x={textX}*/}
+          {/*y={textY}*/}
+          {/*text={text}*/}
+          {/*fontSize={24}*/}
+          {/*fontStyle="bold"*/}
+          {/*fill="#e3ecf2"*/}
+          {/*width={textWidth}*/}
+          {/*align="center"/>*/}
         <StyledExpression
           x={expressionX}
           y={expressionY}

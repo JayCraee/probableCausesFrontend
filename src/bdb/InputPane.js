@@ -58,10 +58,10 @@ class InputPane extends Component {
   }
 
   render() {
-    const sideMenuWidth = 250;
+    const sideMenuWidth = 350;
     const diagramWidth = 500;
 
-    const height = 600;
+    const height = 620;
 
     return (
       <table>

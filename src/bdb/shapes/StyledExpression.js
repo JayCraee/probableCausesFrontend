@@ -45,7 +45,7 @@ class StyledExpression extends Component {
           x={textX}
           y={textY}
           text={text}
-          fontSize={20}
+          fontSize={24}
           width={textWidth}
           align="center"
           fill="#2F6690"

@@ -7,18 +7,26 @@ class DimensionChoice extends Component {
     const button2Text = this.props.button2Text;
 
     return (
-      <div>
-        <Button onClick={
-          () => this.props.onClick(false)
-        }>
-          {button1Text}
-        </Button>
-        <Button onClick={
-          () => this.props.onClick(true)
-        }>
-          {button2Text}
-        </Button>
-      </div>
+      <table id='input-choice'>
+        <tbody>
+        <tr>
+          <td>
+            <Button onClick={
+              () => this.props.onClick(false)
+            }>
+              {button1Text}
+            </Button>
+          </td>
+          <td>
+            <Button onClick={
+              () => this.props.onClick(true)
+            }>
+              {button2Text}
+            </Button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     )
   }
 }
