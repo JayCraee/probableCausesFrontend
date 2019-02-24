@@ -36,6 +36,18 @@ class SimulateQuery extends Query {
   changeFieldToSimulate(index, field) {
     this._fieldsToSimulate[index] = field;
   }
+
+  get constraintsComplete() {
+    return (this._constraints.length > 0);
+  }
+
+  get fieldsToSimulateComplete() {
+    return (this._fieldsToSimulate.length > 0);
+  }
+
+  get simulateQueryComplete() {
+    return (this.fieldsToSimulateComplete && this.constraintsComplete);
+  }
 }
 
 export default SimulateQuery;
