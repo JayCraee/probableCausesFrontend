@@ -60,6 +60,24 @@ td#input-value {
   width: 200px;
 }
 
+td#constraint {
+  padding-right: 5px;
+  padding-bottom: 2px;
+}
+
+tr#constraint {
+
+}
+
+td#field-to-simulate {
+  padding-right: 5px;
+  padding-bottom: 2px;
+}
+
+tr#field-to-simulate {
+
+}
+
 .side-menu-h1 {
   text-align: center;
   color: #e3ecf2;
@@ -107,4 +125,8 @@ td#input-value {
 
 .output {
   height: 160px;
+}
+
+.constraints {
+  margin-bottom: 10px;
 }

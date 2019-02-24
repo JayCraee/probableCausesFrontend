@@ -100,7 +100,7 @@ class InputPane extends Component {
   }
 
   renderSimulate() {
-    let width = 600;
+    let width = 500;
     let height = 600;
     return <SimulatePane
       width={width}
@@ -108,8 +108,10 @@ class InputPane extends Component {
       query={this.props.query}
       changeConstraint={this.props.handleChangeConstraint}
       addConstraint={this.props.handleAddConstraint}
+      removeConstraint={this.props.handleRemoveConstraint}
       changeFieldToSimulate={this.props.handleChangeFieldToSimulate}
       addFieldToSimulate={this.props.handleAddFieldToSimulate}
+      removeFieldToSimulate={this.props.handleRemoveFieldToSimulate}
     />
   }
 

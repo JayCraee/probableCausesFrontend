@@ -20,6 +20,12 @@ class SimulateQuery extends Query {
     return this._constraints.slice();
   }
 
+  get constraintsFields() {
+    return this._constraints.map((constraint)=>(
+      constraint.field
+    ));
+  }
+
   addNewFieldToSimulate(field) {
     this._fieldsToSimulate.push(field);
   }
@@ -47,6 +53,14 @@ class SimulateQuery extends Query {
 
   get simulateQueryComplete() {
     return (this.fieldsToSimulateComplete && this.constraintsComplete);
+  }
+
+  removeConstraint(index) {
+    this._constraints.splice(index, 1);
+  }
+
+  removeFieldToSimulate(index) {
+    this._fieldsToSimulate.splice(index, 1);
   }
 }
 

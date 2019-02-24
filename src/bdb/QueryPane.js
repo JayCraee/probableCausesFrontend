@@ -12,8 +12,11 @@ class QueryPane extends Component {
 
   constructor(props) {
     super(props);
+    let q = new SimulateQuery();
+    q.addNewConstraint('columnA', 'big');
+    q.addNewFieldToSimulate('columnB');
     this.state = {
-      query: new SimulateQuery(),
+      query: q,
     }
   }
 
@@ -194,6 +197,14 @@ class QueryPane extends Component {
     })
   }
 
+  handleRemoveConstraint(key) {
+    let query = this.state.query;
+    query.removeConstraint(key);
+    this.setState({
+      query: query
+    })
+  }
+
   handleChangeFieldToSimulate(key, field) {
     let query = this.state.query;
     query.changeFieldToSimulate(key, field);
@@ -210,8 +221,15 @@ class QueryPane extends Component {
     })
   }
 
+  handleRemoveFieldToSimulate(key) {
+    let query = this.state.query;
+    query.removeFieldToSimulate(key);
+    this.setState({
+      query: query
+    })
+  }
+
   render() {
-    //TODO make it clearer what they need to complete
     return (
       <table id="query-pane-table">
         <tbody>
@@ -229,8 +247,10 @@ class QueryPane extends Component {
               handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
               handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
               handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
+              handleRemoveConstraint={key=>this.handleRemoveConstraint(key)}
               handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
               handleAddFieldToSimulate={field=>this.handleAddFieldToSimulate(field)}
+              handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
             />
           </td>
         </tr>
