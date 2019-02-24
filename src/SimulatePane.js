@@ -210,13 +210,13 @@ class SimulatePane extends Component {
   }
 
   renderConstraints() {
-    let constraintsText = <div className='side-menu-h2'>Fields with known values:</div>;
+    let constraintsText = <div className='simulate-h2'>Fields with known values:</div>;
 
     let nextConstraint = this.state.addingConstraint ? this.renderNewConstraint() : this.renderAddConstraintButton();
 
     //display constraints
     let constraints = (
-      <table>
+      <table id='simulate-pane'>
         <tbody>
         {this.props.query.constraints.map((constraint, key)=>(
           //dropdown
@@ -236,12 +236,12 @@ class SimulatePane extends Component {
   }
 
   renderFieldsToSimulate() {
-    let fieldsText = <div className='side-menu-h2'>Fields to be predicted:</div>;
+    let fieldsText = <div className='simulate-h2'>Fields to be predicted:</div>;
 
     let nextField = this.state.addingField ? this.renderAddField() : this.renderAddFieldButton();
 
     let fields = (
-      <table>
+      <table id='simulate-pane'>
         <tbody>
         {this.props.query.fieldsToSimulate.map((field, key)=>(
           this.renderFieldToSimulate(field, key)

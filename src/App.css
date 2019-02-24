@@ -46,6 +46,11 @@ table#input-choice {
   width: 50%;
 }
 
+table#simulate-pane {
+  display: flex;
+  justify-content: center;
+}
+
 td#query {
   display: flex;
   justify-content: center;
@@ -106,6 +111,7 @@ td#field-to-simulate {
   border-bottom: dashed #e3ecf2;
   border-top: dashed #e3ecf2;
 }
+
 .todo {
   padding-left: 0;
   border: 2px solid red;
@@ -123,6 +129,13 @@ td#field-to-simulate {
 
 .output {
   height: 160px;
+}
+
+.simulate-h2 {
+  color: #e3ecf2;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 3px;
 }
 
 .constraints {
