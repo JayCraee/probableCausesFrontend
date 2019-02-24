@@ -117,7 +117,9 @@ class InputPane extends Component {
   }
 
   renderQueryChoice() {
+    let width=500;
     return <QueryChoicePane
+      width={width}
       setQuery={this.props.handleSetQuery}
     />
   }

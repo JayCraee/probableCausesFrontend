@@ -130,3 +130,12 @@ tr#field-to-simulate {
 .constraints {
   margin-bottom: 10px;
 }
+
+.query-choice {
+  text-align: center;
+  border-color: #e3ecf2;
+  border-style: solid;
+  border-width: 2px;
+  padding: 10px;
+
+}

@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
-import Query from "./data/Query";
+import {Button} from 'reactstrap';
 
 class QueryChoicePane extends Component {
   renderEstimate() {
     let button = (
-      <button onClick={()=>{this.props.setQuery('ESTIMATE')}}>
+      <Button onClick={()=>{this.props.setQuery('ESTIMATE')}}>
         Explore
-      </button>
+      </Button>
     );
 
-    let text = 'Calculate statistics about your data-set';
+    let text = (<div className='side-menu-h3'>Calculate statistics about your data-set</div>);
 
     return (
-      <div>
+      <div className='query-choice'>
         {button}
+        <br/>
         {text}
       </div>
     );
@@ -21,35 +22,43 @@ class QueryChoicePane extends Component {
 
   renderSimulate() {
     let button = (
-      <button onClick={()=>{this.props.setQuery('SIMULATE')}}>
+      <Button onClick={()=>{this.props.setQuery('SIMULATE')}}>
         Test
-      </button>
+      </Button>
     );
 
-    let text = 'Predict new outcomes under your new initial conditions';
+    let text = (<div className='side-menu-h3'>Predict new outcomes under your new initial conditions</div>);
 
     return (
-      <div>
+      <div className='query-choice'>
         {button}
+        <br/>
         {text}
       </div>
     );
   }
 
   render() {
+    let style = {
+      width: this.props.width,
+      backgroundColor: '#7EBAD9',
+    };
+
     return (
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              {this.renderEstimate()}
-            </td>
-            <td>
-              {this.renderSimulate()}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div style={style}>
+        <table>
+          <tbody>
+            <tr>
+              <td width="50%">
+                {this.renderEstimate()}
+              </td>
+              <td width="50%">
+                {this.renderSimulate()}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
