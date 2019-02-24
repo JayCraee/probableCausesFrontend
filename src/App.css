@@ -46,6 +46,12 @@ table#input-choice {
   width: 50%;
 }
 
+td#query {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 td#context {
   vertical-align: middle;
 }
@@ -65,17 +71,9 @@ td#constraint {
   padding-bottom: 2px;
 }
 
-tr#constraint {
-
-}
-
 td#field-to-simulate {
   padding-right: 5px;
   padding-bottom: 2px;
-}
-
-tr#field-to-simulate {
-
 }
 
 .side-menu-h1 {
