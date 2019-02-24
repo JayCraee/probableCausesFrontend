@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import DiagramPane from './DiagramPane';
 import SideMenuPane from './SideMenuPane';
 import UnsupportedSideMenuError from "./error/UnsupportedSideMenuError";
+import SimulatePane from "../SimulatePane";
+import EstimateQuery from "./data/EstimateQuery";
+import SimulateQuery from "./data/SimulateQuery";
 
 class InputPane extends Component {
   constructor(props) {
@@ -57,7 +60,7 @@ class InputPane extends Component {
     this.props.handleFixRow(rowNum, fixed);
   }
 
-  render() {
+  renderEstimate() {
     const sideMenuWidth = 350;
     const diagramWidth = 500;
 
@@ -66,40 +69,56 @@ class InputPane extends Component {
     return (
       <table>
         <tbody>
-          <tr>
-            <td>
-              <SideMenuPane
-                width={sideMenuWidth}
-                height={height}
-                query={this.props.query}
-                setExpression={this.props.handleChooseExpression}
-                setContext={this.props.handleChangeSimilarityContext}
-                fixRow={this.props.handleFixRow}
-                setRow1Condition={boolExpr=>this.props.handleChangeRowBoolExpr(1, boolExpr)}
-                setRow2Condition={boolExpr=>this.props.handleChangeRowBoolExpr(2, boolExpr)}
-                setOrderBy={this.props.handleChangeOrderBy}
-                setLimit={this.props.handleChangeLimit}
-                fixCol={this.props.handleFixCol}
-                setColName={this.props.handleChangeColName}
-                changeConstraint={this.props.handleChangeConstraint}
-                addConstraint={this.props.handleAddConstraint}
-                changeFieldToSimulate={this.props.handleChangeFieldToSimulate}
-                addFieldToSimulate={this.props.handleAddFieldToSimulate}
-              />
-            </td>
-            <td>
-              <DiagramPane
-                width={diagramWidth}
-                height={height}
-                query={this.props.query}
-                //handleSelectBlock={currentlySelected=>this.handleSelectBlock(currentlySelected)}
-                //handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
-              />
-            </td>
-          </tr>
+        <tr>
+          <td>
+            <SideMenuPane
+              width={sideMenuWidth}
+              height={height}
+              query={this.props.query}
+              setExpression={this.props.handleChooseExpression}
+              setContext={this.props.handleChangeSimilarityContext}
+              fixRow={this.props.handleFixRow}
+              setRow1Condition={boolExpr=>this.props.handleChangeRowBoolExpr(1, boolExpr)}
+              setRow2Condition={boolExpr=>this.props.handleChangeRowBoolExpr(2, boolExpr)}
+              setOrderBy={this.props.handleChangeOrderBy}
+              setLimit={this.props.handleChangeLimit}
+              fixCol={this.props.handleFixCol}
+              setColName={this.props.handleChangeColName}
+            />
+          </td>
+          <td>
+            <DiagramPane
+              width={diagramWidth}
+              height={height}
+              query={this.props.query}
+            />
+          </td>
+        </tr>
         </tbody>
       </table>
     );
+  }
+
+  renderSimulate() {
+    let width = 600;
+    let height = 600;
+    return <SimulatePane
+      width={width}
+      height={height}
+      query={this.props.query}
+      changeConstraint={this.props.handleChangeConstraint}
+      addConstraint={this.props.handleAddConstraint}
+      changeFieldToSimulate={this.props.handleChangeFieldToSimulate}
+      addFieldToSimulate={this.props.handleAddFieldToSimulate}
+    />
+  }
+
+  render() {
+    if (this.props.query instanceof EstimateQuery) {
+      return this.renderEstimate();
+    } else if (this.props.query instanceof SimulateQuery) {
+      return this.renderSimulate();
+    }
   }
 }
 

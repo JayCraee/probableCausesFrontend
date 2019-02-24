@@ -13,7 +13,7 @@ class QueryPane extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: new EstimateQuery(),
+      query: new SimulateQuery(),
     }
   }
 
