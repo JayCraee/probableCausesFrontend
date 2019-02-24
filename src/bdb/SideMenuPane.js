@@ -8,15 +8,12 @@ import {
   DropdownItem,
   InputGroup,
   Input,
-  Button
 } from 'reactstrap';
-import EstimateQuery from "./data/EstimateQuery";
 import RowChoice from "./RowChoice";
 import BqlStudio from "./BqlStudio";
 import SimilarityExpression from "./data/SimilarityExpression";
 import CorrelationExpression from "./data/CorrelationExpression";
 import ColChoice from "./ColChoice";
-import SimulateQuery from "./data/SimulateQuery";
 
 /**
  * Side Menu of the input pane
@@ -441,7 +438,6 @@ class SideMenuPane extends Component {
 
   renderCorrelation(statisticText) {
     let inputText = <div className='side-menu-h2'>Input:</div>;
-    let input1Text = <div className='side-menu-h3'>First column:</div>;
     let col1 = this.renderColumnInput(
       ()=>{return this.props.query.col1Chosen},
       ()=>{return this.props.query.col1Fixed},
