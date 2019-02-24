@@ -6,17 +6,13 @@ import UnsupportedExpressionError from "./error/UnsupportedExpressionError";
 import QueryNotFinishedError from './data/error/QueryNotFinishedError';
 import CorrelationExpression from "./data/CorrelationExpression";
 import SimulateQuery from "./data/SimulateQuery";
+import UnsupportedQueryError from "./error/UnsupportedQueryError";
 
 class QueryPane extends Component {
-
-
   constructor(props) {
     super(props);
-    let q = new SimulateQuery();
-    q.addNewConstraint('columnA', 'big');
-    q.addNewFieldToSimulate('columnB');
     this.state = {
-      query: q,
+      query: undefined,
     }
   }
 
@@ -229,6 +225,23 @@ class QueryPane extends Component {
     })
   }
 
+  handleSetQuery(query) {
+    switch(query) {
+      case 'ESTIMATE':
+        this.setState({
+          query: new EstimateQuery(),
+        });
+        break;
+      case 'SIMULATE':
+        this.setState({
+          query: new SimulateQuery(),
+        });
+        break;
+      default:
+        throw new UnsupportedQueryError(query);
+    }
+  }
+
   render() {
     return (
       <table id="query-pane-table">
@@ -251,6 +264,7 @@ class QueryPane extends Component {
               handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
               handleAddFieldToSimulate={field=>this.handleAddFieldToSimulate(field)}
               handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
+              handleSetQuery={query=>this.handleSetQuery(query)}
             />
           </td>
         </tr>

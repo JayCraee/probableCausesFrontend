@@ -5,6 +5,7 @@ import UnsupportedSideMenuError from "./error/UnsupportedSideMenuError";
 import SimulatePane from "../SimulatePane";
 import EstimateQuery from "./data/EstimateQuery";
 import SimulateQuery from "./data/SimulateQuery";
+import QueryChoicePane from "./QueryChoicePane";
 
 class InputPane extends Component {
   constructor(props) {
@@ -115,8 +116,16 @@ class InputPane extends Component {
     />
   }
 
+  renderQueryChoice() {
+    return <QueryChoicePane
+      setQuery={this.props.handleSetQuery}
+    />
+  }
+
   render() {
-    if (this.props.query instanceof EstimateQuery) {
+    if (this.props.query === undefined) {
+      return this.renderQueryChoice();
+    } else if (this.props.query instanceof EstimateQuery) {
       return this.renderEstimate();
     } else if (this.props.query instanceof SimulateQuery) {
       return this.renderSimulate();
