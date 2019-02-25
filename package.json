@@ -8,6 +8,7 @@
     "react": "^16.7.0",
     "react-cookie": "^3.0.4",
     "react-dom": "^16.7.0",
+    "react-heatmap-grid": "^0.7.3",
     "react-http-request": "^2.0.0",
     "react-konva": "^16.7.1",
     "react-router-dom": "^4.3.1",

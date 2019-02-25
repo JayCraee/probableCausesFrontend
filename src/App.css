@@ -58,3 +58,29 @@ table#query-pane-table tr {
 .side-menu-h3 {
   color: #e3ecf2;
 }
+
+.op-button-group {
+    display: inline-block;
+    text-align: center;
+   
+}
+
+.op-run {
+  display: inline-block;
+  color: #ffffff; 
+  width: 601px;
+  background-color: #4a8538;
+}
+
+.op-del {
+  display: inline-block;
+  color: #ffffff; 
+  width: 151px;
+  background-color: #a12f20;
+}
+
+.blank_row
+{
+    height: 1000px !important; /* overwrites any other rules */
+    background-color: #FFFFFF;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InputPane from "./InputPane";
 import OutputPane from "./OutputPane";
+import OperationsPane from "./OperationsPane";
 import EstimateQuery from "./data/EstimateQuery";
 import SimilarityExpression from "./data/SimilarityExpression";
 import UnsupportedExpressionError from "./error/UnsupportedExpressionError";
@@ -253,11 +254,16 @@ class QueryPane extends Component {
             />
           </td>
         </tr>
+        <tr class="blank-row"/>
         <tr>
-
+          <OperationsPane/>
         </tr>
+        <tr class="blank-row"/>
         <tr>
-          <OutputPane></OutputPane>
+          <OutputPane
+            query={this.state.query}
+            queryToURL={expression=>this.queryToURL(expression)}
+          />
         </tr>
         </tbody>
       </table>

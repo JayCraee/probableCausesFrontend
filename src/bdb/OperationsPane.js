@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
+
 
 class OperationsPane extends Component {
   render() {
     return (
       <div>
-        <ButtonGroup>
-          <Button color="info">Run</Button>
-          <Button color="info">Edit</Button>
-          <Button color="info">Copy</Button>
-          <Button color="info">Save</Button>
-          <Button color="info">Delete</Button>
-        </ButtonGroup>
+        <div class="op-button-group"><button class="op-run">Run</button></div>
+        <div class="op-button-group"><button class="op-del">Delete</button></div>
       </div>
-    
+      /*<div class="btn-group">
+      <button type="button" class="btn btn-default">Left</button>
+      <button type="button" class="btn btn-default">Middle</button>
+      <button type="button" class="btn btn-default">Right</button>
+    </div> 
+      <Container>
+       <Row>
+          <Col><button class="op-button">Run</button></Col>
+          <Col>.col</Col>
+          <Col>.col</Col>
+          <Col>.col</Col>
+          <Col>.col</Col>
+        </Row>
+      </Container>*/
     )
   }
 }
