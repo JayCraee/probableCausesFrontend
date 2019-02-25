@@ -5,6 +5,8 @@ class SimulateQuery extends Query {
     super('SIMULATE');
     this._constraints=[];
     this._fieldsToSimulate=[];
+    this._limit1=5000;
+    this._limit2=50;
   }
 
   addNewConstraint(field, value) {
@@ -32,6 +34,14 @@ class SimulateQuery extends Query {
 
   get fieldsToSimulate() {
     return this._fieldsToSimulate.slice();
+  }
+
+  get limit1() {
+    return this._limit1;
+  }
+
+  get limit2() {
+    return this._limit2;
   }
 
   changeConstraint(index, field, value) {
