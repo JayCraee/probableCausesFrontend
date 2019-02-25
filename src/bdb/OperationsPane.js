@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { Button, ButtonGroup } from 'reactstrap';
-import { Container, Row, Col } from 'reactstrap';
+
 
 
 class OperationsPane extends Component {
