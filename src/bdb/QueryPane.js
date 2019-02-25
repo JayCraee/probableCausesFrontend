@@ -15,6 +15,7 @@ class QueryPane extends Component {
     super(props);
     this.state = {
       query: undefined,
+      results: undefined,
     }
   }
 
@@ -255,6 +256,13 @@ class QueryPane extends Component {
     }
   }
 
+  handleRunQuery() {
+    //TODO
+    // gets URL from queryToURL
+    // calls backend with URL
+    // set results state
+  }
+
   render() {
     return (
       <table id="query-pane-table">
@@ -283,13 +291,15 @@ class QueryPane extends Component {
         </tr>
         <tr class="blank-row"/>
         <tr>
-          <OperationsPane/>
+          <OperationsPane
+            handleRunQuery={()=>this.handleRunQuery()}
+          />
         </tr>
         <tr class="blank-row"/>
         <tr>
           <OutputPane
             query={this.state.query}
-            queryToURL={expression=>this.queryToURL(expression)}
+            results={this.state.results}
           />
         </tr>
         </tbody>

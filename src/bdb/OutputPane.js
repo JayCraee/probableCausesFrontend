@@ -1,11 +1,65 @@
 import React, {Component} from 'react';
-import Request from 'react-http-request';
 import { Group } from 'react-konva';
 import HeatMap from 'react-heatmap-grid';
 
 class OutputPane extends Component {
+  //gets results from props
+  constructor(props) {
+    super(props);
+    this.state = {
+      results2: {
+        query: 'ESTIMATE',
+        expression: 'CORRELATION',
+        dimensions: 2,
+        rowNames: ['row1', 'row2', 'row3'],
+        results: [
+          {
+            rowName: 'row4',
+            values: [3, 6, 8],
+          }
+          ,
+          {
+            rowName: 'row5',
+            values: [3, 6, 8],
+          }
+        ]
+      },
+
+      results1: {
+        query: 'ESTIMATE',
+        expression: 'CORRELATION',
+        dimensions: 1,
+        rowNames: ['row1', 'row2', 'row3'],
+        results: [
+          {
+            rowName: 'row4',
+            values: [3, 6, 8],
+          }
+        ]
+      },
+
+      results0: {
+        query: 'ESTIMATE',
+        expression: 'CORRELATION',
+        dimensions: 0,
+        rowNames: ['row1'],
+        results: [
+          {
+            rowName: 'row4',
+            values: [3],
+          }
+        ]
+      }
+    }
+  }
+
 
     render() {
+      //TODO
+      // check if this.props.results are not undefined, if yes:
+      // convert format of this.props.results to format acceptable by graph
+      // draw graph of results
+
         const divStyle = {
           height: 300+'px',
           width: 750+'px',
@@ -22,22 +76,6 @@ class OutputPane extends Component {
           
           <div style={divStyle}>
             <Group>
-              <Request
-                //url={this.props.queryToURL(this.state.query)}
-                method='get'
-                accept='application/json'
-                verbose={true}
-              >
-              {
-              ({error, result, loading}) => {
-                if (loading) {
-                  return <div>loading...</div>;
-                } else {
-                return <div>{ JSON.stringify(result) }</div>;
-                }
-              }
-              }
-            </Request>
             <HeatMap
               xLabels={xLabels}
               yLabels={yLabels}
