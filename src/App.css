@@ -114,8 +114,9 @@ td#field-to-simulate {
 
 .todo {
   padding-left: 0;
-  border: 2px solid red;
+  border: 2px solid #8587a7;
   border-radius: 5px;
+  /*background-color: #8587a7;*/
   margin-bottom: 3px;
 }
 
