@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import InputPane from "./InputPane";
+import OutputPane from "./OutputPane";
+import OperationsPane from "./OperationsPane";
 import EstimateQuery from "./data/EstimateQuery";
 import SimilarityExpression from "./data/SimilarityExpression";
 import UnsupportedExpressionError from "./error/UnsupportedExpressionError";
@@ -16,74 +18,85 @@ class QueryPane extends Component {
     }
   }
 
-  queryToApi(query) {
-
+  queryToURL(query) {
     //compulsory fields
-    let queryType= "", mode="", expression="", expname="ExpName", population="AFRICAN_DATA";
-    let limit="", orderBy="";
+    let queryType= "";
+    let mode="";
+    let expression="";
+    let expname="ExpName";
+    let population="AFRICAN_DATA";
+    // optional fields
+    let limit="";
+    let orderBy="";
+    // separator character between fields
+    let splitChar="-";
 
     if (query instanceof EstimateQuery) {
       queryType="estimate";
-
       if (query.expressionChosen) {
-        if (query.expression instanceof SimilarityExpression) {
 
+        // ESTIMATE SIMILARITY
+        if (query.expression instanceof SimilarityExpression) {
           if (!query.contextChosen) {
             throw new QueryNotFinishedError("You need to complete the query.");
           }
           if (query.rowsComplete) {
-
             let boolexpr1=query.row1Condition;
             let boolexpr2=query.row2Condition;
             let column=query.context;
-
             if (query.row1Fixed) {
               if (query.row2Fixed) {
-
                 // row 1 fixed, row2 fixed
-                mode="FROM!PAIRWISE";
+                mode="FROM_PAIRWISE";
                 expression="SIMILARITY'OF'"+boolexpr1+"’TO’"+boolexpr2+"’IN’THE’CONTEXT’OF’"+column;
-
               } else {
-
                 // row1  fixed, row2 free
                 mode="FROM";
                 expression="SIMILARITY’TO’"+boolexpr1+"’IN’THE’CONTEXT’OF’"+column;
-
               }
             } else {
               if (query.row2Fixed) {
-
                 // row 1 free, row2 fixed
                 mode="FROM";
                 expression="SIMILARITY’TO’"+boolexpr2+"’IN’THE’CONTEXT’OF’"+column;
-
               } else {
                 // row1  free, row2 free
                 mode = "BY";
                 expression="SIMILARITY’IN’THE’CONTEXT’OF’"+column;
               }
             }
-            limit=query.limit;
-            orderBy=query.orderBy;
-
           } else {
             throw new QueryNotFinishedError("Query not finished yet: Rows are not complete.");
           }
 
-        } else {
-          // draw estimate without expression
+        // ESTIMATE CORRELATION
+        } else if (query.expression instanceof CorrelationExpression) {
+          // TODO
+        }
+        else {
           throw new QueryNotFinishedError("Query not finished yet: Type of expression is not chosen.");
         }
       }
     }
 
-    // putting together the API string
-    let stringApi = "bql/query/"+queryType+"/EXPRESSION="+expression+";MODE="+mode+
-      ";EXPNAME="+expname+";POPULATION="+population+
-      ";LIMIT="+limit+";ORDER!BY="+orderBy;
-  }
+    // putting together the url
+    let queryURL =
+      "https://localhost:8080/bql/query/" + queryType + "/EXPRESSION=" + expression
+      + splitChar + "MODE=" + mode
+      + splitChar + "EXPNAME=" + expname
+      + splitChar + "POPULATION=" + population;
 
+    if (query.orderBySupported) {
+      orderBy = query.orderBy;
+      queryURL += splitChar + "ORDER_BY=" + orderBy;
+    }
+
+    if (query.limitSupported) {
+      limit = query.limit;
+      queryURL += splitChar + "LIMIT=" + limit;
+    }
+    return queryURL;
+  }
 
   handleChooseExpression(expression) {
     let query = this.state.query;
@@ -267,6 +280,17 @@ class QueryPane extends Component {
               handleSetQuery={query=>this.handleSetQuery(query)}
             />
           </td>
+        </tr>
+        <tr class="blank-row"/>
+        <tr>
+          <OperationsPane/>
+        </tr>
+        <tr class="blank-row"/>
+        <tr>
+          <OutputPane
+            query={this.state.query}
+            queryToURL={expression=>this.queryToURL(expression)}
+          />
         </tr>
         </tbody>
       </table>
