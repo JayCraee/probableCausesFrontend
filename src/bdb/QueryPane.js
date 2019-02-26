@@ -35,9 +35,10 @@ class QueryPane extends Component {
       // optional fields
       let limit;
       if (this.state.query.expressionChosen) {
-        expressionName = this.state.query.expressionName;
+        // expressionName = this.state.query.expressionName;
         // ESTIMATE SIMILARITY
         if (this.state.query.expression instanceof SimilarityExpression) {
+          expressionName = 'sim';
           if (!this.state.query.contextChosen) {
             throw new QueryNotFinishedError("You need to complete the query.");
           }
@@ -86,6 +87,7 @@ class QueryPane extends Component {
 
         } else if (this.state.query.expression instanceof CorrelationExpression) {
           // ESTIMATE CORRELATION
+          expressionName = 'corr';
           //  convert query object into URlString for ESTIMATE CORRELATION
           if (this.state.query.colsComplete) {
             if (this.state.query.col1Fixed) {
@@ -355,7 +357,7 @@ class QueryPane extends Component {
   async runCorrelationQuery(url, expName, dimensions) {
     const response = await (await fetch(url)).json();
     // some processing to turn response into formatted json for Nori
-    this.parseCorrelationResponse(response, expName, dimensions);
+    this.parseCorrelationResponse(response, 'corr', dimensions);
   }
 
 
