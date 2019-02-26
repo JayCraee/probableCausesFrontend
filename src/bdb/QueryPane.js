@@ -267,8 +267,8 @@ class QueryPane extends Component {
     return (
       <table id="query-pane-table">
         <tbody>
-        <tr>
-          <td>
+        <tr align="center">
+          <td id="input-pane">
             <InputPane
               query={this.state.query}
               handleChooseExpression={expression=>this.handleChooseExpression(expression)}
@@ -292,7 +292,7 @@ class QueryPane extends Component {
         <tr>
           <div class="blank-row"/>
         </tr>
-        <tr>
+        <tr align="center">
           <OperationsPane
             handleRunQuery={()=>this.handleRunQuery()}
           />
@@ -300,7 +300,7 @@ class QueryPane extends Component {
         <tr>
           <div class="blank-row"/>
         </tr>
-        <tr>
+        <tr align="center">
           <OutputPane
             query={this.state.query}
             results={this.state.results}
