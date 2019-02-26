@@ -19,84 +19,180 @@ class QueryPane extends Component {
     }
   }
 
-  queryToURL(query) {
+  queryToURL() {
+    let population = this.props.population;
     //compulsory fields
-    let queryType= "";
-    let mode="";
-    let expression="";
-    let expname="ExpName";
-    let population="AFRICAN_DATA";
-    // optional fields
-    let limit="";
-    let orderBy="";
+    let queryType;
     // separator character between fields
     let splitChar="-";
 
-    if (query instanceof EstimateQuery) {
+    if (this.state.query instanceof EstimateQuery) {
       queryType="estimate";
-      if (query.expressionChosen) {
 
+      let mode;
+      let expression;
+      let expressionName;
+      // optional fields
+      let limit;
+      if (this.state.query.expressionChosen) {
+        expressionName = this.state.query.expressionName;
         // ESTIMATE SIMILARITY
-        if (query.expression instanceof SimilarityExpression) {
-          if (!query.contextChosen) {
+        if (this.state.query.expression instanceof SimilarityExpression) {
+          if (!this.state.query.contextChosen) {
             throw new QueryNotFinishedError("You need to complete the query.");
           }
-          if (query.rowsComplete) {
-            let boolexpr1=query.row1Condition;
-            let boolexpr2=query.row2Condition;
-            let column=query.context;
-            if (query.row1Fixed) {
-              if (query.row2Fixed) {
+          if (this.state.query.rowsComplete) {
+            let column = this.state.query.context;
+            if (this.state.query.row1Fixed) {
+              let boolexpr1 = this.state.query.row1Condition;
+              if (this.state.query.row2Fixed) {
+                let boolexpr2 = this.state.query.row2Condition;
                 // row 1 fixed, row2 fixed
-                mode="FROM_PAIRWISE";
-                expression="SIMILARITY'OF'"+boolexpr1+"’TO’"+boolexpr2+"’IN’THE’CONTEXT’OF’"+column;
+                mode = "BY";
+                expression = "SIMILARITY!OF!" + boolexpr1 + "!TO!" + boolexpr2 + "!IN!THE!CONTEXT!OF!" + column;
               } else {
                 // row1  fixed, row2 free
-                mode="FROM";
-                expression="SIMILARITY’TO’"+boolexpr1+"’IN’THE’CONTEXT’OF’"+column;
+                mode = "FROM";
+                expression = "SIMILARITY!TO!" + boolexpr1 + "!IN!THE!CONTEXT!OF!" + column;
               }
             } else {
-              if (query.row2Fixed) {
+              if (this.state.query.row2Fixed) {
+                let boolexpr2 = this.state.query.row2Condition;
                 // row 1 free, row2 fixed
-                mode="FROM";
-                expression="SIMILARITY’TO’"+boolexpr2+"’IN’THE’CONTEXT’OF’"+column;
+                mode = "FROM";
+                expression = "SIMILARITY!TO!" + boolexpr2 + "!IN!THE!CONTEXT!OF!" + column;
               } else {
                 // row1  free, row2 free
-                mode = "BY";
-                expression="SIMILARITY’IN’THE’CONTEXT’OF’"+column;
+                mode = "FROM_PAIRWISE";
+                expression = "SIMILARITY!IN!THE!CONTEXT!OF!" + column;
               }
             }
+            if (this.state.query.limitSupported) {
+              limit = this.state.query.limit;
+            }
+
+            return (
+              "bql/query/"
+              + queryType + "/"
+              + "EXPRESSION=" + expression
+              + splitChar + "MODE=" + mode
+              + splitChar + "EXPNAME=" + expressionName
+              + splitChar + "POPULATION=" + population
+              + splitChar + "LIMIT=" + limit
+            );
           } else {
             throw new QueryNotFinishedError("Query not finished yet: Rows are not complete.");
           }
 
-        // ESTIMATE CORRELATION
-        } else if (query.expression instanceof CorrelationExpression) {
-          // TODO
+        } else if (this.state.query.expression instanceof CorrelationExpression) {
+          // ESTIMATE CORRELATION
+          //  convert query object into URlString for ESTIMATE CORRELATION
+          if (this.state.query.colsComplete) {
+            if (this.state.query.col1Fixed) {
+              let col1 = this.state.query.col1Name;
+              if (this.state.query.col2Fixed) {
+                let col2 = this.state.query.col2Name;
+                mode = "BY";
+                expression = "CORRELATION!OF!"+col1+"!WITH!"+col2;
+              } else {
+                mode = "FROM_VARIABLES_OF";
+                expression = "CORRELATION!WITH!"+col1;
+              }
+            } else {
+              if (this.state.col2Fixed) {
+                let col2 = this.state.query.col2Name;
+                mode = "FROM_VARIABLES_OF";
+                expression = "CORRELATION!WITH!"+col2;
+              } else {
+                mode = "FROM_PAIRWISE_VARIABLES_OF";
+                expression = "CORRELATION";
+              }
+            }
+            return (
+              "bql/query/"
+              + queryType + "/"
+              + "EXPRESSION=" + expression
+              + splitChar + "MODE=" + mode
+              + splitChar + "EXPNAME=" + expressionName
+              + splitChar + "POPULATION=" + population
+            );
+          } else {
+            throw new QueryNotFinishedError("Query not finished yet: Cols not complete");
+          }
+        } else {
+          throw new QueryNotFinishedError("Query not finished yet: That expression is not supported.");
         }
-        else {
-          throw new QueryNotFinishedError("Query not finished yet: Type of expression is not chosen.");
-        }
+      } else {
+        throw new QueryNotFinishedError("Query not finished yet: Type of expression is not chosen.");
       }
+    } else if (this.state.query instanceof SimulateQuery) {
+      //TODO convert query object into URLString for ESTIMATE CORRELATION
+    }
+  }
+
+  parseCorrelationResponse(response, expName, dimensions) {
+    // let jsonResponse = JSON.parse(response)[0];
+    let jsonResponse = response[0];
+    //response.toJSON is in format
+    // [[
+    //    { "expName": <value>,
+    //      "name0": <name0>,
+    //      "name1": <name1> }
+    //    ,
+    //    etc
+    //  ]]
+    // name0 will be the same in every cell if 1D
+
+    // fill colNames with name0
+    let colNames = [];
+    let rowNames = [];
+    let values = []; //outer array is of rows, each inner array is a row
+
+    for (let cell of jsonResponse) {
+      let col = cell.name1;
+      let row = cell.name0;
+      let correlation = cell[expName];
+
+      //re-size arrays if necessary
+      if (!colNames.includes(col)) {
+        // add new column to each row
+        for (let rowValues of values) {
+          rowValues.push(0);
+        }
+        // add new colName
+        colNames.push(col);
+        // initialise all values to 0
+      }
+      if (!rowNames.includes(row)) {
+        // add new row
+        let newRow = new Array(colNames.length);
+        // initialise all values to 0
+        for (let i = 0; i < colNames.length; ++i) {
+          newRow[i] = 0;
+        }
+        values.push(newRow);
+        // add to rowName
+        rowNames.push(row);
+      }
+      values[rowNames.indexOf(row)][colNames.indexOf(col)] = correlation;
     }
 
-    // putting together the url
-    let queryURL =
-      "https://localhost:8080/bql/query/" + queryType + "/EXPRESSION=" + expression
-      + splitChar + "MODE=" + mode
-      + splitChar + "EXPNAME=" + expname
-      + splitChar + "POPULATION=" + population;
-
-    if (query.orderBySupported) {
-      orderBy = query.orderBy;
-      queryURL += splitChar + "ORDER_BY=" + orderBy;
+    let results = {
+      query: 'ESTIMATE',
+      expression: 'CORRELATION',
+      dimensions: dimensions,
+      colNames: colNames.slice(),
+      rows: []
+    };
+    for (const index in rowNames) {
+      let nextRow = {
+        rowName: rowNames[index],
+        values: values[index].slice(),
+      };
+      results.rows.push(nextRow);
     }
 
-    if (query.limitSupported) {
-      limit = query.limit;
-      queryURL += splitChar + "LIMIT=" + limit;
-    }
-    return queryURL;
+    this.setState({results: results});
   }
 
   handleChooseExpression(expression) {
@@ -256,11 +352,28 @@ class QueryPane extends Component {
     }
   }
 
+  async runCorrelationQuery(url, expName, dimensions) {
+    const response = await (await fetch(url)).json();
+    // some processing to turn response into formatted json for Nori
+    this.parseCorrelationResponse(response, expName, dimensions);
+  }
+
+
   handleRunQuery() {
-    //TODO
     // gets URL from queryToURL
     // calls backend with URL
     // set results state
+    let url = this.queryToURL();
+
+    if (this.state.query instanceof EstimateQuery) {
+      if (this.state.query.expression instanceof CorrelationExpression) {
+        this.runCorrelationQuery(
+          url,
+          this.state.query.expressionName,
+          this.state.query.dimensions
+        );
+      }
+    }
   }
 
   render() {
@@ -289,18 +402,22 @@ class QueryPane extends Component {
             />
           </td>
         </tr>
-        <tr class="blank-row"/>
+        <tr className="blank-row"/>
         <tr>
+          <td>
           <OperationsPane
             handleRunQuery={()=>this.handleRunQuery()}
           />
+          </td>
         </tr>
-        <tr class="blank-row"/>
+        <tr className="blank-row"/>
         <tr>
+          <td>
           <OutputPane
             query={this.state.query}
             results={this.state.results}
           />
+          </td>
         </tr>
         </tbody>
       </table>

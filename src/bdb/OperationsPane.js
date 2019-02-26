@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import { Button, ButtonGroup } from 'reactstrap';
-import { Container, Row, Col } from 'reactstrap';
 
 
 class OperationsPane extends Component {
   render() {
     return (
       <div>
-        <div class="op-button-group" onClick={()=>this.props.handleRunQuery()}><button class="op-run">Run</button></div>
-        <div class="op-button-group"><button class="op-del">Delete</button></div>
+        <div className="op-button-group" onClick={()=>this.props.handleRunQuery()}><button className="op-run">Run</button></div>
+        <div className="op-button-group"><button className="op-del">Delete</button></div>
       </div>
     )
   }
