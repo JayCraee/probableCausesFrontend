@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+/*import React, {Component} from 'react';
 import HeatMap from 'react-heatmap-grid';
 
 class HeatMapOutput extends Component {
@@ -9,9 +9,10 @@ class HeatMapOutput extends Component {
           xLabels={this.props.xLabels}
           yLabels={this.props.yLabels}
           data={this.props.data}
+          yLabelWidth={120}
         />
     )
   }
 }
 
-export default HeatMapOutput;
+export default HeatMapOutput;*/

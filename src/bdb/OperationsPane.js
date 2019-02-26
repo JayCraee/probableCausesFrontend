@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 
-
 class OperationsPane extends Component {
   render() {
     return (
