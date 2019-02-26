@@ -402,7 +402,11 @@ class QueryPane extends Component {
             />
           </td>
         </tr>
-        <tr className="blank-row"/>
+        <tr>
+          <td>
+            <div class="blank-row"/>
+          </td>
+        </tr>
         <tr>
           <td>
           <OperationsPane
@@ -410,7 +414,11 @@ class QueryPane extends Component {
           />
           </td>
         </tr>
-        <tr className="blank-row"/>
+        <tr>
+          <td>
+            <div class="blank-row"/>
+          </td>
+        </tr>
         <tr>
           <td>
           <OutputPane
