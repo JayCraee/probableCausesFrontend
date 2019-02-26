@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from 'reactstrap';
 import QueryPane from './QueryPane';
 import {withRouter} from "react-router-dom";
+import BQLNavBar from './BQLNavBar';
 
 class BqlStudio extends Component {
   constructor(props) {
@@ -23,11 +24,14 @@ class BqlStudio extends Component {
     }
     rows.push(<tr><td id='query'><Button onClick={()=>this.setState({numQueries: this.state.numQueries+1})}>+</Button></td></tr>);
     return (
-      <table width="100%">
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
+      <div>
+        <BQLNavBar/>
+        <table width="100%">
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

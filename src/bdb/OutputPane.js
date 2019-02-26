@@ -11,7 +11,7 @@ class OutputPane extends Component {
       xLabels: undefined,
       yLabels:undefined,
       data:undefined,
-      height: 400,
+      height: 500,
       width: 750,
 
       results2: {
@@ -22,7 +22,7 @@ class OutputPane extends Component {
         rows: [
           {
             rowName: 'Kenya',
-            values: [100, 12, 15, 17, 33, 16, 38],
+            values: [0, 0.12, 0.15, 0.17, 0.33, 0.16, 0.38],
           },
           {
             rowName: 'Uganda',
@@ -55,11 +55,13 @@ class OutputPane extends Component {
         query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 1,
-        colNames: ['Kenya', 'Chad', 'Ghana'],
+        colNames: ['Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana',
+                    'Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana'],
         rows: [
           {
             rowName: 'Algeria',
-            values: [0.135, 0.62, 0.81],
+            values: [0.135, 0.62, 0.81, 0.135, 0.62, 0.81, 0.135, 0.62, 0.81,
+                     0.135, 0.62, 0.81, 0.135, 0.62, 0.81, 0.135, 0.62, 0.81],
           }
         ]
       },
@@ -72,7 +74,7 @@ class OutputPane extends Component {
         rows: [
           {
             rowName: 'Guinea',
-            values: [0.143],
+            values: [0.34],
           }
         ]
       }
@@ -187,8 +189,27 @@ class OutputPane extends Component {
   
 
   render() {
+      let results=this.state.results1;
+      switch (results.dimensions) {
+        case 0:
+          this.state.height=300;
+          this.state.width=750;
+          break;
+        case 1:
+          this.state.height=500;
+          this.state.width=750;
+          break;
+        case 2:
+          this.state.height=500;
+          this.state.width=950;
+          break;
+        default:
+        this.state.height=400;
+        this.state.width=750;
+      }
+
       const divStyle = {
-        height: this.state.height+'px',
+        height: this.state.hight+'px',
         width: this.state.width+'px',
         backgroundColor: '#E3ECF2',
       };
@@ -196,8 +217,8 @@ class OutputPane extends Component {
       //TODO: replace this.state.results<number> to this.props.results
       return (
         <div style={divStyle}>
-          <button className="output-title">{this.state.results1.expression}</button>
-          {this.renderOutput(this.state.results1)}
+          <button className="output-title">{results.expression}</button>
+          {this.renderOutput(results)}
         </div>
       );
     }
