@@ -183,11 +183,13 @@ td#field-to-simulate {
 
 .value {
   padding: 20px 80px;
-  background-color: #329fff;
+  background-color: #2d76b6;
   border-radius: 6px;
   align-content: center;
   font-size: 25px;
   text-align: center;
+  color: #ffffff;
+  font-family: "Lato", sans-serif;
 }
 
 .xLabel {
@@ -196,6 +198,7 @@ td#field-to-simulate {
   border: none;
   font-size: 15px;
   text-align: bottom;
+  font-family: "Lato", sans-serif;
 }
 
 .yLabel {
@@ -204,6 +207,7 @@ td#field-to-simulate {
   border: none;
   font-size: 15px;
   text-align: right;
+  font-family: "Lato", sans-serif;
 }
 
 .output-title {
@@ -213,5 +217,26 @@ td#field-to-simulate {
   border-radius: 6px;
   border: none;
   text-align: center;
+}
 
+.title {
+  font-size: 1.4em;
+  font-weight: 300;
+  font-family: "Lato", sans-serif;
+}
+
+.bar-group .name-label {
+  text-anchor: end;
+  font-weight: 300;
+  font-size: 1em;
+  fill: #333;
+  font-family: "Lato", sans-serif;
+}
+
+.bar-group .value-label {
+  text-anchor: end;
+  fill: #fff;
+  font-weight: 900;
+  font-size: 0.7em;
+  font-family: "Lato", sans-serif;
 }

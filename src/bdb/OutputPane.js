@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Group, Text } from 'react-konva';
+import { Group } from 'react-konva';
 import HeatMap from 'react-heatmap-grid';
-import { Button } from 'reactstrap';
+import BarChart from './BarChart';
 
 class OutputPane extends Component {
   //gets results from props
@@ -59,7 +59,7 @@ class OutputPane extends Component {
         rows: [
           {
             rowName: 'Algeria',
-            values: [3, 6, 8],
+            values: [13.5, 6.2, 8.1],
           }
         ]
       },
@@ -72,13 +72,16 @@ class OutputPane extends Component {
         rows: [
           {
             rowName: 'Guinea',
-            values: [3],
+            values: [0.143],
           }
         ]
       }
     }
   }
 
+  /* Set xLabels, yLabels and data states
+   * then draw HeatMap.
+   */
   handle2D(results) {
     this.state.xLabels=results.colNames;
     this.state.yLabels=new Array();
@@ -105,13 +108,22 @@ class OutputPane extends Component {
     )
   }
 
+  /* Set xLabels, yLabels and data states
+   * then draw BarChart.
+   */
   handle1D(results) {
     this.state.xLabels=results.colNames;
-    this.state.yLabells=results.rows[0].rowName;
+    this.state.yLabels=results.rows[0].rowName;
     this.state.data=results.rows[0].values;
+    return(
+      <BarChart xLabels={this.state.xLabels} yLabels={this.state.yLabels} data={this.state.data}/>
+    )
     
   }
 
+  /* Set xLabels, yLabels and data states
+   * then display the value.
+   */
   handle0D(results) {
     this.state.xLabels=results.colNames[0];
     this.state.yLabels=results.rows[0].rowName;
@@ -189,12 +201,12 @@ class OutputPane extends Component {
         backgroundColor: '#E3ECF2',
       };
 
-      //TODO: replace this.state.results2 to this.props.results
+      //TODO: replace this.state.results<number> to this.props.results
       return (
         <div style={divStyle}>
           <Group>
-            <button class="output-title">{this.state.results2.expression}</button>
-            {this.renderOutput(this.state.results2)}
+            <button class="output-title">{this.state.results1.expression}</button>
+            {this.renderOutput(this.state.results1)}
           </Group>
         </div>
       );
