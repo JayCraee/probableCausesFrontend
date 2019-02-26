@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import DiagramPane from './DiagramPane';
 import SideMenuPane from './SideMenuPane';
 import UnsupportedSideMenuError from "./error/UnsupportedSideMenuError";
-import SimulatePane from "../SimulatePane";
+import SimulatePane from "./SimulatePane";
 import EstimateQuery from "./data/EstimateQuery";
 import SimulateQuery from "./data/SimulateQuery";
 import QueryChoicePane from "./QueryChoicePane";
