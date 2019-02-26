@@ -7,13 +7,18 @@ class BqlStudio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      population: BqlStudio.getPopulation(),
+      population: undefined,
       numQueries: 1,
-    }
+    };
+    this.getPopulation();
   }
 
-  static getPopulation() {
-    return "pop";
+  async getPopulation() {
+    let populationJSON = await (await fetch("util/tableNames")).json();
+    let population = populationJSON[0];
+    this.setState({
+      population: population,
+    })
   }
 
   static getExpressions() {
