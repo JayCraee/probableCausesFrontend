@@ -240,3 +240,10 @@ td#field-to-simulate {
   font-size: 0.7em;
   font-family: "Lato", sans-serif;
 }
+
+.name-label-zero-dimension {
+  font-weight: 300;
+  font-size: 1em;
+  fill: #333;
+  font-family: "Lato", sans-serif;
+}

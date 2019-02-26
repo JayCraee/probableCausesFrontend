@@ -26,27 +26,27 @@ class OutputPane extends Component {
           },
           {
             rowName: 'Uganda',
-            values: [12, 100, 11, 14, 49, 67, 102],
+            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102],
           },
           {
             rowName: 'Tanzania',
-            values: [15, 11, 100, 14, 33, 17, 57],
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57],
           },
           {
             rowName: 'Chad',
-            values: [17, 67, 11, 100, 14, 90, 64],
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64],
           },
           {
             rowName: 'Ghana',
-            values: [33, 49, 33, 14, 100, 22, 2],
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
           },
           {
             rowName: 'Algeria',
-            values: [16, 67, 17, 90, 22, 100, 18],
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18],
           },
           {
             rowName: 'Guinea',
-            values: [38, 102, 57, 64, 2, 18, 100],
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
           }
         ]
       },
@@ -59,7 +59,7 @@ class OutputPane extends Component {
         rows: [
           {
             rowName: 'Algeria',
-            values: [13.5, 6.2, 8.1],
+            values: [0.135, 0.62, 0.81],
           }
         ]
       },
@@ -116,7 +116,12 @@ class OutputPane extends Component {
     this.state.yLabels=results.rows[0].rowName;
     this.state.data=results.rows[0].values;
     return(
-      <BarChart xLabels={this.state.xLabels} yLabels={this.state.yLabels} data={this.state.data}/>
+      <BarChart 
+        xLabels={this.state.xLabels}
+        yLabels={this.state.yLabels}
+        data={this.state.data}
+        dimensions={results.dimensions}
+      />
     )
     
   }
@@ -125,30 +130,17 @@ class OutputPane extends Component {
    * then display the value.
    */
   handle0D(results) {
-    this.state.xLabels=results.colNames[0];
+    this.state.xLabels=[results.colNames[0]];
     this.state.yLabels=results.rows[0].rowName;
-    this.state.data=results.rows[0].values[0];
+    this.state.data=[results.rows[0].values[0]];
     return(
-      <table align="center">
-        <tr>
-          <td width="20%"/>
-          <td width="20%"/>
-          <td width="20%">
-            <text class="xLabel">{this.state.xLabels}</text>
-          </td>
-          <td width="40%"/>
-           </tr>
-        <tr>
-        <td/>
-          <td>
-            <text class="yLabel">{this.state.yLabels}</text>
-          </td> 
-          <td>
-            <button class="value">{this.state.data}</button>
-          </td>
-          <td/>
-        </tr>
-      </table>
+      <div>
+        <BarChart
+          xLabels={this.state.xLabels}
+          yLabels={this.state.yLabels} 
+          data={this.state.data}
+          dimensions={results.dimensions}/>
+      </div>
     )
   }
 
@@ -204,10 +196,8 @@ class OutputPane extends Component {
       //TODO: replace this.state.results<number> to this.props.results
       return (
         <div style={divStyle}>
-          <Group>
-            <button class="output-title">{this.state.results1.expression}</button>
-            {this.renderOutput(this.state.results1)}
-          </Group>
+          <button className="output-title">{this.state.results1.expression}</button>
+          {this.renderOutput(this.state.results1)}
         </div>
       );
     }

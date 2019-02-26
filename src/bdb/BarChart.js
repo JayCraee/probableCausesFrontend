@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import BarGroup from './BarGroup';
 
 class BarChart extends React.Component {
@@ -6,7 +6,6 @@ class BarChart extends React.Component {
         super(props);
         this.state = {
             data: [],
-            row: {name:undefined, value:undefined}
         }
     }
 
@@ -25,7 +24,13 @@ class BarChart extends React.Component {
         return (
             <svg width="800" height="300" >
                 <g className="container">
-                    <text x="10" y="30">{this.props.yLabels}</text>
+                    <text 
+                        className={this.props.dimensions===0 ? "name-label-zero-dimension" : ""}
+                        x="100"
+                        y={this.props.dimensions===0 ? 53 : 30}
+                    >
+                    {this.props.yLabels}
+                    </text>
                 </g>
                 <g className="chart" transform="translate(100,60)">
                     {barGroups}
