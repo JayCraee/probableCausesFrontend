@@ -132,10 +132,6 @@ td#field-to-simulate {
   height: 160px;
 }
 
-.output {
-  height: 160px;
-}
-
 .simulate-h2 {
   color: #e3ecf2;
   font-weight: bold;
@@ -165,9 +161,9 @@ td#field-to-simulate {
 .op-run {
   display: inline-block;
   color: #ffffff;
-  width: 750px;
   background-color: #53b386;
   border-radius: 6px;
+  width: 750px;
 }
 
 .op-del {

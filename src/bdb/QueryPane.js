@@ -290,7 +290,7 @@ class QueryPane extends Component {
           </td>
         </tr>
         <tr>
-          <div class="blank-row"/>
+          <div className="blank-row"/>
         </tr>
         <tr align="center">
           <OperationsPane
@@ -298,7 +298,7 @@ class QueryPane extends Component {
           />
         </tr>
         <tr>
-          <div class="blank-row"/>
+          <div className="blank-row"/>
         </tr>
         <tr align="center">
           <OutputPane

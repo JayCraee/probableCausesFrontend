@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Group } from 'react-konva';
 import HeatMap from 'react-heatmap-grid';
 import BarChart from './BarChart';
 
 class OutputPane extends Component {
+
   //gets results from props
   constructor(props) {
     super(props);
@@ -11,42 +11,195 @@ class OutputPane extends Component {
       xLabels: undefined,
       yLabels:undefined,
       data:undefined,
-      height: 500,
+      height: 400,
       width: 750,
 
+      // Examples of the structure of this.props.results
+      /*********************************************************************************************************************/
       results2: {
         query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 2,
-        colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea'],
+        colNames: ['Kenya', 'EstimatedSpeedOfCollision', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea', 'Morocco',
+                  'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea'],
         rows: [
           {
             rowName: 'Kenya',
-            values: [0, 0.12, 0.15, 0.17, 0.33, 0.16, 0.38],
+            values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.6],
           },
           {
             rowName: 'Uganda',
-            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102],
+            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.2],
           },
           {
-            rowName: 'Tanzania',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57],
+            rowName: 'EstimatedSpeedOfCollision',
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 1],
           },
           {
             rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64],
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.3],
           },
           {
             rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.4],
           },
           {
             rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18],
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.2],
           },
           {
             rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
+          }
+        ]
+      },
+
+      results2b: {
+        query: 'ESTIMATE',
+        expression: 'CORRELATION',
+        dimensions: 2,
+        colNames: ['Kenya', 'Uganda', 'EstimatedSpeedOfCollision', 'Chad', 'Ghana', 'Algeria', 'Guinea',
+                    'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+        rows: [
+          {
+            rowName: 'Kenya',
+            values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
+          },
+          {
+            rowName: 'DistanceToNearestTrafficLight',
+            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Tanzania',
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
+          },
+          {
+            rowName: 'Chad',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Ghana',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+          rowName: 'Tanzania',
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Chad',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+            rowName: 'Ghana',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+          rowName: 'DistanceToNearestTrafficLight',
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Chad',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Ghana',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+            rowName: 'Chad',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Ghana',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
+          },
+          {
+          rowName: 'Tanzania',
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Chad',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Ghana',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'EstimatedSpeedOfCollision',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+          rowName: 'Tanzania',
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'DistanceToNearestTrafficLight',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Ghana',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Algeria',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
+          },
+          {
+            rowName: 'Guinea',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
           }
         ]
       },
@@ -55,13 +208,32 @@ class OutputPane extends Component {
         query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 1,
-        colNames: ['Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana',
-                    'Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana', 'Kenya', 'Chad', 'Ghana'],
+        colNames: ['EstimatedSpeedOfCollision', 'Uganda', 'EstimatedSpeedOfCollision', 'Chad', 'Ghana', 'Algeria', 'Guinea',
+                    'Kenya', 'Uganda', 'Tanzania', 'DistanceToNearestTrafficLight', 'Ghana', 'Algeria', 'Guinea',
+                    'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea',
+                    'Kenya', 'Uganda', 'Tanzania', 'DistanceToNearestTrafficLight', 'Ghana', 'Algeria', 'Guinea',
+      'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea'],
         rows: [
           {
-            rowName: 'Algeria',
-            values: [0.135, 0.62, 0.81, 0.135, 0.62, 0.81, 0.135, 0.62, 0.81,
-                     0.135, 0.62, 0.81, 0.135, 0.62, 0.81, 0.135, 0.62, 0.81],
+            rowName: 'EstimatedSpeedOfCollision',
+            values: [0.135, 0.62, 0.2, 0.135, 0.102, 0.57, 0.64, 
+                    0.135, 0.62, 0.3, 0.135, 1, 0.2, 0.64, 0.135, 
+                    0.62, 0.3, 0.135, 0.102, 0.57, 0.64,
+                    0.135, 0.62, 0.3, 0.135, 0.102, 0.2, 0.64, 0.135, 
+                    0.62, 0.3, 0.135, 0.102, 0.57, 0.64],
+          }
+        ]
+      },
+
+      results1b: {
+        query: 'ESTIMATE',
+        expression: 'CORRELATION',
+        dimensions: 1,
+      colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+        rows: [
+          {
+            rowName: 'Morocco',
+            values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
           }
         ]
       },
@@ -70,30 +242,30 @@ class OutputPane extends Component {
         query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 0,
-        colNames: ['Kenya'],
+        colNames: ['DistanceToNearestTrafficLight'],
         rows: [
           {
             rowName: 'Guinea',
-            values: [0.34],
+            values: [1],
           }
         ]
       }
+      /*********************************************************************************************************************/
+      // End of examples
     }
   }
 
   /* Set xLabels, yLabels and data states
    * then draw HeatMap.
    */
-  handle2D(results) {
+  renderHeatMap(results) {
     this.state.xLabels=results.colNames;
     this.state.yLabels=new Array();
     this.state.data=new Array(results.rows.length);
-
     //iterate through rows
     for (var i=0; i<results.rows.length; i++) {
       let helpArray = new Array(results.rows[i].values.length);
       this.state.yLabels[i]=results.rows[i].rowName;
-
       // iterate through columns
       for (var j=0; j<results.rows[i].values.length; j++) {
         helpArray[j]=results.rows[i].values[j];
@@ -105,7 +277,7 @@ class OutputPane extends Component {
         xLabels={this.state.xLabels}
         yLabels={this.state.yLabels}
         data={this.state.data}
-        yLabelWidth={120}
+        yLabelWidth={220}
       />
     )
   }
@@ -113,7 +285,7 @@ class OutputPane extends Component {
   /* Set xLabels, yLabels and data states
    * then draw BarChart.
    */
-  handle1D(results) {
+  renderBarChart(results) {
     this.state.xLabels=results.colNames;
     this.state.yLabels=results.rows[0].rowName;
     this.state.data=results.rows[0].values;
@@ -123,27 +295,11 @@ class OutputPane extends Component {
         yLabels={this.state.yLabels}
         data={this.state.data}
         dimensions={results.dimensions}
+        height={this.state.height}
+        width={this.state.width}
       />
     )
     
-  }
-
-  /* Set xLabels, yLabels and data states
-   * then display the value.
-   */
-  handle0D(results) {
-    this.state.xLabels=[results.colNames[0]];
-    this.state.yLabels=results.rows[0].rowName;
-    this.state.data=[results.rows[0].values[0]];
-    return(
-      <div>
-        <BarChart
-          xLabels={this.state.xLabels}
-          yLabels={this.state.yLabels} 
-          data={this.state.data}
-          dimensions={results.dimensions}/>
-      </div>
-    )
   }
 
   renderOutput(results) {
@@ -151,37 +307,39 @@ class OutputPane extends Component {
     if (results!==undefined) {
       let res=results;
 
+      // case study for different queries, expressions and dimensions
       switch(res.query) {
           case "ESTIMATE":
             switch(res.expression) {
-
               case "CORRELATION":
                 switch(res.dimensions) {
                   case 2:
-                    return this.handle2D(res);
+                    return this.renderHeatMap(res);
                   case 1:
-                    return this.handle1D(res);
+                    return this.renderBarChart(res);
                   case 0:
-                    return this.handle0D(res);
+                    return this.renderBarChart(res);
                   default:
+                    // dimension format error
                 }
-
+                break;
               case "SIMILARITY":
                 switch(res.dimensions) {
                   case 2:
-                    return this.handle2D(res);
+                    return this.renderHeatMap(res);
                   case 1:
-                    return this.handle1D(res);
+                    return this.renderBarChart(res);
                   case 0:
-                    return this.handle0D(res);
+                    return this.renderBarChart(res);
                   default:
+                    // dimension format error
                 }
+                break;
               default:
                 // not supported expression
             }
             break;
             default:
-              return;
               // not supported query
         } 
       } 
@@ -189,32 +347,42 @@ class OutputPane extends Component {
   
 
   render() {
-      let results=this.state.results1;
+      /*****************************************************************************************************************
+      * For testing: replace this.props.results to this.state.results<number> where number can be 0, 1, 1b, 2 or 2b
+      /*****************************************************************************************************************/
+      let results=this.state.results2;
+
+      // Set height and width of the OutPutPane
       switch (results.dimensions) {
         case 0:
-          this.state.height=300;
+          this.state.height=280;
           this.state.width=750;
           break;
         case 1:
-          this.state.height=500;
-          this.state.width=750;
+          this.state.height=220+results.colNames.length*30;
+          this.state.width=900;
           break;
         case 2:
-          this.state.height=500;
-          this.state.width=950;
+          if (results.rows.length>5) this.state.height=200+results.rows.length*30;
+          else this.state.height=350;
+          if (results.colNames.length>7) this.state.width=400+results.colNames.length*80;
+          else this.state.width=750;
           break;
         default:
-        this.state.height=400;
-        this.state.width=750;
+          this.state.height=400;
+          this.state.width=750;
       }
 
+      // Basic styling of OutputPane
       const divStyle = {
-        height: this.state.hight+'px',
+        height: this.state.height+'px',
         width: this.state.width+'px',
         backgroundColor: '#E3ECF2',
       };
 
-      //TODO: replace this.state.results<number> to this.props.results
+      /* Display name of expression as the title,
+       * then call function to display the heatmap/chart
+       */
       return (
         <div style={divStyle}>
           <button className="output-title">{results.expression}</button>

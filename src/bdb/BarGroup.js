@@ -8,7 +8,7 @@ class BarGroup extends Component{
     render() {
         let barPadding = 2
         let barColour = '#348AA7'
-        let widthScale = d => d * 650
+        let widthScale = d => d * 550
     
         let props=this.props;
         let width = widthScale(props.d.value)
