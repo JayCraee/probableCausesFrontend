@@ -11,7 +11,7 @@ class ColumnDimension {
   }
 
   get dimensions() {
-    return this._fixedCols;
+    return 2-this._fixedCols;
   }
 
   getColChosen(num) {

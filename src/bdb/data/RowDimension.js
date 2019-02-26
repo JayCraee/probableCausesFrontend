@@ -14,7 +14,7 @@ class RowDimension {
   }
 
   get dimensions() {
-    return this._fixedRows;
+    return 2-this._fixedRows;
   }
 
   set row1Fixed(fixed) {
