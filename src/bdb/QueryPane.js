@@ -377,6 +377,15 @@ class QueryPane extends Component {
   }
 
   render() {
+    let output = (this.state.results !== undefined) ? (
+      <OutputPane
+        query={this.state.query}
+        results={this.state.results}
+      />
+    ) : (
+      "no results"
+    );
+
     return (
       <table id="query-pane-table">
         <tbody>
@@ -404,7 +413,7 @@ class QueryPane extends Component {
         </tr>
         <tr>
           <td>
-            <div class="blank-row"/>
+            <div className="blank-row"/>
           </td>
         </tr>
         <tr>
@@ -416,15 +425,12 @@ class QueryPane extends Component {
         </tr>
         <tr>
           <td>
-            <div class="blank-row"/>
+            <div className="blank-row"/>
           </td>
         </tr>
         <tr>
           <td>
-          <OutputPane
-            query={this.state.query}
-            results={this.state.results}
-          />
+            {output}
           </td>
         </tr>
         </tbody>
