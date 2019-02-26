@@ -35,7 +35,7 @@ class SideMenuPane extends Component {
   }
 
   getAllColumns() {
-    return ['columnA', ['columnB']];
+    return this.props.columns;
   }
 
   getNominalColumns() {

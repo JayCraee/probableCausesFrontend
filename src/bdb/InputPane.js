@@ -76,6 +76,7 @@ class InputPane extends Component {
               width={sideMenuWidth}
               height={height}
               query={this.props.query}
+              columns={this.props.columns}
               setExpression={this.props.handleChooseExpression}
               setContext={this.props.handleChangeSimilarityContext}
               fixRow={this.props.handleFixRow}

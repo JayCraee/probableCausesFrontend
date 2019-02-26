@@ -8,16 +8,21 @@ class BqlStudio extends Component {
     super(props);
     this.state = {
       population: undefined,
+      columns: undefined,
       numQueries: 1,
     };
-    this.getPopulation();
+    this.getTableData();
   }
 
-  async getPopulation() {
-    let populationJSON = await (await fetch("util/tableNames")).json();
-    let population = populationJSON[0];
+  async getTableData() {
+    let populationsArr = await (await fetch("util/tableNames")).json();
+    let population = populationsArr[0];
+
+    let columns = await (await fetch("util/columnNames/"+population)).json();
+
     this.setState({
       population: population,
+      columns: columns,
     })
   }
 
@@ -28,7 +33,16 @@ class BqlStudio extends Component {
   render() {
     let rows = [];
     for (let i = 0; i < this.state.numQueries; ++i) {
-      rows.push(<tr key={i}><td id='query'><QueryPane population={this.state.population}/></td></tr>)
+      rows.push(
+        <tr key={i}>
+          <td id='query'>
+            <QueryPane
+              population={this.state.population}
+              columns={this.state.columns}
+            />
+          </td>
+        </tr>
+      );
     }
     rows.push(<tr key={this.state.numQueries}><td id='query'><Button onClick={()=>this.setState({numQueries: this.state.numQueries+1})}>+</Button></td></tr>);
     return (

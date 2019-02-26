@@ -132,8 +132,14 @@ class QueryPane extends Component {
     }
   }
 
-  parseCorrelationResponse(response, expName, dimensions) {
-    // let jsonResponse = JSON.parse(response)[0];
+  parseEstimateResponse(
+    response,
+    expName,
+    actualExpressionName,
+    colID,
+    rowID,
+    dimensions
+  ) {
     let jsonResponse = response[0];
     //response.toJSON is in format
     // [[
@@ -151,8 +157,8 @@ class QueryPane extends Component {
     let values = []; //outer array is of rows, each inner array is a row
 
     for (let cell of jsonResponse) {
-      let col = cell.name1;
-      let row = cell.name0;
+      let col = cell[colID];
+      let row = cell[rowID];
       let correlation = cell[expName];
 
       //re-size arrays if necessary
@@ -181,7 +187,7 @@ class QueryPane extends Component {
 
     let results = {
       query: 'ESTIMATE',
-      expression: 'CORRELATION',
+      expression: actualExpressionName,
       dimensions: dimensions,
       colNames: colNames.slice(),
       rows: []
@@ -195,6 +201,28 @@ class QueryPane extends Component {
     }
 
     this.setState({results: results});
+  }
+
+  parseCorrelationResponse(response, expName, dimensions) {
+    this.parseEstimateResponse(
+      response,
+      expName,
+      'CORRELATION',
+      'name1',
+      'name0',
+      dimensions
+    );
+  }
+
+  parseSimilarityResponse(response, expName, dimensions) {
+    this.parseEstimateResponse(
+      response,
+      expName,
+      'SIMILARITY',
+      'rowid1',
+      'rowid0',
+      dimensions
+    );
   }
 
   handleChooseExpression(expression) {
@@ -354,10 +382,16 @@ class QueryPane extends Component {
     }
   }
 
-  async runCorrelationQuery(url, expName, dimensions) {
+  async runCorrelationQuery(url, dimensions) {
     const response = await (await fetch(url)).json();
     // some processing to turn response into formatted json for Nori
     this.parseCorrelationResponse(response, 'corr', dimensions);
+  }
+
+  async runSimilarityQuery(url, dimensions) {
+    const response = await (await fetch(url)).json();
+    // some processing to turn response into formatted json for Nori
+    this.parseSimilarityResponse(response, 'sim', dimensions);
   }
 
 
@@ -371,9 +405,13 @@ class QueryPane extends Component {
       if (this.state.query.expression instanceof CorrelationExpression) {
         this.runCorrelationQuery(
           url,
-          this.state.query.expressionName,
           this.state.query.dimensions
         );
+      } else if (this.state.query.expression instanceof SimilarityExpression) {
+        this.runSimilarityQuery(
+          url,
+          this.state.query.dimensions
+        )
       }
     }
   }
@@ -395,6 +433,7 @@ class QueryPane extends Component {
           <td>
             <InputPane
               query={this.state.query}
+              columns={this.props.columns}
               handleChooseExpression={expression=>this.handleChooseExpression(expression)}
               handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
               handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
