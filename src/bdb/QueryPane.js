@@ -531,7 +531,6 @@ class QueryPane extends Component {
       <table id="query-pane-table">
         <tbody>
           <tr align="center">
-<<<<<<< HEAD
             <td id="input-pane">
               <InputPane
                 query={this.state.query}
@@ -553,10 +552,6 @@ class QueryPane extends Component {
                 handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
                 handleSetQuery={query=>this.handleSetQuery(query)}
               />
-=======
-            <td>
-              {renderInputPane}
->>>>>>> brnch
             </td>
           </tr>
           <tr align="center">
