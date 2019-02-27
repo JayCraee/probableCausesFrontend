@@ -108,6 +108,8 @@ class InputPane extends Component {
       width={width}
       height={height}
       query={this.props.query}
+      columns={this.props.columns}
+      nominalColumns={this.props.nominalColumns}
       changeConstraint={this.props.handleChangeConstraint}
       addConstraint={this.props.handleAddConstraint}
       removeConstraint={this.props.handleRemoveConstraint}

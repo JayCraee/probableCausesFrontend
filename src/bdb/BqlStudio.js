@@ -10,6 +10,7 @@ class BqlStudio extends Component {
     this.state = {
       population: undefined,
       columns: undefined,
+      nominalColumns: undefined,
       numQueries: 1,
     };
     this.getTableData();
@@ -20,10 +21,12 @@ class BqlStudio extends Component {
     let population = populationsArr[0];
 
     let columns = await (await fetch("util/columnNames/"+population)).json();
+    let nominalColumns = await (await fetch("/util/nominalColumnNames/"+population)).json();
 
     this.setState({
       population: population,
       columns: columns,
+      nominalColumns: nominalColumns,
     })
   }
 
@@ -40,6 +43,7 @@ class BqlStudio extends Component {
             <QueryPane
               population={this.state.population}
               columns={this.state.columns}
+              nominalColumns={this.state.nominalColumns}
             />
           </td>
         </tr>

@@ -15,11 +15,11 @@ class SimulatePane extends Component {
   }
 
   getAllColumns() {
-    return ['columnA', 'columnB', 'columnC', 'columnD'];
+    return this.props.columns;
   }
 
   getNominalColumns() {
-    return ['columnB', 'columnD'];
+    return this.props.nominalColumns;
   }
 
   static difference(A, B) {

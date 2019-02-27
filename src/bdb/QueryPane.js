@@ -69,6 +69,8 @@ class QueryPane extends Component {
             }
             if (this.state.query.limitSupported) {
               limit = this.state.query.limit;
+            } else {
+              limit = 50;
             }
 
             return (
@@ -126,7 +128,31 @@ class QueryPane extends Component {
         throw new QueryNotFinishedError("Query not finished yet: Type of expression is not chosen.");
       }
     } else if (this.state.query instanceof SimulateQuery) {
-      //TODO convert query object into URLString for ESTIMATE CORRELATION
+      // convert query object into URLString for ESTIMATE CORRELATION
+      if (this.state.query.simulateQueryComplete) {
+        queryType = 'simulate';
+        let constraints = "";
+        for (const constraint of this.state.query.constraints) {
+          constraints += constraint.field + "=" + constraint.value + ",";
+        }
+        //take off the last comma
+        constraints = constraints.slice(0, -1);
+        let fieldsToSimulate = "";
+        for (const field of this.state.query.fieldsToSimulate) {
+          fieldsToSimulate += field + ",";
+        }
+        //take off the last comma
+        fieldsToSimulate = fieldsToSimulate.slice(0, -1);
+        return (
+          "bql/query/"
+          + queryType + "/"
+          + "COLNAMES=" + fieldsToSimulate
+          + splitChar + "GIVEN=" + constraints
+          + splitChar + "POPULATION=" + population
+        );
+      } else {
+        throw new QueryNotFinishedError("Query not finished yet")
+      }
     }
   }
 
@@ -398,6 +424,51 @@ class QueryPane extends Component {
     this.parseSimilarityResponse(response, 'value', dimensions);
   }
 
+  parseSimulateResponse(response, fieldsToSimulate) {
+    let data = response[0];
+    let colNames = [];
+    let values = [];
+
+    let simulatedColumns = "";
+    for (const field of fieldsToSimulate) {
+      simulatedColumns += field + "_"
+    }
+    simulatedColumns = simulatedColumns.slice(0, -1);
+
+    let max = 0;
+    for (const cell of data) {
+      max = (cell.frequency > max) ? cell.frequency : max;
+    }
+
+    for (const cell of data) {
+      colNames.push(cell[simulatedColumns]);
+      values.push(Number((cell.frequency / max).toFixed(5)));
+    }
+
+    let results = {
+      query: 'SIMULATE',
+      expression: 'Scaled frequency of each outcome',
+      dimensions: 1,
+      colNames : colNames,
+      rows: [
+        {
+          rowName: simulatedColumns,
+          values: values,
+        }
+      ]
+    };
+
+    this.setState({
+      results: results
+    })
+  }
+
+  async runSimulateQuery(url, fieldsToSimulate) {
+    const response = await (await fetch(url)).json();
+
+    this.parseSimulateResponse(response, fieldsToSimulate);
+  }
+
 
   handleRunQuery() {
     // gets URL from queryToURL
@@ -417,6 +488,11 @@ class QueryPane extends Component {
           this.state.query.dimensions
         )
       }
+    } else if (this.state.query instanceof SimulateQuery) {
+      this.runSimulateQuery(
+        url,
+        this.state.query.fieldsToSimulate
+        );
     }
   }
 
@@ -438,6 +514,7 @@ class QueryPane extends Component {
               <InputPane
                 query={this.state.query}
                 columns={this.props.columns}
+                nominalColumns={this.props.nominalColumns}
                 handleChooseExpression={expression=>this.handleChooseExpression(expression)}
                 handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
                 handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
