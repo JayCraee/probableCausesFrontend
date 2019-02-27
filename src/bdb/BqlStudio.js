@@ -54,14 +54,35 @@ class BqlStudio extends Component {
           <header>
             <tr height="30px"/>
             <tr>
-              <td width="10%"/>
+              <td width="15%"/>
               <td>
-                <p align="center">This section could provide some information about how to use BQL Studio. Just a quick summary.</p>
-                <p> Sample paragraph (for styling purposes): Sub-Saharan Africa is the global capital for road traffic deaths. Indeed, there has been no progress in reducing the number of deaths from road traffic incidents in any low-income country between 2013 and 2016, according to the World Health Organization’s 2018 Global Status Report on Road Safety. Globally, the number of road traffic deaths have continued to increase, reaching 1.35 million in 2016, the latest data show. Road traffic deaths are now the eighth-leading cause of death for all age groups—killing more people than tuberculosis and HIV/AIDS—and the leading cause of death for children and young adults between the ages of 5 and 29. While some countries have made progress with regard to post-crash care and have passed legislation to regulate road traffic risk factors such as vehicle safety standards, the improvements haven’t keep up with the “motorization of transport” trend and rising population growth. At the current pace, the WHO estimates that the target of halving road traffic deaths by 2020—one of the United Nations’ Sustainable Development Goals—will not be met. </p>
+                <p id='welcome-title-big'>Welcome to BQL Studio</p>
+                <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p> 
+                <p align="center">BayesDB uses advanced machine learning and statistical methods to make it easy for you to turn data into real world results. In BQL Studio, you can test and improve the reliability of your data-set, extract insight from it, and find out what would happen in the real world if you made changes to policy. Main functionalities of BQL Studio:</p> 
+              <table>
+                  <header>
+                    <tr height="10px"/>
+                    <tr>
+                      <td width="200px"><p id='title-text'><b>EXPLORE SIMILARITY</b></p></td>
+                      <td width="5px"/>
+                      <td><p id='normal-text'>Helps you to find exceptional datapoints and analyse them or remove them from your data-set.</p> </td>
+                    </tr>
+                    <tr>
+                      <td><p id='title-text'><b>EXPLORE CORRELATION</b></p></td>
+                      <td width="5px"/>
+                      <td><p id='normal-text'>Helps you to find patterns and trends that you may or may not have expected.</p> </td>
+                    </tr>
+                    <tr>
+                      <td><p id='title-text'><b>TEST or SIMULATE</b></p></td>
+                      <td width="5px"/>
+                      <td><p id='normal-text'>Helps you to predict what effects a policy change would have if implemented in the real world.</p> </td>
+                    </tr>
+                  </header>
+                </table>
               </td>
-              <td width="10%"/>
+              <td width="15%"/>
             </tr>
-            <tr height="10px"/>
+            <tr height="20px"/>
           </header>
           <tbody>
             {rows}
