@@ -38,16 +38,15 @@ class QueryPane extends Component {
         // expressionName = this.state.query.expressionName;
         // ESTIMATE SIMILARITY
         if (this.state.query.expression instanceof SimilarityExpression) {
-          expressionName = 'sim';
           if (!this.state.query.contextChosen) {
             throw new QueryNotFinishedError("You need to complete the query.");
           }
           if (this.state.query.rowsComplete) {
             let column = this.state.query.context;
             if (this.state.query.row1Fixed) {
-              let boolexpr1 = this.state.query.row1Condition;
+              let boolexpr1 = "("+this.state.query.row1Condition+")";
               if (this.state.query.row2Fixed) {
-                let boolexpr2 = this.state.query.row2Condition;
+                let boolexpr2 = "("+this.state.query.row2Condition+")";
                 // row 1 fixed, row2 fixed
                 mode = "BY";
                 expression = "SIMILARITY!OF!" + boolexpr1 + "!TO!" + boolexpr2 + "!IN!THE!CONTEXT!OF!" + column;
@@ -58,7 +57,7 @@ class QueryPane extends Component {
               }
             } else {
               if (this.state.query.row2Fixed) {
-                let boolexpr2 = this.state.query.row2Condition;
+                let boolexpr2 = "("+this.state.query.row2Condition+")";
                 // row 1 free, row2 fixed
                 mode = "FROM";
                 expression = "SIMILARITY!TO!" + boolexpr2 + "!IN!THE!CONTEXT!OF!" + column;
@@ -77,7 +76,6 @@ class QueryPane extends Component {
               + queryType + "/"
               + "EXPRESSION=" + expression
               + splitChar + "MODE=" + mode
-              + splitChar + "EXPNAME=" + expressionName
               + splitChar + "POPULATION=" + population
               + splitChar + "LIMIT=" + limit
             );
@@ -101,7 +99,7 @@ class QueryPane extends Component {
                 expression = "CORRELATION!WITH!"+col1;
               }
             } else {
-              if (this.state.col2Fixed) {
+              if (this.state.query.col2Fixed) {
                 let col2 = this.state.query.col2Name;
                 mode = "FROM_VARIABLES_OF";
                 expression = "CORRELATION!WITH!"+col2;
@@ -157,9 +155,9 @@ class QueryPane extends Component {
     let values = []; //outer array is of rows, each inner array is a row
 
     for (let cell of jsonResponse) {
-      let col = cell[colID];
-      let row = cell[rowID];
-      let correlation = cell[expName];
+      let col = cell[colID]+"";
+      let row = cell[rowID]+"";
+      let correlation = Number(cell[expName].toFixed(5));
 
       //re-size arrays if necessary
       if (!colNames.includes(col)) {
@@ -383,15 +381,21 @@ class QueryPane extends Component {
   }
 
   async runCorrelationQuery(url, dimensions) {
-    const response = await (await fetch(url)).json();
-    // some processing to turn response into formatted json for Nori
-    this.parseCorrelationResponse(response, 'corr', dimensions);
+    let response;
+    try {
+      response = await (await fetch(url)).json();
+      // some processing to turn response into formatted json for Nori
+      this.parseCorrelationResponse(response, 'corr', dimensions);
+    } catch (e) {
+
+    }
+
   }
 
   async runSimilarityQuery(url, dimensions) {
     const response = await (await fetch(url)).json();
     // some processing to turn response into formatted json for Nori
-    this.parseSimilarityResponse(response, 'sim', dimensions);
+    this.parseSimilarityResponse(response, 'value', dimensions);
   }
 
 

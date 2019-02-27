@@ -165,7 +165,7 @@ class SideMenuPane extends Component {
           ))}
         </DropdownMenu>
       </UncontrolledDropdown>);
-    }
+    };
 
     let choice = <ColChoice onClick={fixed => fixAction(num, fixed)}/>;
     let every = 'Every Column';
