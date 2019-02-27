@@ -20,37 +20,37 @@ class OutputPane extends Component {
         query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 2,
-        colNames: ['Kenya', 'EstimatedSpeedOfCollision', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea', 'Morocco',
-                  'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea'],
+        colNames: ["VehicleType", "SecondVehicleType", "Date", "Time", "RoadHasPavement", "DistanceToNearestTrafficLight",
+                   "SpeedLimit", "EstimatedSpeedOfCollision",  "SeatBeltUsed", "Severity OfDamage", "LandUse", "City"],
         rows: [
           {
-            rowName: 'Kenya',
-            values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.6],
+            rowName: 'VehicleType',
+            values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.5, 0.12, 0.15, 0.17, 0.33],
           },
           {
-            rowName: 'Uganda',
-            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.2],
+            rowName: 'SecondVehicleType',
+            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.3, 0.12, 0.15, 0.17, 0.33],
           },
           {
             rowName: 'EstimatedSpeedOfCollision',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 1],
+            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33],
           },
           {
-            rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.3],
+            rowName: 'Date',
+            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.2, 0.12, 0.15, 0.17, 0.33],
           },
           {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.4],
+            rowName: 'Time',
+            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.4, 0.12, 0.15, 0.17, 0.33],
           },
           {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.2],
-          },
+            rowName: 'RoadHasPavement',
+            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
+          }/*,
           {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
-          }
+            rowName: 'DistanceToNearestTrafficLight',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
+          }*/
         ]
       },
 
@@ -255,17 +255,36 @@ class OutputPane extends Component {
     }
   }
 
+  // insert whitespace before every uppercase letter
+  lexing(string) {
+    let returnString = "";
+    if (string.length>0) returnString += string.charAt(0);
+    let i=1;
+    let character='';
+    while (i<string.length) {
+        character = string.charAt(i);
+        if (character == character.toUpperCase()) {
+           returnString += " "; 
+        }
+        returnString += string.charAt(i);
+        i++;
+    }
+    return returnString;
+  }
+
+
   /* Set xLabels, yLabels and data states
    * then draw HeatMap.
    */
   renderHeatMap(results) {
-    this.state.xLabels=results.colNames;
+    // column names
+    this.state.xLabels=results.colNames.map(i => this.lexing(i));
     this.state.yLabels=new Array();
     this.state.data=new Array(results.rows.length);
     //iterate through rows
     for (var i=0; i<results.rows.length; i++) {
       let helpArray = new Array(results.rows[i].values.length);
-      this.state.yLabels[i]=results.rows[i].rowName;
+      this.state.yLabels[i]=this.lexing(results.rows[i].rowName);
       // iterate through columns
       for (var j=0; j<results.rows[i].values.length; j++) {
         helpArray[j]=results.rows[i].values[j];
@@ -278,6 +297,7 @@ class OutputPane extends Component {
         yLabels={this.state.yLabels}
         data={this.state.data}
         yLabelWidth={220}
+        //xLabelsLocation="bottom"
       />
     )
   }
@@ -286,8 +306,8 @@ class OutputPane extends Component {
    * then draw BarChart.
    */
   renderBarChart(results) {
-    this.state.xLabels=results.colNames;
-    this.state.yLabels=results.rows[0].rowName;
+    this.state.xLabels=results.colNames.map(i => this.lexing(i));
+    this.state.yLabels=this.lexing(results.rows[0].rowName);
     this.state.data=results.rows[0].values;
     return(
       <BarChart 
@@ -339,8 +359,10 @@ class OutputPane extends Component {
                 // not supported expression
             }
             break;
-            default:
-              // not supported query
+          case "SIMULATE":
+            return this.renderHeatMap(res);
+          default:
+            this.renderHeatMap(res);
         } 
       } 
     }
@@ -350,7 +372,7 @@ class OutputPane extends Component {
       /*****************************************************************************************************************
       * For testing: replace this.props.results to this.state.results<number> where number can be 0, 1, 1b, 2 or 2b
       /*****************************************************************************************************************/
-      let results=this.state.results2;
+      let results=this.props.results;
 
       // Set height and width of the OutPutPane
       switch (results.dimensions) {
