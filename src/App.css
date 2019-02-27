@@ -50,7 +50,7 @@ table#simulate-pane {
   justify-content: center;
 }
 
-td#input-pane {
+td#diagram-pane {
   border: 5px solid #e3ecf2;
   border-collapse: collapse;
 }
@@ -163,7 +163,7 @@ td#field-to-simulate {
   color: #ffffff;
   background-color: #53b386;
   border-radius: 6px;
-  width: 750px;
+  width: 800px;
 }
 
 .op-del {
@@ -227,9 +227,17 @@ td#field-to-simulate {
 }
 
 
-.bar-group .value-label {
+.bar-group .value-label-light {
   text-anchor: end;
   fill: #fff;
+  font-weight: 900;
+  font-size: 0.9em;
+  font-family: "Lato", sans-serif;
+}
+
+.bar-group .value-label-dark {
+  text-anchor: end;
+  fill: #348aa7;
   font-weight: 900;
   font-size: 0.9em;
   font-family: "Lato", sans-serif;
@@ -246,4 +254,31 @@ td#field-to-simulate {
   color: #fff;
   background-color: #1c6ca1;
   font-weight: bold;
+}
+
+p#welcome-title-big {
+  font-size: 28px;
+  text-align: center;
+  font-weight: bold;
+  color: #1c6ca1;
+  margin:0 
+}
+
+p#welcome-title-small {
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  color: #1c6ca1;
+  margin:15
+}
+
+p#title-text{
+  text-align: right;
+  color: #1c6ca1;
+  margin:0
+}
+
+p#normal-text {
+  text-align: left;
+  margin:0
 }

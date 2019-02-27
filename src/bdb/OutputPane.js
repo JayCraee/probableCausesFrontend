@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import HeatMap from 'react-heatmap-grid';
 import BarChart from './BarChart';
+import BarChartResponsive from './BarChartResponsive';
 
 class OutputPane extends Component {
 
@@ -68,138 +69,6 @@ class OutputPane extends Component {
           {
             rowName: 'DistanceToNearestTrafficLight',
             values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Tanzania',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
-          },
-          {
-            rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-          rowName: 'Tanzania',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-          rowName: 'DistanceToNearestTrafficLight',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-            rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2],
-          },
-          {
-          rowName: 'Tanzania',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Chad',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'EstimatedSpeedOfCollision',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-          rowName: 'Tanzania',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'DistanceToNearestTrafficLight',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Ghana',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Algeria',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          },
-          {
-            rowName: 'Guinea',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
           }
         ]
       },
@@ -208,19 +77,11 @@ class OutputPane extends Component {
         query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 1,
-        colNames: ['EstimatedSpeedOfCollision', 'Uganda', 'EstimatedSpeedOfCollision', 'Chad', 'Ghana', 'Algeria', 'Guinea',
-                    'Kenya', 'Uganda', 'Tanzania', 'DistanceToNearestTrafficLight', 'Ghana', 'Algeria', 'Guinea',
-                    'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea',
-                    'Kenya', 'Uganda', 'Tanzania', 'DistanceToNearestTrafficLight', 'Ghana', 'Algeria', 'Guinea',
-      'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'Algeria', 'Guinea'],
+        colNames: ['EstimatedSpeedOfCollision', 'Uganda', 'EstimatedSpeedOfCollision', 'Chad'],
         rows: [
           {
             rowName: 'EstimatedSpeedOfCollision',
-            values: [0.135, 0.62, 0.2, 0.135, 0.102, 0.57, 0.64, 
-                    0.135, 0.62, 0.3, 0.135, 1, 0.2, 0.64, 0.135, 
-                    0.62, 0.3, 0.135, 0.102, 0.57, 0.64,
-                    0.135, 0.62, 0.3, 0.135, 0.102, 0.2, 0.64, 0.135, 
-                    0.62, 0.3, 0.135, 0.102, 0.57, 0.64],
+            values: [423435, 0.62, 2, 0.135],
           }
         ]
       },
@@ -239,7 +100,7 @@ class OutputPane extends Component {
       },
 
       results0: {
-        query: 'SIMULATE',
+        query: 'ESTIMATE',
         expression: 'CORRELATION',
         dimensions: 0,
         colNames: ['DistanceToNearestTrafficLight'],
@@ -247,6 +108,16 @@ class OutputPane extends Component {
           {
             rowName: 'Guinea',
             values: [6],
+          }
+        ]
+      },
+
+      resultSimulate: {
+        query: 'SIMULATE',
+        data: [
+          {
+            label: 'VehicleType',
+            value: 1232
           }
         ]
       }
@@ -310,7 +181,7 @@ class OutputPane extends Component {
     this.state.yLabels=this.lexing(results.rows[0].rowName);
     this.state.data=results.rows[0].values;
     return(
-      <BarChart 
+      <BarChartResponsive 
         xLabels={this.state.xLabels}
         yLabels={this.state.yLabels}
         data={this.state.data}
@@ -359,18 +230,10 @@ class OutputPane extends Component {
             }
             break;
           case "SIMULATE":
-            switch(res.dimensions) {
-              case 2:
-                return this.renderHeatMap(res);
-              case 1:
-                return this.renderHeatMap(res);
-              case 0:
-                return this.renderBarChart(res);
-              default:
-                // dimension format error
-            }
+            this.renderBarChart(res);
+            break;
           default:
-            this.renderHeatMap(res);
+            this.renderBarChart(res);
         } 
       } 
     }

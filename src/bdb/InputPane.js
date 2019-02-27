@@ -63,7 +63,7 @@ class InputPane extends Component {
 
   renderEstimate() {
     const sideMenuWidth = 350;
-    const diagramWidth = 500;
+    const diagramWidth = 450;
 
     const height = 620;
 
@@ -88,7 +88,7 @@ class InputPane extends Component {
               setColName={this.props.handleChangeColName}
             />
           </td>
-          <td>
+          <td id="diagram-pane">
             <DiagramPane
               width={diagramWidth}
               height={height}
