@@ -174,13 +174,6 @@ td#field-to-simulate {
   border-radius: 6px;
 }
 
-.blank_row {
-    height: 100px !important; /* overwrites any other rules */
-    background-color: #FFFFFF;
-    border-radius: 6px;
-    font-size: 20px;
-}
-
 .value {
   padding: 20px 80px;
   background-color: #2d76b6;
@@ -211,12 +204,12 @@ td#field-to-simulate {
 }
 
 .output-title {
-  padding: 30px 285px;
-  font-size: 25px;
+  font-size: 23px;
   background-color: #e3ecf2;
-  border-radius: 6px;
-  border: none;
   text-align: center;
+  font-weight: bold;
+  
+
 }
 
 .title {
@@ -238,7 +231,7 @@ td#field-to-simulate {
   text-anchor: end;
   fill: #fff;
   font-weight: 900;
-  font-size: 0.7em;
+  font-size: 0.9em;
   font-family: "Lato", sans-serif;
 }
 
@@ -252,4 +245,5 @@ td#field-to-simulate {
 .nav-bar {
   color: #fff;
   background-color: #1c6ca1;
+  font-weight: bold;
 }

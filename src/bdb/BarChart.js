@@ -1,5 +1,6 @@
 import React from 'react';
 import BarGroup from './BarGroup';
+import ValueGroup from './ValueGroup';
 
 class BarChart extends React.Component {
     constructor(props) {
@@ -17,12 +18,19 @@ class BarChart extends React.Component {
             this.state.data[i]={name:this.props.xLabels[i], value:this.props.data[i]};
         }
         let barHeight=30;
-        let barGroups = this.state.data.map((d, i) => 
+        let barGroups=undefined;
+        if (this.props.dimensions===0) {
+            barGroups = this.state.data.map((d, i) => 
+            <g transform={`translate(0, ${i * barHeight})`}>
+                <ValueGroup d={d} barHeight={barHeight} />
+            </g> )
+        } else {
+            barGroups = this.state.data.map((d, i) => 
             <g transform={`translate(0, ${i * barHeight})`}>
                 <BarGroup d={d} barHeight={barHeight} />
-            </g>
-        )
-
+            </g> )
+        }
+   
         return (
             <svg  width={this.props.width} height={this.props.height}>
                 <g className="container">

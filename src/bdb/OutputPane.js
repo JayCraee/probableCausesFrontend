@@ -226,7 +226,7 @@ class OutputPane extends Component {
       },
 
       results1b: {
-        query: 'ESTIMATE',
+        query: 'SIMULATE',
         expression: 'CORRELATION',
         dimensions: 1,
       colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
@@ -239,14 +239,14 @@ class OutputPane extends Component {
       },
 
       results0: {
-        query: 'ESTIMATE',
+        query: 'SIMULATE',
         expression: 'CORRELATION',
         dimensions: 0,
         colNames: ['DistanceToNearestTrafficLight'],
         rows: [
           {
             rowName: 'Guinea',
-            values: [1],
+            values: [6],
           }
         ]
       }
@@ -318,8 +318,7 @@ class OutputPane extends Component {
         height={this.state.height}
         width={this.state.width}
       />
-    )
-    
+    ) 
   }
 
   renderOutput(results) {
@@ -360,7 +359,16 @@ class OutputPane extends Component {
             }
             break;
           case "SIMULATE":
-            return this.renderHeatMap(res);
+            switch(res.dimensions) {
+              case 2:
+                return this.renderHeatMap(res);
+              case 1:
+                return this.renderHeatMap(res);
+              case 0:
+                return this.renderBarChart(res);
+              default:
+                // dimension format error
+            }
           default:
             this.renderHeatMap(res);
         } 
@@ -387,8 +395,8 @@ class OutputPane extends Component {
         case 2:
           if (results.rows.length>5) this.state.height=200+results.rows.length*30;
           else this.state.height=350;
-          if (results.colNames.length>7) this.state.width=400+results.colNames.length*80;
-          else this.state.width=750;
+          if (results.colNames.length>7) this.state.width=420+results.colNames.length*80;
+          else this.state.width=900;
           break;
         default:
           this.state.height=400;
@@ -407,7 +415,8 @@ class OutputPane extends Component {
        */
       return (
         <div style={divStyle}>
-          <button className="output-title">{results.expression}</button>
+          <br></br>
+          <p className="output-title">{results.expression+":"}</p>
           {this.renderOutput(results)}
         </div>
       );

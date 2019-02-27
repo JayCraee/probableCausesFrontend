@@ -21,6 +21,7 @@ class BqlStudio extends Component {
     let rows = [];
     for (let i = 0; i < this.state.numQueries; ++i) {
       rows.push(<tr><td id='query'><QueryPane/></td></tr>)
+      rows.push(<tr height="20px"/>)
     }
     rows.push(<tr><td id='query'><Button onClick={()=>this.setState({numQueries: this.state.numQueries+1})}>+</Button></td></tr>);
     return (
