@@ -289,16 +289,10 @@ class QueryPane extends Component {
             />
           </td>
         </tr>
-        <tr>
-          <div className="blank-row"/>
-        </tr>
         <tr align="center">
           <OperationsPane
             handleRunQuery={()=>this.handleRunQuery()}
           />
-        </tr>
-        <tr>
-          <div className="blank-row"/>
         </tr>
         <tr align="center">
           <OutputPane
