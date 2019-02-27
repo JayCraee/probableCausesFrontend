@@ -37,7 +37,6 @@
 }
 
 table#query-pane-table {
-  border: 1px solid black;
   border-collapse: collapse;
 }
 
@@ -49,6 +48,11 @@ table#input-choice {
 table#simulate-pane {
   display: flex;
   justify-content: center;
+}
+
+td#input-pane {
+  border: 5px solid #e3ecf2;
+  border-collapse: collapse;
 }
 
 td#query {
@@ -128,10 +132,6 @@ td#field-to-simulate {
   height: 160px;
 }
 
-.output {
-  height: 160px;
-}
-
 .simulate-h2 {
   color: #e3ecf2;
   font-weight: bold;
@@ -161,9 +161,9 @@ td#field-to-simulate {
 .op-run {
   display: inline-block;
   color: #ffffff;
-  width: 601px;
-  background-color: #4a8538;
+  background-color: #53b386;
   border-radius: 6px;
+  width: 750px;
 }
 
 .op-del {
@@ -172,13 +172,6 @@ td#field-to-simulate {
   width: 151px;
   background-color: #a12f20;
   border-radius: 6px;
-}
-
-.blank_row {
-    height: 100px !important; /* overwrites any other rules */
-    background-color: #FFFFFF;
-    border-radius: 6px;
-    font-size: 20px;
 }
 
 .value {
@@ -211,12 +204,12 @@ td#field-to-simulate {
 }
 
 .output-title {
-  padding: 30px 285px;
-  font-size: 25px;
+  font-size: 23px;
   background-color: #e3ecf2;
-  border-radius: 6px;
-  border: none;
   text-align: center;
+  font-weight: bold;
+  
+
 }
 
 .title {
@@ -233,11 +226,12 @@ td#field-to-simulate {
   font-family: "Lato", sans-serif;
 }
 
+
 .bar-group .value-label {
   text-anchor: end;
   fill: #fff;
   font-weight: 900;
-  font-size: 0.7em;
+  font-size: 0.9em;
   font-family: "Lato", sans-serif;
 }
 
@@ -246,4 +240,10 @@ td#field-to-simulate {
   font-size: 1em;
   fill: #333;
   font-family: "Lato", sans-serif;
+}
+
+.nav-bar {
+  color: #fff;
+  background-color: #1c6ca1;
+  font-weight: bold;
 }

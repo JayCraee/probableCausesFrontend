@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import { number } from 'prop-types';
 
-class BarGroup extends Component{
+class ValueGroup extends Component{
     constructor(props){
         super(props)
     }
@@ -8,9 +9,9 @@ class BarGroup extends Component{
     render() {
         let barPadding = 2
         let barColour = '#348AA7'
-        let widthScale = d => d * 500
+        let widthScale = d => number.toString(d).length*4+10
     
-        let props=this.props;
+        let props=this.props
         let width = widthScale(props.d.value)
         let yMid = props.barHeight * 0.5
     
@@ -24,4 +25,4 @@ class BarGroup extends Component{
     }
 }
 
-export default BarGroup;
+export default ValueGroup;
