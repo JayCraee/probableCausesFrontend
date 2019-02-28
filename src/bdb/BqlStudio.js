@@ -3,6 +3,7 @@ import {Button} from 'reactstrap';
 import QueryPane from './QueryPane';
 import {withRouter} from "react-router-dom";
 import BQLNavBar from './BQLNavBar';
+import { Image } from 'react-bootstrap';
 
 class BqlStudio extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class BqlStudio extends Component {
             <tr>
               <td width="15%"/>
               <td>
-                <p id='welcome-title-big'>Welcome to BQL Studio</p>
+                <p id='welcome-title-big'>Welcome to <Image src={require("./logo.svg")} width="170" fluid/></p>
                 <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p> 
                 <p align="center">BayesDB uses advanced machine learning and statistical methods to make it easy for you to turn data into real world results. In BQL Studio, you can test and improve the reliability of your data-set, extract insight from it, and find out what would happen in the real world if you made changes to policy.</p> 
                 <p id='main-functionalities'>Main functionalities of BQL Studio:</p>

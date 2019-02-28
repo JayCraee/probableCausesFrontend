@@ -229,10 +229,10 @@ class OutputPane extends Component {
             }
             break;
           case "SIMULATE":
-            this.renderBarChart(res);
+            return this.renderBarChart(res);
             break;
           default:
-            this.renderBarChart(res);
+            return this.renderBarChart(res);
         } 
       } 
     }

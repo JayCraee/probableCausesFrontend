@@ -261,7 +261,7 @@ p#welcome-title-big {
   text-align: center;
   font-weight: bold;
   color: #1c6ca1;
-  margin:0 
+  margin:15
 }
 
 p#welcome-title-small {
@@ -269,7 +269,7 @@ p#welcome-title-small {
   text-align: center;
   font-weight: bold;
   color: #1c6ca1;
-  margin:15
+  margin:0
 }
 
 b#title-text{
@@ -290,4 +290,12 @@ p#normal-text {
   margin:0;
   padding-left: 30px;
   padding-right: 30px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand>img {
+  padding: 7px 14px;
 }

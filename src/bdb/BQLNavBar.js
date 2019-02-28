@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
+import {Image} from 'react-bootstrap'
+
 
 export default class BQLNavbar extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ export default class BQLNavbar extends Component {
 
   render() {
     return <Navbar className="nav-bar" dark expand="md">
-      <NavbarBrand tag={Link} to="/">BQL Studio</NavbarBrand>
+      <NavbarBrand href="/">
+        <Image src={require("./logo.svg")} width="200" fluid/>
+      </NavbarBrand>
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
