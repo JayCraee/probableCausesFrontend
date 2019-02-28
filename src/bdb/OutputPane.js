@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import HeatMap from 'react-heatmap-grid';
 import BarChart from './BarChart';
-import BarChartResponsive from './BarChartResponsive';
 
 class OutputPane extends Component {
 
@@ -181,7 +180,7 @@ class OutputPane extends Component {
     this.state.yLabels=this.lexing(results.rows[0].rowName);
     this.state.data=results.rows[0].values;
     return(
-      <BarChartResponsive 
+      <BarChart 
         xLabels={this.state.xLabels}
         yLabels={this.state.yLabels}
         data={this.state.data}

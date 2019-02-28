@@ -158,15 +158,15 @@ td#field-to-simulate {
 
 }
 
-.op-run {
-  display: inline-block;
+button#op-run {
+  /*display: inline-block;*/
   color: #ffffff;
   background-color: #53b386;
   border-radius: 6px;
-  width: 500px;
+  width: 100%;
 }
 
-.op-del {
+button#op-del {
   display: inline-block;
   color: #ffffff;
   width: 151px;
@@ -272,13 +272,22 @@ p#welcome-title-small {
   margin:15
 }
 
-p#title-text{
-  text-align: right;
+b#title-text{
   color: #1c6ca1;
-  margin:0
+  margin:0;
+}
+
+p#main-functionalities {
+  text-align: center;
+  margin:0;
+  color: #1c6ca1;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 p#normal-text {
-  text-align: left;
-  margin:0
+  text-align: center;
+  margin:0;
+  padding-left: 30px;
+  padding-right: 30px;
 }

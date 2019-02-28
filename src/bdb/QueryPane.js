@@ -505,9 +505,13 @@ class QueryPane extends Component {
     ) : (
       undefined
     );
-
-    let renderInputPane=
-      <InputPane
+      
+    return (
+      <table id="query-pane-table">
+        <tbody>
+          <tr align="center">
+            <td id="input-pane">
+            <InputPane
         id="007"
         query={this.state.query}
         columns={this.props.columns}
@@ -527,38 +531,12 @@ class QueryPane extends Component {
         handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
         handleSetQuery={query=>this.handleSetQuery(query)}
       />
-    return (
-      <table id="query-pane-table">
-        <tbody>
-          <tr align="center">
-            <td id="input-pane">
-              <InputPane
-                query={this.state.query}
-                columns={this.props.columns}
-                nominalColumns={this.props.nominalColumns}
-                handleChooseExpression={expression=>this.handleChooseExpression(expression)}
-                handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
-                handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
-                handleChangeLimit={limit=>this.handleChangeLimit(limit)}
-                handleChangeOrderBy={order=>this.handleChangeOrderBy(order)}
-                handleChangeRowBoolExpr={(rowNum, boolExpr)=>this.handleChangeRowBoolExpr(rowNum, boolExpr)}
-                handleFixCol={(colNum, fixed)=>this.handleFixCol(colNum, fixed)}
-                handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
-                handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
-                handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
-                handleRemoveConstraint={key=>this.handleRemoveConstraint(key)}
-                handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
-                handleAddFieldToSimulate={field=>this.handleAddFieldToSimulate(field)}
-                handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
-                handleSetQuery={query=>this.handleSetQuery(query)}
-              />
             </td>
           </tr>
           <tr align="center">
-            <td>
+            <td width="200px">
               <OperationsPane
                 handleRunQuery={()=>this.handleRunQuery()}
-                width={renderInputPane.offsetWidth}
               />
             </td>
           </tr>
