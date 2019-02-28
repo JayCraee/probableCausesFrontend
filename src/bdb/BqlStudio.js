@@ -22,8 +22,8 @@ class BqlStudio extends Component {
     let populationsArr = await (await fetch("util/tableNames")).json();
     let population = populationsArr[0];
 
-    let columns = await (await fetch("util/columnNames/"+population)).json();
-    let nominalColumns = await (await fetch("/util/nominalColumnNames/"+population)).json();
+    let columns = await (await fetch("util/columnNamesPop/"+population)).json();
+    let nominalColumns = await (await fetch("/util/columnNamesPop/"+population)).json();
 
     this.setState({
       population: population,
