@@ -515,6 +515,7 @@ class QueryPane extends Component {
         id="007"
         query={this.state.query}
         columns={this.props.columns}
+        nominalColumns={this.props.nominalColumns}
         handleChooseExpression={expression=>this.handleChooseExpression(expression)}
         handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
         handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
