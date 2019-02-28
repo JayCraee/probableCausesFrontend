@@ -248,7 +248,6 @@ button#op-del {
 }
 
 .nav-bar {
-  position: fixed;
   color: #fff;
   background-color: #1c6ca1;
   font-weight: bold;
@@ -292,4 +291,11 @@ p#normal-text {
 
 p#intro-end{
   margin-bottom: 20px;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand>img {
+  padding: 7px 14px;
 }
