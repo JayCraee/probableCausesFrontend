@@ -133,8 +133,8 @@ class OutputPane extends Component {
     let character='';
     while (i<string.length) {
         character = string.charAt(i);
-        if (character === character.toUpperCase()) {
-           returnString += " "; 
+        if (character === '_') {
+           returnString += " ";
         }
         returnString += string.charAt(i);
         i++;
