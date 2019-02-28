@@ -133,7 +133,7 @@ class OutputPane extends Component {
     let character='';
     while (i<string.length) {
         character = string.charAt(i);
-        if (character == character.toUpperCase()) {
+        if (character === character.toUpperCase()) {
            returnString += " "; 
         }
         returnString += string.charAt(i);
@@ -148,24 +148,25 @@ class OutputPane extends Component {
    */
   renderHeatMap(results) {
     // column names
-    this.state.xLabels=results.colNames.map(i => this.lexing(i));
-    this.state.yLabels=new Array();
-    this.state.data=new Array(results.rows.length);
+    let xLabels = results.colNames.map(i => this.lexing(i));
+    let yLabels = [];
+    let data = new Array(results.rows.length);
+
     //iterate through rows
     for (var i=0; i<results.rows.length; i++) {
       let helpArray = new Array(results.rows[i].values.length);
-      this.state.yLabels[i]=this.lexing(results.rows[i].rowName);
+      yLabels[i]=this.lexing(results.rows[i].rowName);
       // iterate through columns
       for (var j=0; j<results.rows[i].values.length; j++) {
         helpArray[j]=results.rows[i].values[j];
       }
-      this.state.data[i]=helpArray;
+      data[i]=helpArray;
     }
     return(
       <HeatMap
-        xLabels={this.state.xLabels}
-        yLabels={this.state.yLabels}
-        data={this.state.data}
+        xLabels={xLabels}
+        yLabels={yLabels}
+        data={data}
         yLabelWidth={220}
         //xLabelsLocation="bottom"
       />
@@ -176,14 +177,14 @@ class OutputPane extends Component {
    * then draw BarChart.
    */
   renderBarChart(results) {
-    this.state.xLabels=results.colNames.map(i => this.lexing(i));
-    this.state.yLabels=this.lexing(results.rows[0].rowName);
-    this.state.data=results.rows[0].values;
+    let xLabels=results.colNames.map(i => this.lexing(i));
+    let yLabels=this.lexing(results.rows[0].rowName);
+    let data=results.rows[0].values;
     return(
       <BarChart 
-        xLabels={this.state.xLabels}
-        yLabels={this.state.yLabels}
-        data={this.state.data}
+        xLabels={xLabels}
+        yLabels={yLabels}
+        data={data}
         dimensions={results.dimensions}
         height={this.state.height}
         width={this.state.width}
@@ -229,10 +230,9 @@ class OutputPane extends Component {
             }
             break;
           case "SIMULATE":
-            this.renderBarChart(res);
-            break;
+            return this.renderBarChart(res);
           default:
-            this.renderBarChart(res);
+            return this.renderBarChart(res);
         } 
       } 
     }

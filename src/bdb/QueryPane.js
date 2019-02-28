@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {GridLoader} from 'react-spinners';
 import InputPane from "./InputPane";
 import OutputPane from "./OutputPane";
 import OperationsPane from "./OperationsPane";
@@ -16,6 +17,7 @@ class QueryPane extends Component {
     this.state = {
       query: undefined,
       results: undefined,
+      loading: false
     }
   }
 
@@ -224,7 +226,10 @@ class QueryPane extends Component {
       results.rows.push(nextRow);
     }
 
-    this.setState({results: results});
+    this.setState({
+      results: results,
+      loading: false,
+    });
   }
 
   parseCorrelationResponse(response, expName, dimensions) {
@@ -459,7 +464,8 @@ class QueryPane extends Component {
     };
 
     this.setState({
-      results: results
+      results: results,
+      loading: false,
     })
   }
 
@@ -471,6 +477,8 @@ class QueryPane extends Component {
 
 
   handleRunQuery() {
+    this.setState({loading: true});
+
     // gets URL from queryToURL
     // calls backend with URL
     // set results state
@@ -497,14 +505,20 @@ class QueryPane extends Component {
   }
 
   render() {
-    let output = (this.state.results !== undefined) ? (
-      <OutputPane
-        query={this.state.query}
-        results={this.state.results}
-      />
+    let output = this.state.loading ? (
+      <div>
+        <GridLoader loading={true}/>
+        loading...
+      </div>
     ) : (
-      undefined
-    );
+      (this.state.results !== undefined) ? (
+        <OutputPane
+          query={this.state.query}
+          results={this.state.results}
+        />
+      ) : (
+        undefined
+    ));
       
     return (
       <table id="query-pane-table">
