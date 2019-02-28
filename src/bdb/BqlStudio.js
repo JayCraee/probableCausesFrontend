@@ -9,14 +9,29 @@ import { Image } from 'react-bootstrap';
 class BqlStudio extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      population: undefined,
-      columns: undefined,
-      nominalColumns: undefined,
-      loading: true,
-      numQueries: 1,
-    };
-    this.getTableData();
+
+    let test = false;
+    if (!test) {
+      this.state = {
+        population: undefined,
+        columns: undefined,
+        nominalColumns: undefined,
+        loading: true,
+        numQueries: 1,
+        test: false,
+      };
+      this.getTableData();
+    } else {
+      this.state = {
+        population: 'pop',
+        columns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+        nominalColumns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+        loading: false,
+        numQueries: 1,
+        test: true,
+      };
+    }
+
   }
 
   async getTableData() {
@@ -55,6 +70,7 @@ class BqlStudio extends Component {
                 population={this.state.population}
                 columns={this.state.columns}
                 nominalColumns={this.state.nominalColumns}
+                test={this.state.test}
               />
             </td>
           </tr>

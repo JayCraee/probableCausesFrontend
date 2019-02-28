@@ -504,6 +504,167 @@ class QueryPane extends Component {
     }
   }
 
+  handleTestQuery() {
+    if (this.state.query instanceof EstimateQuery) {
+      if (this.state.query.expression instanceof CorrelationExpression) {
+        switch (this.state.query.dimensions) {
+          case 0:
+            this.setState({results:{
+              query: 'ESTIMATE',
+              expression: 'CORRELATION',
+              dimensions: 0,
+              colNames: ['DistanceToNearestTrafficLight'],
+              rows: [
+                {
+                  rowName: 'Guinea',
+                  values: [6],
+                }
+              ]
+            }});
+            break;
+          case 1:
+            this.setState({results:{
+              query: 'ESTIMATE',
+              expression: 'CORRELATION',
+              dimensions: 1,
+              colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+              rows: [
+                {
+                  rowName: 'Morocco',
+                  values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
+                }
+              ]
+            }});
+            break;
+          case 2:
+            this.setState({results:{
+              query: 'ESTIMATE',
+              expression: 'CORRELATION',
+              dimensions: 2,
+              colNames: ["VehicleType", "SecondVehicleType", "Date", "Time", "RoadHasPavement", "DistanceToNearestTrafficLight",
+                "SpeedLimit", "EstimatedSpeedOfCollision",  "SeatBeltUsed", "Severity OfDamage", "LandUse", "City"],
+              rows: [
+                {
+                  rowName: 'VehicleType',
+                  values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.5, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'SecondVehicleType',
+                  values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.3, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'EstimatedSpeedOfCollision',
+                  values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'Date',
+                  values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.2, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'Time',
+                  values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.4, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'RoadHasPavement',
+                  values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
+                }/*,
+          {
+            rowName: 'DistanceToNearestTrafficLight',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
+          }*/
+              ]
+            }});
+            break;
+          default:
+        }
+      } else if (this.state.query.expression instanceof SimilarityExpression) {
+        switch (this.state.query.dimensions) {
+          case 0:
+            this.setState({results: {
+                query: 'ESTIMATE',
+                expression: 'SIMILARITY',
+                dimensions: 0,
+                colNames: ['DistanceToNearestTrafficLight'],
+                rows: [
+                  {
+                    rowName: 'Guinea',
+                    values: [6],
+                  }
+                ]
+              }});
+            break;
+          case 1:
+            this.setState({results:{
+              query: 'ESTIMATE',
+              expression: 'SIMILARITY',
+              dimensions: 1,
+              colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+              rows: [
+                {
+                  rowName: 'Morocco',
+                  values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
+                }
+              ]
+            }});
+            break;
+          case 2:
+            this.setState({results:{
+              query: 'ESTIMATE',
+              expression: 'SIMILARITY',
+              dimensions: 2,
+              colNames: ["VehicleType", "SecondVehicleType", "Date", "Time", "RoadHasPavement", "DistanceToNearestTrafficLight",
+                "SpeedLimit", "EstimatedSpeedOfCollision",  "SeatBeltUsed", "Severity OfDamage", "LandUse", "City"],
+              rows: [
+                {
+                  rowName: 'VehicleType',
+                  values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.5, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'SecondVehicleType',
+                  values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.3, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'EstimatedSpeedOfCollision',
+                  values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'Date',
+                  values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.2, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'Time',
+                  values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.4, 0.12, 0.15, 0.17, 0.33],
+                },
+                {
+                  rowName: 'RoadHasPavement',
+                  values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
+                }/*,
+          {
+            rowName: 'DistanceToNearestTrafficLight',
+            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
+          }*/
+              ]
+            }});
+            break;
+          default:
+        }
+      }
+    } else if (this.state.query instanceof SimulateQuery) {
+      this.setState({results: {
+        query: 'SIMULATE',
+        expression: 'Scaled frequency of each outcome',
+        dimensions: 1,
+        colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+        rows: [
+          {
+            rowName: 'Morocco',
+            values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
+          }
+        ]
+      }});
+    }
+  }
+
   render() {
     let output = this.state.loading ? (
       <div>
@@ -519,6 +680,16 @@ class QueryPane extends Component {
       ) : (
         undefined
     ));
+
+    let operation = this.props.test ? (
+      <OperationsPane
+        handleRunQuery={()=>this.handleTestQuery()}
+      />
+    ) : (
+      <OperationsPane
+        handleRunQuery={()=>this.handleRunQuery()}
+      />
+    );
       
     return (
       <table id="query-pane-table">
@@ -526,7 +697,6 @@ class QueryPane extends Component {
           <tr align="center">
             <td id="input-pane">
             <InputPane
-        id="007"
         query={this.state.query}
         columns={this.props.columns}
         nominalColumns={this.props.nominalColumns}
@@ -550,9 +720,7 @@ class QueryPane extends Component {
           </tr>
           <tr align="center">
             <td width="200px">
-              <OperationsPane
-                handleRunQuery={()=>this.handleRunQuery()}
-              />
+              {operation}
             </td>
           </tr>
           <tr align="center">

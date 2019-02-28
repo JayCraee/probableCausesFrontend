@@ -62,8 +62,8 @@ class InputPane extends Component {
   }
 
   renderEstimate() {
-    const sideMenuWidth = 350;
-    const diagramWidth = 450;
+    const sideMenuWidth = 450;
+    const diagramWidth = 500;
 
     const height = 620;
 
