@@ -10,7 +10,7 @@ class BqlStudio extends Component {
   constructor(props) {
     super(props);
 
-    let test = false;
+    let test = true;
     if (!test) {
       this.state = {
         population: undefined,
@@ -55,7 +55,7 @@ class BqlStudio extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div><GridLoader
+      return <div align="center"><GridLoader
         loading={true}
       />
       loading...
@@ -63,6 +63,8 @@ class BqlStudio extends Component {
     } else {
       let rows = [];
       for (let i = 0; i < this.state.numQueries; ++i) {
+        rows.push(<tr height="35px"/>);
+        rows.push(<tr align="center"><p  id='welcome-title-small'>Query {i+1}</p></tr>)
         rows.push(
           <tr key={i}>
             <td id='query'>
@@ -76,7 +78,13 @@ class BqlStudio extends Component {
           </tr>
         );
       }
-      rows.push(<tr key={this.state.numQueries}><td id='query'><Button onClick={()=>this.setState({numQueries: this.state.numQueries+1})}>+</Button></td></tr>);
+      rows.push(<tr key={this.state.numQueries}>
+                  <td id='query'>
+                    <Button style={{backgroundColor: "#2ec077"}} onClick={()=>this.setState({numQueries: this.state.numQueries+1})}>
+                      New query
+                    </Button>
+                  </td>
+                </tr>);
       return (
         <div>
           <BQLNavBar/>
@@ -98,7 +106,7 @@ class BqlStudio extends Component {
               </tr>
             </header>
             <tbody>
-            {rows}
+              {rows}
             </tbody>
           </table>
         </div>

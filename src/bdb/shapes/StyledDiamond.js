@@ -40,8 +40,8 @@ class StyledDiamond extends Component {
           points={points}
           tension={0}
           closed
-          stroke="black"
-          fill="#7EBAD9"
+          //stroke="black"
+          fill="#1c6ca1"
           //onClick={this.props.onClick}
         />
         <Text

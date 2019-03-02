@@ -12,7 +12,7 @@ class OutputPane extends Component {
       yLabels:undefined,
       data:undefined,
       height: 400,
-      width: 750,
+      width: 800,
 
       // Examples of the structure of this.props.results
       /*********************************************************************************************************************/
@@ -134,7 +134,7 @@ class OutputPane extends Component {
     while (i<string.length) {
         character = string.charAt(i);
         if (character === '_') {
-           returnString += " ";
+           //returnString += " ";
         }
         returnString += string.charAt(i);
         i++;
@@ -168,6 +168,7 @@ class OutputPane extends Component {
         yLabels={yLabels}
         data={data}
         yLabelWidth={220}
+        background="#1c6ca1"
         //xLabelsLocation="bottom"
       />
     )
@@ -278,7 +279,7 @@ class OutputPane extends Component {
       return (
         <div style={divStyle}>
           <br></br>
-          <p className="output-title">{results.expression+":"}</p>
+          <p className="output-title">{"Results:"}</p>
           {this.renderOutput(results)}
         </div>
       );

@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import { number } from 'prop-types';
 
 class ValueGroup extends Component{
-    constructor(props){
-        super(props)
-    }
 
     render() {
         let barPadding = 2

@@ -58,7 +58,7 @@ class SideMenuPane extends Component {
     return (
       <div>
         <div className='side-menu-h1'>
-          Select a statistic
+          Select 
         </div>
         <Stage width={this.props.width} height={this.props.height}>
           <Layer>
@@ -136,50 +136,52 @@ class SideMenuPane extends Component {
   }
 
   renderColumnInput (
-    inputChosen,
-    inputFixed,
-    inputConditionChosen,
-    inputCondition,
-    onChangeAction,
-    fixAction,
-    num,
-    inputText
-  ) {
-    let input = () => {
-      let col1Name = '';
-      if (inputConditionChosen()) {
-        col1Name = inputCondition();
-      }
-
-      return (<UncontrolledDropdown>
-        <DropdownToggle caret>
-          {col1Name}
-        </DropdownToggle>
-        <DropdownMenu>
-          {this.state.allColumns.map((columnName, index) => (
-            <DropdownItem key={index} onClick={() => {
-              onChangeAction(num, columnName);
-            }}>
-              {columnName}
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </UncontrolledDropdown>);
-    };
-
-    let choice = <ColChoice onClick={fixed => fixAction(num, fixed)}/>;
-    let every = 'Every Column';
-
-    return this.renderInput(
       inputChosen,
       inputFixed,
       inputConditionChosen,
       inputCondition,
-      input,
-      inputText,
-      choice,
-      every
-    );
+      onChangeAction,
+      fixAction,
+      num,
+      inputText
+    ) 
+    {
+      let input = () => {
+        let col1Name = '';
+        if (inputConditionChosen()) {
+          col1Name = inputCondition();
+        }
+
+        return (<UncontrolledDropdown>
+          <DropdownToggle color="light" caret>
+            {col1Name}
+          </DropdownToggle>
+          <DropdownMenu>
+            {this.state.allColumns.map((columnName, index) => (
+              <DropdownItem key={index} onClick={() => {
+                onChangeAction(num, columnName);
+                }}>
+                {columnName}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+          </UncontrolledDropdown>
+        );
+      };
+
+      let choice = <ColChoice onClick={fixed => fixAction(num, fixed)}/>;
+      let every = <t id='white-text'>Every Column</t>;
+
+      return this.renderInput(
+        inputChosen,
+        inputFixed,
+        inputConditionChosen,
+        inputCondition,
+        input,
+        inputText,
+        choice,
+        every
+      );
   }
 
   renderInput(
@@ -204,10 +206,10 @@ class SideMenuPane extends Component {
           <table>
             <tbody>
             <tr>
-              <td id='input-name'>
+              <td align="center">
                 {input1Text}
               </td>
-              <td id='input-value'>
+              <td align="center">
                 {row1Input}
               </td>
             </tr>
@@ -221,7 +223,7 @@ class SideMenuPane extends Component {
           <div className="todo">{input1Table}</div>
         );
       } else {
-        input1Type = <div>{every}</div>;
+        input1Type = <div id='white-text'>{every}</div>;
         input1 = (
           <table>
             <tbody>
@@ -274,17 +276,30 @@ class SideMenuPane extends Component {
       </div>
     ) : undefined;
     return (
-      <div>
-        {statisticText}
-        {inputDiv}
-        {processingDiv}
-        {outputDiv}
-      </div>
+      <table>
+        <tbody>
+          <tr>
+            {statisticText}
+          </tr>
+          <tr height="30px"/>
+          <tr>
+            {inputDiv}
+          </tr>
+          <tr height="10px"/>
+          <tr>
+            {processingDiv}
+          </tr>
+          <tr height="10px"/>
+          <tr>
+          {outputDiv}
+          </tr>
+        </tbody>
+      </table>
     );
   }
 
   renderSimilarity(statisticText) {
-    let inputText = <div className='side-menu-h2'>Input:</div>;
+    let inputText = <div className='side-menu-h2'>Description (TODO)</div>;
     let input1 = this.renderRowInput(
       ()=>{return this.props.query.row1Chosen},
       ()=>{return this.props.query.row1Fixed},
@@ -293,7 +308,7 @@ class SideMenuPane extends Component {
       this.props.setRow1Condition,
       this.props.fixRow,
       1,
-      'First row:'
+      'Compare:'
     );
 
     let input2 = this.renderRowInput(
@@ -304,15 +319,25 @@ class SideMenuPane extends Component {
       this.props.setRow2Condition,
       this.props.fixRow,
       2,
-      'Second row:'
+      'With:'
     );
 
     let input = (
-      <div className="input">
-        {inputText}
-        {input1}
-        {input2}
-      </div>
+      <table className="input">
+        <tbody>
+          <tr>
+            {inputText}
+          </tr>
+          <tr height="10px"/>
+          <tr>
+            {input1}
+          </tr>
+          <tr height="10px"/>
+          <tr>
+            {input2}
+          </tr>
+        </tbody>
+      </table>
     );
 
     let processingText = <div className='side-menu-h2'>Processing:</div>
@@ -321,11 +346,11 @@ class SideMenuPane extends Component {
     if (this.props.query.contextChosen) {
       context = this.props.query.context;
     } else {
-      context = 'add context';
+      context = 'Add context:';
     }
     let contextDropDown = (
       <UncontrolledDropdown>
-        <DropdownToggle caret>
+        <DropdownToggle color="light" caret>
           {context}
         </DropdownToggle>
         <DropdownMenu>
@@ -337,7 +362,7 @@ class SideMenuPane extends Component {
             </DropdownItem>
           ))}
         </DropdownMenu>
-      </UncontrolledDropdown>
+    </UncontrolledDropdown>
     );
     let contextTable = (
       <table>
@@ -353,16 +378,22 @@ class SideMenuPane extends Component {
       <div>
         {contextTable}
       </div>
-    ) : (
+    )
+    :(
       <div className='todo'>
         {contextTable}
       </div>
     );
     let processing = (
-      <div className='processing'>
+      <table className='processing'>
+        <tr>
         {processingText}
+        </tr>
+        <tr/>
+        <tr>
         {contextDiv}
-      </div>
+        </tr>
+      </table>
     );
 
     let output;
@@ -377,7 +408,7 @@ class SideMenuPane extends Component {
               Order by:
             </div>
             <UncontrolledDropdown>
-              <DropdownToggle caret>
+              <DropdownToggle color="light" caret>
                 {this.props.query.orderBy}
               </DropdownToggle>
               <DropdownMenu>
@@ -437,7 +468,10 @@ class SideMenuPane extends Component {
   }
 
   renderCorrelation(statisticText) {
-    let inputText = <div className='side-menu-h2'>Input:</div>;
+    let inputText = <div className='side-menu-h2'>(1) Choose one specific column or every column. You will compare this to other column(s). <br/>
+                                                  (2) Choose what to comapre with: one specific or every column. <br/>
+                                                  (3) Click Run, and the results will be displayed below the <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> button. <br/>
+                                                  <i>Correlation between 2 columns will return a real number, expressing how much they correlate on a scale from 0 to 1.</i></div>;
     let col1 = this.renderColumnInput(
       ()=>{return this.props.query.col1Chosen},
       ()=>{return this.props.query.col1Fixed},
@@ -446,7 +480,7 @@ class SideMenuPane extends Component {
       this.props.setColName,
       this.props.fixCol,
       1,
-      'First column:'
+      'Compare:'
     );
 
     let col2 = this.renderColumnInput(
@@ -457,15 +491,25 @@ class SideMenuPane extends Component {
       this.props.setColName,
       this.props.fixCol,
       2,
-      'Second column:'
+      'With:'
     );
 
     let input = (
-      <div className='input'>
-        {inputText}
-        {col1}
-        {col2}
-      </div>
+      <table>
+      <tbody>
+        <tr>
+          {inputText}
+        </tr>
+        <tr height="10px"/>
+        <tr align="center">
+          {col1}
+        </tr>
+        <tr height="10px"/>
+        <tr align="center">
+          {col2}
+        </tr>
+      </tbody>
+    </table>
     );
 
     return this.renderEstimate(statisticText, input, undefined, undefined);
@@ -476,7 +520,10 @@ class SideMenuPane extends Component {
     if (this.props.query.expressionChosen) {
       let statisticText = (
         <div className='side-menu-h1'>
-          Statistic: {this.props.query.expressionName}
+          {this.props.query.expression instanceof CorrelationExpression ? 
+            "Correlation between columns" : 
+            this.props.query.expression instanceof SimilarityExpression ?
+            "Similarities TODO" : "Unsupported query type"}
         </div>
       );
 
@@ -495,7 +542,7 @@ class SideMenuPane extends Component {
     const divStyle = {
       height: this.props.height+'px',
       width: this.props.width+'px',
-      backgroundColor: '#7EBAD9',
+      backgroundColor: '#1c6ca1',
     };
 
     return (

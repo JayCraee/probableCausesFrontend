@@ -12,6 +12,7 @@
     "react-dom": "^16.8.3",
     "react-heatmap-grid": "^0.7.3",
     "react-http-request": "^2.0.0",
+    "react-icons": "^3.4.0",
     "react-konva": "^16.8.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",

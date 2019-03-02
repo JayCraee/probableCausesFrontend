@@ -84,6 +84,7 @@ class DiagramPane extends Component {
     if (query instanceof EstimateQuery) {
       if (query.expressionChosen) {
         //draw dotted lines
+        /*
         let line1 = <Line
           dash={[7, 3]}
           dashEnabled
@@ -96,7 +97,7 @@ class DiagramPane extends Component {
           points={[0, line2Y, this.props.width, line2Y]}
           stroke={arrowColour}
         />;
-
+        */
         if (query.expression instanceof SimilarityExpression) {
           estimateY = processingY + similarityOffset;
           inputArrowY2 = estimateY;
@@ -253,8 +254,6 @@ class DiagramPane extends Component {
 
           diagram = (
             <Group>
-              {line1}
-              {line2}
               {estimate}
               {row1}
               {arrowToInput1}
@@ -354,8 +353,6 @@ class DiagramPane extends Component {
           }
           diagram = (
             <Group>
-              {line1}
-              {line2}
               {estimate}
               {col1}
               {arrowToInput1}
