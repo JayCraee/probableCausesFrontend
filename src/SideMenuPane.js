@@ -152,7 +152,7 @@ class SideMenuPane extends Component {
       }
 
       return (<UncontrolledDropdown>
-        <DropdownToggle caret>
+        <DropdownToggle color="light" caret>
           {col1Name}
         </DropdownToggle>
         <DropdownMenu>
@@ -246,10 +246,12 @@ class SideMenuPane extends Component {
               <td id='input-name'>
                 {input1Text}
               </td>
+              <td>
+                {choice}
+              </td>
             </tr>
             </tbody>
           </table>
-          {choice}
         </div>
       )
     }
@@ -325,7 +327,7 @@ class SideMenuPane extends Component {
     }
     let contextDropDown = (
       <UncontrolledDropdown>
-        <DropdownToggle caret>
+        <DropdownToggle color="light" caret>
           {context}
         </DropdownToggle>
         <DropdownMenu>
@@ -377,7 +379,7 @@ class SideMenuPane extends Component {
               Order by:
             </div>
             <UncontrolledDropdown>
-              <DropdownToggle caret>
+              <DropdownToggle color="light" caret>
                 {this.props.query.orderBy}
               </DropdownToggle>
               <DropdownMenu>
@@ -495,7 +497,7 @@ class SideMenuPane extends Component {
     const divStyle = {
       height: this.props.height+'px',
       width: this.props.width+'px',
-      backgroundColor: '#7EBAD9',
+      backgroundColor: '#1c6ca1',
     };
 
     return (

@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import {Button} from 'reactstrap';
+import {Button} from 'react-bootstrap';
 
 class QueryChoicePane extends Component {
   renderEstimate() {
     let button = (
-      <Button onClick={()=>{this.props.setQuery('ESTIMATE')}}>
+      <Button variant="light" onClick={()=>{this.props.setQuery('ESTIMATE')}}>
         Explore
       </Button>
     );
 
-    let text = (<div className='side-menu-h3'>Calculate statistics about your data-set</div>);
+    let text = (<div className='side-menu-h3'><i>Calculate statistics about your data-set</i></div>);
 
     return (
       <div className='query-choice'>
@@ -22,12 +22,12 @@ class QueryChoicePane extends Component {
 
   renderSimulate() {
     let button = (
-      <Button onClick={()=>{this.props.setQuery('SIMULATE')}}>
+      <Button variant="light" onClick={()=>{this.props.setQuery('SIMULATE')}}>
         Test
       </Button>
     );
 
-    let text = (<div className='side-menu-h3'>Predict new outcomes under your new initial conditions</div>);
+    let text = (<div className='side-menu-h3'><i>Predict new outcomes under your new initial conditions</i></div>);
 
     return (
       <div className='query-choice'>
@@ -41,7 +41,7 @@ class QueryChoicePane extends Component {
   render() {
     let style = {
       width: this.props.width,
-      backgroundColor: '#7EBAD9',
+      backgroundColor: '#1c6ca1',
     };
 
     return (

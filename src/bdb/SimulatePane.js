@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, DropdownItem, DropdownMenu, DropdownToggle, Input, InputGroup, UncontrolledDropdown} from 'reactstrap';
+import {  } from 'react-bootstrap';
+
 
 class SimulatePane extends Component {
   constructor(props) {
@@ -11,6 +13,8 @@ class SimulatePane extends Component {
       addingField: false,
       nextConstraintField: '',
       nextConstraintValue: '',
+      addButtonColor: "#2ec077",
+      deleteButtonColor: "#701f2a"
     }
   }
 
@@ -30,8 +34,8 @@ class SimulatePane extends Component {
     return (
       <tr key={key} id='constraint'>
         <td id='constraint'>
-          <UncontrolledDropdown>
-            <DropdownToggle caret>
+          <UncontrolledDropdown >
+            <DropdownToggle color="light" caret>
               {constraint.field}
             </DropdownToggle>
             <DropdownMenu>
@@ -58,8 +62,8 @@ class SimulatePane extends Component {
           </InputGroup>
         </td>
         <td id='constraint'>
-          <Button onClick={()=>(this.props.removeConstraint(key))}>
-            -
+          <Button style={{backgroundColor: this.state.deleteButtonColor}} onClick={()=>(this.props.removeConstraint(key))}>
+            X
           </Button>
         </td>
       </tr>
@@ -70,7 +74,9 @@ class SimulatePane extends Component {
     return (
       <tr id='constraint'>
         <td id='constraint'>
-          <Button onClick={()=>{this.setState({addingConstraint: true})}}>+</Button>
+          <Button style={{backgroundColor: this.state.addButtonColor}} onClick={()=>{this.setState({addingConstraint: true})}}>
+          +
+          </Button>
         </td>
       </tr>
     );
@@ -81,7 +87,7 @@ class SimulatePane extends Component {
       <tr id='constraint'>
         <td id='constraint'>
         <UncontrolledDropdown>
-        <DropdownToggle caret>
+        <DropdownToggle color="light" caret>
         {this.state.nextConstraintField}
         </DropdownToggle>
         <DropdownMenu>
@@ -110,28 +116,31 @@ class SimulatePane extends Component {
         />
     </td>
     <td id='constraint'>
-        <Button
-        onClick={()=>{
-          this.props.addConstraint(this.state.nextConstraintField, this.state.nextConstraintValue);
-          this.setState({
-            nextConstraintValue: '',
-            nextConstraintField: '',
-            addingConstraint: false,
-          });
-        }}
-        >
-        Add
+        <Button 
+          style={{backgroundColor: this.state.addButtonColor}}
+          onClick={()=>{
+            this.props.addConstraint(this.state.nextConstraintField, this.state.nextConstraintValue);
+            this.setState({
+              nextConstraintValue: '',
+              nextConstraintField: '',
+              addingConstraint: false,
+            });
+          }}
+          >
+          +
         </Button>
     </td>
         <td>
-          <Button onClick={() => {
+          <Button 
+            style={{backgroundColor: this.state.deleteButtonColor}}
+            onClick={() => {
             this.setState({
               nextConstraintValue: '',
               nextConstraintField: '',
               addingConstraint: false,
             });
           }}>
-            Cancel
+            X
           </Button>
         </td>
     </tr>
@@ -143,7 +152,7 @@ class SimulatePane extends Component {
       <tr key={key} id='field-to-simulate'>
         <td id='field-to-simulate'>
           <UncontrolledDropdown key={key}>
-            <DropdownToggle caret>
+            <DropdownToggle color="light" caret>
               {field}
             </DropdownToggle>
             <DropdownMenu>
@@ -158,8 +167,8 @@ class SimulatePane extends Component {
           </UncontrolledDropdown>
         </td>
         <td id='field-to-simulate'>
-          <Button onClick={()=>(this.props.removeFieldToSimulate(key))}>
-            -
+          <Button style={{backgroundColor: this.state.deleteButtonColor}} onClick={()=>(this.props.removeFieldToSimulate(key))}>
+            X
           </Button>
         </td>
       </tr>
@@ -170,7 +179,7 @@ class SimulatePane extends Component {
     return (
       <tr id='field-to-simulate'>
         <td id='field-to-simulate'>
-          <Button onClick={()=>{this.setState({addingField: true})}}>+</Button>
+          <Button style={{backgroundColor: this.state.addButtonColor}} onClick={()=>{this.setState({addingField: true})}}>+</Button>
         </td>
       </tr>
     );
@@ -181,7 +190,7 @@ class SimulatePane extends Component {
       <tr id='field-to-simulate'>
         <td id='field-to-simulate'>
           <UncontrolledDropdown>
-            <DropdownToggle caret/>
+            <DropdownToggle color="light" caret/>
             <DropdownMenu>
               {SimulatePane.difference(this.state.nominalColumns, this.props.query.fieldsToSimulate).map((columnName, index) => (
                 <DropdownItem key={index} onClick={() => {
@@ -197,12 +206,15 @@ class SimulatePane extends Component {
           </UncontrolledDropdown>
         </td>
         <td id='field-to-simulate'>
-          <Button onClick={() => {
-            this.setState({
-              addingField: false,
-            });
-          }}>
-            Cancel
+          <Button 
+            style={{backgroundColor: this.state.deleteButtonColor}}
+            onClick={() => {
+              this.setState({
+                addingField: false,
+              });
+            }}
+          >
+            X
           </Button>
         </td>
       </tr>
@@ -276,7 +288,8 @@ class SimulatePane extends Component {
     let style = {
       width: this.props.width,
       height: this.props.height,
-      backgroundColor: '#7EBAD9',
+      backgroundColor: '#1c6ca1',
+      //backgroundColor: '#81ADDC',
     };
 
     return this.renderSimulate(style);

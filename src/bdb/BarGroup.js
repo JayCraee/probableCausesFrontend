@@ -6,8 +6,11 @@ class BarGroup extends Component{
     }
 
     render() {
+        let labelLimit = 130
         let barPadding = 2
-        let barColour = '#348AA7'
+        //let barColour = '#329fff'
+        //let barColour = '#348AA7'
+        let barColour = '#1c6ca1'
         let widthScale = d => d * 500
     
         let props=this.props;
@@ -18,7 +21,7 @@ class BarGroup extends Component{
             <g className="bar-group">
             <text className="name-label" x="-6" y={yMid} alignmentBaseline="middle" >{props.d.name}</text>
             <rect y={barPadding * 0.15} width={width} height={props.barHeight - barPadding} fill={barColour} />
-            <text className={width-8<8 ? "value-label-dark": "value-label-light"} x={width-8<8 ? width+60: width-8} y={yMid} alignmentBaseline="middle" >{props.d.value}</text>
+            <text className={width<labelLimit ? "value-label-dark": "value-label-light"} x={width<labelLimit ? width+8: width-8} y={yMid} alignmentBaseline="middle" >{props.d.value}</text>
             </g>
         )
     }

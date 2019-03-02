@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
+import { Button } from 'reactstrap';
 
 
 class OperationsPane extends Component {
   render() {
     return (
-      <button id='op-run' onClick={()=>this.props.handleRunQuery()}>Run</button>
+     <button id='run' onClick={()=>this.props.handleRunQuery()}>
+          Run
+      </button>
+     
     )
   }
 }
