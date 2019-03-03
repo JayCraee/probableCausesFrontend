@@ -170,7 +170,7 @@ class SideMenuPane extends Component {
       };
 
       let choice = <ColChoice onClick={fixed => fixAction(num, fixed)}/>;
-      let every = <t id='white-text'>Every Column</t>;
+      let every = 'Every Column';
 
       return this.renderInput(
         inputChosen,
@@ -206,10 +206,10 @@ class SideMenuPane extends Component {
           <table>
             <tbody>
             <tr>
-              <td align="center">
+              <td>
                 {input1Text}
               </td>
-              <td align="center">
+              <td>
                 {row1Input}
               </td>
             </tr>
@@ -248,10 +248,10 @@ class SideMenuPane extends Component {
               <td id='input-name'>
                 {input1Text}
               </td>
+              <td>{choice}</td>
             </tr>
             </tbody>
           </table>
-          {choice}
         </div>
       )
     }
@@ -259,7 +259,7 @@ class SideMenuPane extends Component {
     return input1;
   }
 
-  renderEstimate(statisticText, input, processing, output) {
+  renderEstimate(statisticText, input, processing, output, explanation) {
     let inputDiv = (input !== undefined) ? (
       <div className='side-menu-block'>
         {input}
@@ -275,37 +275,40 @@ class SideMenuPane extends Component {
         {output}
       </div>
     ) : undefined;
+    let explanationDiv = (explanation !== undefined) ? (
+      <div className='side-menu-block'>
+        {explanation}
+      </div>
+    ) : undefined;
     return (
       <table>
         <tbody>
-          <tr>
-            {statisticText}
-          </tr>
-          <tr height="30px"/>
-          <tr>
-            {inputDiv}
-          </tr>
+          <tr> {statisticText} </tr>
+          <tr height="15px"/>
+          <tr> {inputDiv} </tr>
           <tr height="10px"/>
-          <tr>
-            {processingDiv}
-          </tr>
+          <tr> {processingDiv}  </tr>
           <tr height="10px"/>
-          <tr>
-          {outputDiv}
-          </tr>
+          <tr> {outputDiv} </tr>
+          <tr height="15px"/>
+          <tr> {explanationDiv}</tr>
         </tbody>
       </table>
     );
   }
 
   renderSimilarity(statisticText) {
-    let inputText = <div className='side-menu-h2'>(1) Choose to compare one or every row.  <br/>
-      <div className='side-menu-h4'><i>To choose a specific row you need to input a boolean expression (e.g. ID=1) and the first row to match this expression will be used.</i></div>
-      (2) Choose to compare it with one or every row. <br/>
-      (3) Choose a column for the context <br/>
-      (4) Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> and the results will be displayed below. <br/>
-      <div className='side-menu-h4'><i>Similarity between 2 rows will return a real number, expressing how similar they are in the context of a column on a scale from 0 to 1.</i></div></div>;
-    let input1 = this.renderRowInput(
+    let inputText = 
+      <div className='side-menu-h2'>(1) Choose to compare one or every row.  <br/>
+        <div className='side-menu-h4'>
+          <i>To choose a specific row you need to input a boolean expression (e.g. ID=1) and the first row to match this expression will be used.</i>
+        </div>
+        (2) Choose to compare it with one or every row. <br/>
+        (3) Choose a column for the context <br/>
+        (4) Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> and the results will be displayed below. <br/>
+      </div>
+
+      let input1 = this.renderRowInput(
       ()=>{return this.props.query.row1Chosen},
       ()=>{return this.props.query.row1Fixed},
       ()=>{return this.props.query.row1ConditionChosen},
@@ -333,7 +336,7 @@ class SideMenuPane extends Component {
           <tr>
             {inputText}
           </tr>
-          <tr height="10px"/>
+          <tr height="30px"/>
           <tr>
             {input1}
           </tr>
@@ -345,7 +348,6 @@ class SideMenuPane extends Component {
       </table>
     );
 
-    let processingText = <div className='side-menu-h2'>Processing:</div>
     let contextText = <div className='side-menu-h3'>Context:</div>;
     let context = '';
     if (this.props.query.contextChosen) {
@@ -380,7 +382,7 @@ class SideMenuPane extends Component {
       </table>
     );
     let contextDiv = this.props.query.contextChosen ? (
-      <div>
+      <div align="center" >
         {contextTable}
       </div>
     )
@@ -391,18 +393,13 @@ class SideMenuPane extends Component {
     );
     let processing = (
       <table className='processing'>
-        <tr>
-        {processingText}
-        </tr>
-        <tr/>
-        <tr>
+        <tr align="center" >
         {contextDiv}
         </tr>
       </table>
     );
 
     let output;
-    let outputText = <div className='side-menu-h2'>Output</div>;
     if (this.props.query.rowsComplete) {
       let orderBy;
       if (this.props.query.orderBySupported) {
@@ -439,7 +436,7 @@ class SideMenuPane extends Component {
         limit = (
           <table>
             <tbody>
-            <tr>
+            <tr align="center" >
               <td id='input-name'>
                 <div className='side-menu-h3'>
                   Limit:
@@ -462,21 +459,30 @@ class SideMenuPane extends Component {
 
       output = (
         <div className='output'>
-          {outputText}
           {orderBy}
           {limit}
         </div>
       )
     }
 
-    return this.renderEstimate(statisticText, input, processing, output);
+    let explanation =
+      <div className='side-menu-h4'>
+        <i>Similarity between 2 rows will return a real number, expressing how similar they are in the context of a column on a scale from 0 to 1.</i>
+      </div>
+    
+    return this.renderEstimate(statisticText, input, processing, output, explanation);
   }
 
   renderCorrelation(statisticText) {
-    let inputText = <div className='side-menu-h2'>(1) Choose one specific column or every column. You will compare this to other column(s). <br/>
-                                                  (2) Choose what to compare with: one specific or every column. <br/>
-                                                  (3) Click Run, and the results will be displayed below the <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> button. <br/>
-                                                  <i>Correlation between 2 columns will return a real number, expressing how much they correlate on a scale from 0 to 1.</i></div>;
+    let inputText = 
+      <div className='side-menu-h2'>
+        1. Choose to compare one or every column. <br/>
+        2. Choose to compare it with one or every column. <br/>
+        3. Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> and the results will be displayed below. <br/><br/>
+      </div>  
+
+                
+                                                  
     let col1 = this.renderColumnInput(
       ()=>{return this.props.query.col1Chosen},
       ()=>{return this.props.query.col1Fixed},
@@ -502,22 +508,29 @@ class SideMenuPane extends Component {
     let input = (
       <table>
       <tbody>
-        <tr>
+      <tr>
           {inputText}
         </tr>
-        <tr height="10px"/>
-        <tr align="center">
+        <tr height="50px"/>
+        <tr>
           {col1}
         </tr>
-        <tr height="10px"/>
-        <tr align="center">
+        <tr height="30px"/>
+        <tr>
           {col2}
         </tr>
       </tbody>
     </table>
     );
 
-    return this.renderEstimate(statisticText, input, undefined, undefined);
+    let explanation = 
+      <div className='side-menu-h4'>
+        <i>
+          Correlation between 2 columns will return a real number, expressing how much they correlate on a scale from 0 to 1.
+        </i>
+      </div>
+
+    return this.renderEstimate(statisticText, input, undefined, undefined, explanation);
   }
 
   renderSideMenu() {

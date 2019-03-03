@@ -31,7 +31,6 @@ class BqlStudio extends Component {
         loading: false,
         numQueries: 1,
         test: true,
-        calls: 0
       };
     }
 
@@ -101,7 +100,7 @@ class BqlStudio extends Component {
       rows.push(<tr key={this.state.numQueries}>
                   <td id='query'>
                     <Button style={{backgroundColor: "#2ec077"}} onClick={()=>this.handleNewQuery()}>
-                      New query, {this.state.calls}
+                      New query
                     </Button>
                   </td>
                 </tr>);
@@ -120,9 +119,6 @@ class BqlStudio extends Component {
               <p id='intro-end'/>
             </header>
             <tbody>
-              <tr><ScrollableAnchor id={'please-work'}>
-              <p id='welcome-title-small'>Please work</p>
-            </ScrollableAnchor></tr>
               {rows}
             </tbody>
           </table>
