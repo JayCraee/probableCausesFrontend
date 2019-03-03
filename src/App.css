@@ -47,10 +47,10 @@ table#query-pane-table {
 }
 
 table#input-choice {
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto;*/
   width: 320px;
-  justify-content: center;
+  justify-content: left;
 
 }
 

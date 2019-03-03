@@ -9,16 +9,15 @@ class DimensionChoice extends Component {
     return (
       <table id='input-choice'>
         <tbody>
-          <tr>
-            <td>
+          <tr align="left">
+            <div>
               <Button 
                 variant="light"
                 onClick={() => this.props.onClick(false) }
               >
                 {button1Text}
               </Button>
-            </td>
-            <td>
+              <t> </t>
               <Button 
                 variant="light"
                 onClick={() => this.props.onClick(true)}
@@ -26,7 +25,7 @@ class DimensionChoice extends Component {
               >
                 {button2Text}
               </Button>
-            </td>
+            </div>
           </tr>
         </tbody>
       </table>
