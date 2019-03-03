@@ -299,7 +299,12 @@ class SideMenuPane extends Component {
   }
 
   renderSimilarity(statisticText) {
-    let inputText = <div className='side-menu-h2'>Description (TODO)</div>;
+    let inputText = <div className='side-menu-h2'>(1) Choose to compare one or every row.  <br/>
+      <div className='side-menu-h4'><i>To choose a specific row you need to input a boolean expression (e.g. ID=1) and the first row to match this expression will be used.</i></div>
+      (2) Choose to compare it with one or every row. <br/>
+      (3) Choose a column for the context <br/>
+      (4) Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> and the results will be displayed below. <br/>
+      <div className='side-menu-h4'><i>Similarity between 2 rows will return a real number, expressing how similar they are in the context of a column on a scale from 0 to 1.</i></div></div>;
     let input1 = this.renderRowInput(
       ()=>{return this.props.query.row1Chosen},
       ()=>{return this.props.query.row1Fixed},
@@ -469,7 +474,7 @@ class SideMenuPane extends Component {
 
   renderCorrelation(statisticText) {
     let inputText = <div className='side-menu-h2'>(1) Choose one specific column or every column. You will compare this to other column(s). <br/>
-                                                  (2) Choose what to comapre with: one specific or every column. <br/>
+                                                  (2) Choose what to compare with: one specific or every column. <br/>
                                                   (3) Click Run, and the results will be displayed below the <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> button. <br/>
                                                   <i>Correlation between 2 columns will return a real number, expressing how much they correlate on a scale from 0 to 1.</i></div>;
     let col1 = this.renderColumnInput(
@@ -523,7 +528,7 @@ class SideMenuPane extends Component {
           {this.props.query.expression instanceof CorrelationExpression ? 
             "Correlation between columns" : 
             this.props.query.expression instanceof SimilarityExpression ?
-            "Similarities TODO" : "Unsupported query type"}
+            "Similarity between rows" : "Unsupported query type"}
         </div>
       );
 

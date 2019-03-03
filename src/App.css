@@ -109,6 +109,13 @@ td#field-to-simulate {
   padding-bottom: 3px;
 }
 
+.side-menu-h4 {
+  color: #e3ecf2;
+  font-weight: bold;
+  padding-left: 5px;
+  font-size: small;
+}
+
 .side-menu-h3 {
   color: #e3ecf2;
   padding-left: 5px;
