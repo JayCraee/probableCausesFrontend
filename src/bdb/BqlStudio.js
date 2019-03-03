@@ -4,7 +4,9 @@ import {GridLoader} from 'react-spinners';
 import QueryPane from './QueryPane';
 import {withRouter} from "react-router-dom";
 import BQLNavBar from './BQLNavBar';
-import { Image } from 'react-bootstrap';
+import ScrollableAnchor from 'react-scrollable-anchor'
+import { configureAnchors } from 'react-scrollable-anchor'
+import { goToAnchor } from 'react-scrollable-anchor'
 
 class BqlStudio extends Component {
   constructor(props) {
@@ -29,9 +31,18 @@ class BqlStudio extends Component {
         loading: false,
         numQueries: 1,
         test: true,
+        calls: 0
       };
     }
 
+  }
+
+
+  handleNewQuery() {
+    this.setState({numQueries: this.state.numQueries+1});
+    goToAnchor('section'+(this.state.numQueries+1), true);
+
+    //goToTop();
   }
 
   async getTableData() {
@@ -61,10 +72,17 @@ class BqlStudio extends Component {
       loading...
       </div>
     } else {
+      configureAnchors({offset: -10, scrollDuration: 1000});
       let rows = [];
       for (let i = 0; i < this.state.numQueries; ++i) {
+        //sections.push({id: 'section'+i+1, label: 'Section '+i+1});
         rows.push(<tr height="35px"/>);
-        rows.push(<tr align="center"><p  id='welcome-title-small'>Query {i+1}</p></tr>)
+        rows.push(
+          <tr>
+            <ScrollableAnchor id={'section'+(i+1)}>
+              <p id='welcome-title-small'>Query {i+1}</p>
+            </ScrollableAnchor>
+          </tr>);
         rows.push(
           <tr key={i}>
             <td id='query'>
@@ -77,35 +95,34 @@ class BqlStudio extends Component {
             </td>
           </tr>
         );
+        
+        
       }
       rows.push(<tr key={this.state.numQueries}>
                   <td id='query'>
-                    <Button style={{backgroundColor: "#2ec077"}} onClick={()=>this.setState({numQueries: this.state.numQueries+1})}>
-                      New query
+                    <Button style={{backgroundColor: "#2ec077"}} onClick={()=>this.handleNewQuery()}>
+                      New query, {this.state.calls}
                     </Button>
                   </td>
                 </tr>);
       return (
         <div>
           <BQLNavBar/>
-          <table width="100%">
+          <table id='centered'>
             <header>
-              <tr>
-                <td width="15%"/>
-                <td>
-                  <p id='welcome-title-big'>Welcome to <Image src={require("./logo.svg")} width="170" fluid/></p>
-                  <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p>
-                  <p align="center">BayesDB uses advanced machine learning and statistical methods to make it easy for you to turn data into real world results. In BQL Studio, you can test and improve the reliability of your data-set, extract insight from it, and find out what would happen in the real world if you made changes to policy.</p>
-                  <p id='main-functionalities'>Main functionalities of BQL Studio:</p>
-                  <p id='normal-text'><b id='title-text'>EXPLORE SIMILARITY - </b> Helps you to find exceptional datapoints and analyse them or remove them from your dataset.</p>
-                  <p id='normal-text'><b id='title-text'>EXPLORE CORRELATION - </b>Helps you to find patterns and trends that you may or may not have expected in the data.</p>
-                  <p id='normal-text'><b id='title-text'>TEST or SIMULATE - </b> Helps you to predict what effects a policy change would have if implemented in the real world.</p>
-                  <p id='intro-end'/>
-                </td>
-                <td width="15%"/>
-              </tr>
+              <p id='welcome-title-big'>Welcome to <img src={require("./logo.svg")} alt="" width="170" fluid/></p>
+              <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p>
+              <p> BayesDB uses advanced machine learning and statistical methods to make it easy for you to turn data into real world results. <br/> In BQL Studio, you can test and improve the reliability of your data-set, extract insight from it, and find out what would happen in the real world if you made changes to policy.</p>
+              <p id='main-functionalities'>Main functionalities of BQL Studio:</p>
+              <p id='normal-text'><b id='title-text'>EXPLORE SIMILARITY - </b> Helps you to find exceptional datapoints and analyse them or remove them from your dataset.</p>
+              <p id='normal-text'><b id='title-text'>EXPLORE CORRELATION - </b>Helps you to find patterns and trends that you may or may not have expected in the data.</p>
+              <p id='normal-text'><b id='title-text'>TEST or SIMULATE - </b> Helps you to predict what effects a policy change would have if implemented in the real world.</p>
+              <p id='intro-end'/>
             </header>
             <tbody>
+              <tr><ScrollableAnchor id={'please-work'}>
+              <p id='welcome-title-small'>Please work</p>
+            </ScrollableAnchor></tr>
               {rows}
             </tbody>
           </table>
