@@ -513,10 +513,10 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 0,
-              colNames: ['vehicle'],
+              colNames: ['speed'],
               rows: [
                 {
-                  rowName: 'Guinea',
+                  rowName: 'fatality',
                   values: [6],
                 }
               ]
@@ -527,10 +527,10 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 1,
-              colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
-                  rowName: 'Morocco',
+                  rowName: 'injury',
                   values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
                 }
               ]
@@ -541,37 +541,36 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 2,
-              colNames: ["VehicleType", "SecondVehicleType", "Date", "Time", "RoadHasPavement", "DistanceToNearestTrafficLight",
-                "SpeedLimit", "EstimatedSpeedOfCollision",  "SeatBeltUsed", "Severity OfDamage", "LandUse", "City"],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
-                  rowName: 'VehicleType',
+                  rowName: 'speed',
                   values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.5, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'SecondVehicleType',
+                  rowName: 'injury',
                   values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.3, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'EstimatedSpeedOfCollision',
+                  rowName: 'vehicle',
                   values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'Date',
+                  rowName: 'fatality',
                   values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.2, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'Time',
+                  rowName: 'area',
                   values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.4, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'RoadHasPavement',
+                  rowName: 'city',
                   values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
-                }/*,
-          {
-            rowName: 'DistanceToNearestTrafficLight',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
-          }*/
+                },
+                {
+                  rowName: 'people-involved',
+                  values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
+                }
               ]
             }});
             break;
@@ -584,10 +583,10 @@ class QueryPane extends Component {
                 query: 'ESTIMATE',
                 expression: 'SIMILARITY',
                 dimensions: 0,
-                colNames: ['DistanceToNearestTrafficLight'],
+                colNames: ['speed'],
                 rows: [
                   {
-                    rowName: 'Guinea',
+                    rowName: 'fatality',
                     values: [6],
                   }
                 ]
@@ -598,10 +597,10 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'SIMILARITY',
               dimensions: 1,
-              colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
-                  rowName: 'Morocco',
+                  rowName: 'injury',
                   values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
                 }
               ]
@@ -612,37 +611,36 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'SIMILARITY',
               dimensions: 2,
-              colNames: ["VehicleType", "SecondVehicleType", "Date", "Time", "RoadHasPavement", "DistanceToNearestTrafficLight",
-                "SpeedLimit", "EstimatedSpeedOfCollision",  "SeatBeltUsed", "Severity OfDamage", "LandUse", "City"],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
-                  rowName: 'VehicleType',
+                  rowName: 'speed',
                   values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.5, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'SecondVehicleType',
+                  rowName: 'injury',
                   values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.3, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'EstimatedSpeedOfCollision',
+                  rowName: 'vehicle',
                   values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'Date',
+                  rowName: 'fatality',
                   values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.2, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'Time',
+                  rowName: 'area',
                   values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.4, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'RoadHasPavement',
+                  rowName: 'city',
                   values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
-                }/*,
-          {
-            rowName: 'DistanceToNearestTrafficLight',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
-          }*/
+                },
+                {
+                  rowName: 'people-involved',
+                  values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
+                }
               ]
             }});
             break;
@@ -654,10 +652,10 @@ class QueryPane extends Component {
         query: 'SIMULATE',
         expression: 'Scaled frequency of each outcome',
         dimensions: 1,
-        colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
+        colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
         rows: [
           {
-            rowName: 'Morocco',
+            rowName: 'injury',
             values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
           }
         ]
