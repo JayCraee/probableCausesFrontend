@@ -475,6 +475,23 @@ class QueryPane extends Component {
     this.parseSimulateResponse(response, fieldsToSimulate);
   }
 
+  isValidQuery() {
+    return (
+      this.state.query !== undefined &&
+      ((this.state.query instanceof EstimateQuery &&
+      this.state.query.expressionChosen &&
+        ((this.state.query.expression instanceof SimilarityExpression &&
+        this.state.query.rowsComplete && this.state.query.contextChosen) ||
+        this.state.query.expression instanceof CorrelationExpression &&
+        this.state.query.colsComplete)) ||
+        (this.state.query instanceof SimulateQuery &&
+        this.state.query.simulateQueryComplete))
+    );
+  }
+
+  handleIncompleteQuery() {
+    alert("Query incomplete");
+  }
 
   handleRunQuery() {
     this.setState({loading: true});
@@ -681,13 +698,17 @@ class QueryPane extends Component {
         undefined
     ));
 
-    let operation = this.props.test ? (
+    let operation = this.isValidQuery() ? (this.props.test ? (
       <OperationsPane
         handleRunQuery={()=>this.handleTestQuery()}
       />
     ) : (
       <OperationsPane
         handleRunQuery={()=>this.handleRunQuery()}
+      />
+    )) : (
+      <OperationsPane
+        handleRunQuery={()=>this.handleIncompleteQuery()}
       />
     );
       
