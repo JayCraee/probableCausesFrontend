@@ -140,26 +140,9 @@ td#field-to-simulate {
 .todo {
   text-align: center;
   padding-left: 0;
-  border: 4px solid #701f2a;
-  border-radius: 5px;
-  /*background-color: #8587a7;*/
   margin-bottom: 3px;
 }
 
-.todo-button {
-  color: #000000;
-  background-color: #f1f1f1;
-  border: 2px solid #701f2a;
-  border-radius: 5px;
-}
-
-/*table#input {
-  height: 120px;
-}
-
-table#processing {
-  height: 300px;
-}*/
 
 .simulate-h2 {
   color: #e3ecf2;
@@ -178,12 +161,6 @@ table#processing {
   padding: 10px;
 }
 
-.op-button-group {
-    display: inline-block;
-    text-align: center;
-
-}
-
 button#run {
   color: #ffffff;
   /*background-color: #53b386;*/
@@ -191,15 +168,6 @@ button#run {
   border-radius: 6px;
   width: 100%;
   height: 35px;
-}
-
-
-button#op-del {
-  display: inline-block;
-  color: #ffffff;
-  width: 151px;
-  background-color: #a12f20;
-  border-radius: 6px;
 }
 
 .value {
@@ -235,8 +203,6 @@ button#op-del {
   font-size: 23px;
   text-align: center;
   font-weight: bold;
-  
-
 }
 
 .title {
@@ -253,14 +219,6 @@ button#op-del {
   font-family: "Lato", sans-serif;
 }
 
-
-.bar-group .value-label-light {
-  text-anchor: end;
-  fill: #fff;
-  font-weight: 900;
-  font-size: 0.9em;
-  font-family: "Lato", sans-serif;
-}
 
 .bar-group .value-label-dark {
   text-anchor: start;
