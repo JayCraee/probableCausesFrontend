@@ -36,6 +36,12 @@
   margin-top: 20px;
 }
 
+table#centered {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  text-align: center;
+}
 table#query-pane-table {
   border-collapse: collapse;
 }
