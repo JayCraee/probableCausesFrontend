@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 
 class BarGroup extends Component{
-    constructor(props){
-        super(props)
-    }
 
     render() {
         let labelLimit = 130

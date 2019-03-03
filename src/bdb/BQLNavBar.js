@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
-import {Image} from 'react-bootstrap'
-
+import { goToTop } from 'react-scrollable-anchor'
 
 export default class BQLNavbar extends Component {
   constructor(props) {
@@ -17,9 +16,9 @@ export default class BQLNavbar extends Component {
   }
 
   render() {
-    return <Navbar className="nav-bar" dark expand="md">
-      <NavbarBrand href="/">
-        <Image src={require("./logo.svg")} width="200" fluid/>
+    return <Navbar className="nav-bar" dark expand="md" fixed="top">
+      <NavbarBrand>
+        <img src={require("./logo.svg")} width="200" onClick={()=>goToTop()} fluid/>
       </NavbarBrand>
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
