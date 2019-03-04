@@ -14,7 +14,8 @@ class SimulatePane extends Component {
       nextConstraintField: '',
       nextConstraintValue: '',
       addButtonColor: "#2ec077",
-      deleteButtonColor: "#701f2a"
+      deleteButtonColor: "#701f2a",
+      numOfItems: 2
     }
   }
 
@@ -74,7 +75,14 @@ class SimulatePane extends Component {
     return (
       <tr id='constraint'>
         <td id='constraint'>
-          <Button style={{backgroundColor: this.state.addButtonColor}} onClick={()=>{this.setState({addingConstraint: true})}}>
+          <Button 
+            style={{backgroundColor: this.state.addButtonColor}} 
+            onClick={()=>{
+              {
+                this.setState({addingConstraint: true});
+                this.setState({numOfItems: this.state.numOfItems+1});
+              }
+            }}>
           +
           </Button>
         </td>
@@ -124,6 +132,7 @@ class SimulatePane extends Component {
               nextConstraintValue: '',
               nextConstraintField: '',
               addingConstraint: false,
+              numOfItems: this.state.numOfItems+1
             });
           }}
           >
@@ -179,7 +188,14 @@ class SimulatePane extends Component {
     return (
       <tr id='field-to-simulate'>
         <td id='field-to-simulate'>
-          <Button style={{backgroundColor: this.state.addButtonColor}} onClick={()=>{this.setState({addingField: true})}}>+</Button>
+          <Button 
+            style={{backgroundColor: this.state.addButtonColor}} 
+            onClick={()=>{
+              this.setState({
+                addingField: true,
+                numOfItems: this.state.numOfItems+1
+              })
+              }}>+</Button>
         </td>
       </tr>
     );
@@ -287,9 +303,8 @@ class SimulatePane extends Component {
   render() {
     let style = {
       width: this.props.width,
-      height: this.props.height,
+      height: this.props.height+this.state.numOfItems*25,
       backgroundColor: '#1c6ca1',
-      //backgroundColor: '#81ADDC',
     };
 
     return this.renderSimulate(style);
