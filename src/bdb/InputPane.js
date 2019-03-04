@@ -71,7 +71,7 @@ class InputPane extends Component {
       <table>
         <tbody>
         <tr>
-          <td>
+          <td id="side-menu-pane">
             <SideMenuPane
               width={sideMenuWidth}
               height={height}

@@ -59,6 +59,11 @@ table#simulate-pane {
   justify-content: center;
 }
 
+td#side-menu-pane {
+  border: 5px solid #e3ecf2;
+  border-collapse: collapse;
+}
+
 td#diagram-pane {
   border: 5px solid #e3ecf2;
   border-collapse: collapse;
