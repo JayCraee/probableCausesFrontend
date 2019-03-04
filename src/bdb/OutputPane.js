@@ -24,10 +24,8 @@ class OutputPane extends Component {
     let character='';
     while (i<string.length) {
         character = string.charAt(i);
-        if (character === '_') {
-           //returnString += " ";
-        }
-        returnString += string.charAt(i);
+        if (character === '_') returnString += " ";
+        else returnString += string.charAt(i);
         i++;
     }
     return returnString;
