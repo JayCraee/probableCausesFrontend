@@ -109,8 +109,8 @@ class BqlStudio extends Component {
       return (
         <div>
           <BQLNavBar/>
-          <table id='centered'>
-            <header>
+          <table align="center">
+            <header id='centered'>
               <p> id='welcome-title-big' </p>
               <p> id='welcome-title-big' </p>
               <p id='welcome-title-big'>Welcome to <Image src={require("./logo.svg")} alt="" width="170" fluid/></p>

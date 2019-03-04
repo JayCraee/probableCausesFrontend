@@ -682,7 +682,7 @@ class QueryPane extends Component {
 
   render() {
     let output = this.state.loading ? (
-      <div>
+      <div align="center">
         <GridLoader loading={true}/>
         loading...
       </div>
@@ -714,36 +714,36 @@ class QueryPane extends Component {
       <table id="query-pane-table">
         <tbody>
           <tr align="center">
-            <td id="input-pane">
+            <td>
               <InputPane
-          query={this.state.query}
-          columns={this.props.columns}
-          nominalColumns={this.props.nominalColumns}
-          handleChooseExpression={expression=>this.handleChooseExpression(expression)}
-          handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
-          handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
-          handleChangeLimit={limit=>this.handleChangeLimit(limit)}
-          handleChangeOrderBy={order=>this.handleChangeOrderBy(order)}
-          handleChangeRowBoolExpr={(rowNum, boolExpr)=>this.handleChangeRowBoolExpr(rowNum, boolExpr)}
-          handleFixCol={(colNum, fixed)=>this.handleFixCol(colNum, fixed)}
-          handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
-          handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
-          handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
-          handleRemoveConstraint={key=>this.handleRemoveConstraint(key)}
-          handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
-          handleAddFieldToSimulate={field=>this.handleAddFieldToSimulate(field)}
-          handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
-          handleSetQuery={query=>this.handleSetQuery(query)}
-        />
+                query={this.state.query}
+                columns={this.props.columns}
+                nominalColumns={this.props.nominalColumns}
+                handleChooseExpression={expression=>this.handleChooseExpression(expression)}
+                handleFixRow={(rowNum, fixed)=>this.handleFixRow(rowNum, fixed)}
+                handleChangeSimilarityContext={columnName=>this.handleChangeSimilarityContext(columnName)}
+                handleChangeLimit={limit=>this.handleChangeLimit(limit)}
+                handleChangeOrderBy={order=>this.handleChangeOrderBy(order)}
+                handleChangeRowBoolExpr={(rowNum, boolExpr)=>this.handleChangeRowBoolExpr(rowNum, boolExpr)}
+                handleFixCol={(colNum, fixed)=>this.handleFixCol(colNum, fixed)}
+                handleChangeColName={(colNum, name)=>this.handleChangeColName(colNum, name)}
+                handleChangeConstraint={(key, field, value)=>this.handleChangeConstraint(key, field, value)}
+                handleAddConstraint={(field, value)=>this.handleAddConstraint(field, value)}
+                handleRemoveConstraint={key=>this.handleRemoveConstraint(key)}
+                handleChangeFieldToSimulate={(key, field)=>this.handleChangeFieldToSimulate(key, field)}
+                handleAddFieldToSimulate={field=>this.handleAddFieldToSimulate(field)}
+                handleRemoveFieldToSimulate={key=>this.handleRemoveFieldToSimulate(key)}
+                handleSetQuery={query=>this.handleSetQuery(query)}
+              />
             </td>
           </tr>
-          <tr align="center">
+          <tr>
           <td>
             {operation}
           </td>
           </tr>
-          <tr align="center">
-            <td>
+          <tr>
+            <td align="center">
               {output}
             </td>
           </tr>

@@ -13,115 +13,6 @@ class OutputPane extends Component {
       data:undefined,
       height: 400,
       width: 800,
-
-      // Examples of the structure of this.props.results
-      /*********************************************************************************************************************/
-      results2: {
-        query: 'ESTIMATE',
-        expression: 'CORRELATION',
-        dimensions: 2,
-        colNames: ["VehicleType", "SecondVehicleType", "Date", "Time", "RoadHasPavement", "DistanceToNearestTrafficLight",
-                   "SpeedLimit", "EstimatedSpeedOfCollision",  "SeatBeltUsed", "Severity OfDamage", "LandUse", "City"],
-        rows: [
-          {
-            rowName: 'VehicleType',
-            values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0.5, 0.12, 0.15, 0.17, 0.33],
-          },
-          {
-            rowName: 'SecondVehicleType',
-            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.3, 0.12, 0.15, 0.17, 0.33],
-          },
-          {
-            rowName: 'EstimatedSpeedOfCollision',
-            values: [0.15, 0.11, 0, 0.14, 0.33, 0.17, 0.57, 0, 0.12, 0.15, 0.17, 0.33],
-          },
-          {
-            rowName: 'Date',
-            values: [0.17, 0.67, 0.11, 0, 0.14, 0.9, 0.64, 0.2, 0.12, 0.15, 0.17, 0.33],
-          },
-          {
-            rowName: 'Time',
-            values: [0.33, 0.49, 0.33, 0.14, 0, 0.22, 0.2, 0.4, 0.12, 0.15, 0.17, 0.33],
-          },
-          {
-            rowName: 'RoadHasPavement',
-            values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
-          }/*,
-          {
-            rowName: 'DistanceToNearestTrafficLight',
-            values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
-          }*/
-        ]
-      },
-
-      results2b: {
-        query: 'ESTIMATE',
-        expression: 'CORRELATION',
-        dimensions: 2,
-        colNames: ['Kenya', 'Uganda', 'EstimatedSpeedOfCollision', 'Chad', 'Ghana', 'Algeria', 'Guinea',
-                    'Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
-        rows: [
-          {
-            rowName: 'Kenya',
-            values: [0, 0.12, 0.15, 0.17, 0.33, 1, 0.38, 0, 0.12, 0.15, 0.17, 0.33, 1, 0.38],
-          },
-          {
-            rowName: 'DistanceToNearestTrafficLight',
-            values: [0.12, 0, 0.11, 0.14, 0.49, 0.67, 0.102, 0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0],
-          }
-        ]
-      },
-
-      results1: {
-        query: 'ESTIMATE',
-        expression: 'CORRELATION',
-        dimensions: 1,
-        colNames: ['EstimatedSpeedOfCollision', 'Uganda', 'EstimatedSpeedOfCollision', 'Chad'],
-        rows: [
-          {
-            rowName: 'EstimatedSpeedOfCollision',
-            values: [423435, 0.62, 2, 0.135],
-          }
-        ]
-      },
-
-      results1b: {
-        query: 'SIMULATE',
-        expression: 'CORRELATION',
-        dimensions: 1,
-      colNames: ['Kenya', 'Uganda', 'Tanzania', 'Chad', 'Ghana', 'DistanceToNearestTrafficLight', 'Guinea'],
-        rows: [
-          {
-            rowName: 'Morocco',
-            values: [0.135, 0.62, 0.3, 0.135, 0.102, 1, 0.09],
-          }
-        ]
-      },
-
-      results0: {
-        query: 'ESTIMATE',
-        expression: 'CORRELATION',
-        dimensions: 0,
-        colNames: ['DistanceToNearestTrafficLight'],
-        rows: [
-          {
-            rowName: 'Guinea',
-            values: [6],
-          }
-        ]
-      },
-
-      resultSimulate: {
-        query: 'SIMULATE',
-        data: [
-          {
-            label: 'VehicleType',
-            value: 1232
-          }
-        ]
-      }
-      /*********************************************************************************************************************/
-      // End of examples
     }
   }
 
@@ -243,34 +134,34 @@ class OutputPane extends Component {
       /*****************************************************************************************************************/
       let results=this.props.results;
       let explanationText = undefined;
+      let defaultWidth = 930;
 
       // Set height and width of the OutPutPane
       switch (results.dimensions) {
         case 0:
           this.state.height=280;
-          this.state.width=960;
+          this.state.width=defaultWidth;
           break;
         case 1:
           this.state.height=220+results.colNames.length*30;
-          this.state.width=960;
+          this.state.width=defaultWidth;
           break;
         case 2:
           if (results.rows.length>5) this.state.height=200+results.rows.length*30;
           else this.state.height=350;
           if (results.colNames.length>7) this.state.width=420+results.colNames.length*80;
-          else this.state.width=960;
+          else this.state.width=defaultWidth;
           explanationText = "This is a Heat Map - the darker blues reperesent greater values.";
           break;
         default:
           this.state.height=400;
-          this.state.width=750;
+          this.state.width=defaultWidth;
       }
 
       const divStyle = {
         height: this.state.height+'px',
         width: this.state.width+'px',
-        backgroundColor: '#E3ECF2',
-        margin: 5+'px'
+        align: "center"
       };
 
       return (
