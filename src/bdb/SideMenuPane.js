@@ -317,7 +317,7 @@ class SideMenuPane extends Component {
   }
 
   renderSimilarity(statisticText) {
-    let inputText = 
+    let inputText = (
       <div className='side-menu-h2'>(1) Choose to compare one or every row.  <br/>
         <div className='side-menu-h4'>
           <i>To choose a specific row you need to input a boolean expression (e.g. ID=1) and the first row to match this expression will be used.</i>
@@ -326,8 +326,9 @@ class SideMenuPane extends Component {
         (3) Choose a column for the context <br/>
         (4) Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}} disabled>Run</button> and the results will be displayed below. <br/>
       </div>
+    );
 
-      let input1 = this.renderRowInput(
+    let input1 = this.renderRowInput(
       ()=>{return this.props.query.row1Chosen},
       ()=>{return this.props.query.row1Fixed},
       ()=>{return this.props.query.row1ConditionChosen},

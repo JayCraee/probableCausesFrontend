@@ -109,8 +109,6 @@ class BqlStudio extends Component {
           <BQLNavBar/>
           <table align="center">
             <header id='centered'>
-              <p> id='welcome-title-big' </p>
-              <p> id='welcome-title-big' </p>
               <p id='welcome-title-big'>Welcome to <Image src={require("./logo.svg")} alt="" width="170" fluid/></p>
               <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p>
               <p> BayesDB uses advanced machine learning and statistical methods to make it easy for you to turn data into real world results. <br/> In BQL Studio, you can test and improve the reliability of your data-set, extract insight from it, and find out what would happen in the real world if you made changes to policy.</p>
