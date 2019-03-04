@@ -324,7 +324,7 @@ class SideMenuPane extends Component {
         </div>
         (2) Choose to compare it with one or every row. <br/>
         (3) Choose a column for the context <br/>
-        (4) Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> and the results will be displayed below. <br/>
+        (4) Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}} disabled>Run</button> and the results will be displayed below. <br/>
       </div>
 
       let input1 = this.renderRowInput(
@@ -497,7 +497,7 @@ class SideMenuPane extends Component {
       <div className='side-menu-h2'>
         1. Choose to compare one or every column. <br/>
         2. Choose to compare it with one or every column. <br/>
-        3. Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}}>Run</button> and the results will be displayed below. <br/><br/>
+        3. Click <button style={{backgroundColor: "#2ec077", borderRadius: "6px"}} disabled>Run</button> and the results will be displayed below. <br/><br/>
       </div>  
 
                 

@@ -135,6 +135,8 @@ class SimulatePane extends Component {
                 addingConstraint: false,
                 numOfItems: this.state.numOfItems + 1
               });
+            } else {
+              alert('Specify a field name');
             }
           }}
           >

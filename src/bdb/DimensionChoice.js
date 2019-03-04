@@ -10,22 +10,24 @@ class DimensionChoice extends Component {
       <table id='input-choice'>
         <tbody>
           <tr align="left">
-            <div>
-              <Button 
-                variant="light"
-                onClick={() => this.props.onClick(false) }
-              >
-                {button1Text}
-              </Button>
-              <t> </t>
-              <Button 
-                variant="light"
-                onClick={() => this.props.onClick(true)}
-                
-              >
-                {button2Text}
-              </Button>
-            </div>
+            <td>
+              <div>
+                <Button
+                  variant="light"
+                  onClick={() => this.props.onClick(false) }
+                >
+                  {button1Text}
+                </Button>
+                <t> </t>
+                <Button
+                  variant="light"
+                  onClick={() => this.props.onClick(true)}
+
+                >
+                  {button2Text}
+                </Button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
