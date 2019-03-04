@@ -171,7 +171,7 @@ td#field-to-simulate {
   padding-right: 10px;
   padding-top: 25px;
   border: 2px solid #e3ecf2;
-  background-color: #2d76b6;
+  background-color: #1c6ca1;
 }
 
 button#run {
@@ -185,7 +185,7 @@ button#run {
 
 .value {
   padding: 20px 80px;
-  background-color: #2d76b6;
+  background-color: #1c6ca1;
   border-radius: 6px;
   align-content: center;
   font-size: 25px;

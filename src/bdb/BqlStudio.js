@@ -75,8 +75,9 @@ class BqlStudio extends Component {
       configureAnchors({offset: -10, scrollDuration: 1000});
       let rows = [];
       for (let i = 0; i < this.state.numQueries; ++i) {
-        //sections.push({id: 'section'+i+1, label: 'Section '+i+1});
-        rows.push(<tr height="35px"/>);
+        rows.push(<tr height="50px"/>);
+        /*rows.push(<hr/>);
+        rows.push(<tr height="35px"/>);*/
         rows.push(
           <tr>
             <ScrollableAnchor id={'section'+(i+1)}>

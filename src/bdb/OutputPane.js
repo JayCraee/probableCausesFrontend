@@ -242,12 +242,13 @@ class OutputPane extends Component {
       * For testing: replace this.props.results to this.state.results<number> where number can be 0, 1, 1b, 2 or 2b
       /*****************************************************************************************************************/
       let results=this.props.results;
+      let explanationText = undefined;
 
       // Set height and width of the OutPutPane
       switch (results.dimensions) {
         case 0:
           this.state.height=280;
-          this.state.width=750;
+          this.state.width=960;
           break;
         case 1:
           this.state.height=220+results.colNames.length*30;
@@ -258,6 +259,7 @@ class OutputPane extends Component {
           else this.state.height=350;
           if (results.colNames.length>7) this.state.width=420+results.colNames.length*80;
           else this.state.width=960;
+          explanationText = "This is a Heat Map - the darker blues reperesent greater values.";
           break;
         default:
           this.state.height=400;
@@ -271,14 +273,13 @@ class OutputPane extends Component {
         margin: 5+'px'
       };
 
-      let explanationText = "This is a Heat Map - the darker blues reperesent greater values."
       return (
         <div style={divStyle}>
           <br/>
           <p className="output-title">{"Results:"}</p>
           {this.renderOutput(results)}
           <br/>
-          {explanationText}
+          {explanationText!=undefined ? explanationText : ""}
         </div>
       );
     }

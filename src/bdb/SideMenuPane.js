@@ -58,9 +58,9 @@ class SideMenuPane extends Component {
     return (
       <div>
         <div className='side-menu-h1'>
-          Select 
+          Select statistical method
         </div>
-        <Stage width={this.props.width} height={this.props.height}>
+         <Stage width={this.props.width} height={this.props.height}>
           <Layer>
             {BqlStudio.getExpressions().map((expression, index) => (
               <StyledExpression
@@ -76,7 +76,7 @@ class SideMenuPane extends Component {
             ))}
           </Layer>
         </Stage>
-      </div>
+       </div>
     )
   }
 
@@ -552,7 +552,13 @@ class SideMenuPane extends Component {
       }
       return sideMenu;
     } else {
-      return this.renderChooseExpression();
+      return (
+        <div>
+          {this.renderChooseExpression()}
+          <div className='side-menu-h2'> Similarity - <i>Select rows, compare them in some context, explore how similar they are.</i></div>
+          <div height = "40px" />
+          <div className='side-menu-h2'>Correlation - <i>Select columns, compare them, explore any correlations they have.</i></div>
+        </div>)
     }
   }
 

@@ -49,6 +49,8 @@ class StyledExpression extends Component {
           width={textWidth}
           align="center"
           fill="#2F6690"
+          fontFamily="Arial"
+          fontStyle="bold"
           onClick={this.props.onClick}
         />
       </Group>

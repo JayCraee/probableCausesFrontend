@@ -8,7 +8,7 @@ import {Circle} from 'react-konva';
  */
 class StyledEllipse extends Component {
   render() {
-    let fill='#74bcff';
+    let fill='#e3ecf2';
 
     const scaleX = Math.floor(this.props.width*0.5);
     const scaleY = Math.floor(this.props.height*0.5);
