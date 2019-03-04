@@ -41,7 +41,6 @@ class QueryChoicePane extends Component {
   render() {
     let style = {
       width: this.props.width,
-      backgroundColor: '#1c6ca1',
     };
 
     return (

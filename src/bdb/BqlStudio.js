@@ -7,6 +7,7 @@ import BQLNavBar from './BQLNavBar';
 import ScrollableAnchor from 'react-scrollable-anchor'
 import { configureAnchors } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
+import { Image } from 'react-bootstrap'
 
 class BqlStudio extends Component {
   constructor(props) {
@@ -26,8 +27,8 @@ class BqlStudio extends Component {
     } else {
       this.state = {
         population: 'pop',
-        columns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
-        nominalColumns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+        columns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+        nominalColumns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
         loading: false,
         numQueries: 1,
         test: true,
@@ -109,7 +110,9 @@ class BqlStudio extends Component {
           <BQLNavBar/>
           <table id='centered'>
             <header>
-              <p id='welcome-title-big'>Welcome to <img src={require("./logo.svg")} alt="" width="170" fluid/></p>
+              <p> id='welcome-title-big' </p>
+              <p> id='welcome-title-big' </p>
+              <p id='welcome-title-big'>Welcome to <Image src={require("./logo.svg")} alt="" width="170" fluid/></p>
               <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p>
               <p> BayesDB uses advanced machine learning and statistical methods to make it easy for you to turn data into real world results. <br/> In BQL Studio, you can test and improve the reliability of your data-set, extract insight from it, and find out what would happen in the real world if you made changes to policy.</p>
               <p id='main-functionalities'>Main functionalities of BQL Studio:</p>

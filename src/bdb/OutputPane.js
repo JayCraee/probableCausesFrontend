@@ -147,7 +147,6 @@ class OutputPane extends Component {
    * then draw HeatMap.
    */
   renderHeatMap(results) {
-    // column names
     let xLabels = results.colNames.map(i => this.lexing(i));
     let yLabels = [];
     let data = new Array(results.rows.length);
@@ -169,7 +168,6 @@ class OutputPane extends Component {
         data={data}
         yLabelWidth={220}
         background="#1c6ca1"
-        //xLabelsLocation="bottom"
       />
     )
   }
@@ -253,34 +251,34 @@ class OutputPane extends Component {
           break;
         case 1:
           this.state.height=220+results.colNames.length*30;
-          this.state.width=900;
+          this.state.width=960;
           break;
         case 2:
           if (results.rows.length>5) this.state.height=200+results.rows.length*30;
           else this.state.height=350;
           if (results.colNames.length>7) this.state.width=420+results.colNames.length*80;
-          else this.state.width=900;
+          else this.state.width=960;
           break;
         default:
           this.state.height=400;
           this.state.width=750;
       }
 
-      // Basic styling of OutputPane
       const divStyle = {
         height: this.state.height+'px',
         width: this.state.width+'px',
         backgroundColor: '#E3ECF2',
+        margin: 5+'px'
       };
 
-      /* Display name of expression as the title,
-       * then call function to display the heatmap/chart
-       */
+      let explanationText = "This is a Heat Map - the darker blues reperesent greater values."
       return (
         <div style={divStyle}>
-          <br></br>
+          <br/>
           <p className="output-title">{"Results:"}</p>
           {this.renderOutput(results)}
+          <br/>
+          {explanationText}
         </div>
       );
     }

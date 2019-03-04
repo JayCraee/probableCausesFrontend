@@ -544,7 +544,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 1,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
               rows: [
                 {
                   rowName: 'injury',
@@ -558,7 +558,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 2,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
               rows: [
                 {
                   rowName: 'speed',
@@ -614,7 +614,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'SIMILARITY',
               dimensions: 1,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
               rows: [
                 {
                   rowName: 'injury',
@@ -628,7 +628,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'SIMILARITY',
               dimensions: 2,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
               rows: [
                 {
                   rowName: 'speed',
@@ -669,7 +669,7 @@ class QueryPane extends Component {
         query: 'SIMULATE',
         expression: 'Scaled frequency of each outcome',
         dimensions: 1,
-        colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+        colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
         rows: [
           {
             rowName: 'injury',

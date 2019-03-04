@@ -160,9 +160,13 @@ td#field-to-simulate {
 }
 
 .query-choice {
+  height: 150px;
   text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 25px;
   border: 2px solid #e3ecf2;
-  padding: 10px;
+  background-color: #2d76b6;
 }
 
 button#run {
@@ -283,17 +287,5 @@ p#normal-text {
 
 p#intro-end{
   margin-bottom: 20px;
-}
-
-t#white-text {
-  color: #ffffff;
-}
-
-.input-button {
-  background-color: #e3ecf2;
-  border: 1px solid #2ec077;
-  color: #74bcff;
-  /* #5A9AD9  */
-  border-radius: 12px;
 }
 

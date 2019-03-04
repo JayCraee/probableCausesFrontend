@@ -103,7 +103,7 @@ class InputPane extends Component {
 
   renderSimulate() {
     let width = 500;
-    let height = 600;
+    let height = 300;
     return <SimulatePane
       width={width}
       height={height}

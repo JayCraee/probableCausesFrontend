@@ -223,7 +223,7 @@ class SideMenuPane extends Component {
           <div className="todo">{input1Table}</div>
         );
       } else {
-        input1Type = <div id='white-text'>{every}</div>;
+        input1Type = <div>{every}</div>;
         input1 = (
           <table>
             <tbody>
