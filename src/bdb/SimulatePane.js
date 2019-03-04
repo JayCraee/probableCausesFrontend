@@ -127,13 +127,15 @@ class SimulatePane extends Component {
         <Button 
           style={{backgroundColor: this.state.addButtonColor}}
           onClick={()=>{
-            this.props.addConstraint(this.state.nextConstraintField, this.state.nextConstraintValue);
-            this.setState({
-              nextConstraintValue: '',
-              nextConstraintField: '',
-              addingConstraint: false,
-              numOfItems: this.state.numOfItems+1
-            });
+            if (this.state.nextConstraintField !== '') {
+              this.props.addConstraint(this.state.nextConstraintField, this.state.nextConstraintValue);
+              this.setState({
+                nextConstraintValue: '',
+                nextConstraintField: '',
+                addingConstraint: false,
+                numOfItems: this.state.numOfItems + 1
+              });
+            }
           }}
           >
           +
