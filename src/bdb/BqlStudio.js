@@ -13,7 +13,7 @@ class BqlStudio extends Component {
   constructor(props) {
     super(props);
 
-    let test = true;
+    let test = false;
     if (!test) {
       this.state = {
         population: undefined,

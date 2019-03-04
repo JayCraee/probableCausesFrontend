@@ -225,7 +225,7 @@ class SideMenuPane extends Component {
           <table>
             <tbody>
             <tr>
-              <td>
+              <td id='input-name'>
                 {input1Text}
               </td>
               <td>
