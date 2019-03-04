@@ -14,6 +14,7 @@ import BqlStudio from "./BqlStudio";
 import SimilarityExpression from "./data/SimilarityExpression";
 import CorrelationExpression from "./data/CorrelationExpression";
 import ColChoice from "./ColChoice";
+import { goToAnchor } from 'react-scrollable-anchor';
 
 /**
  * Side Menu of the input pane
@@ -44,6 +45,11 @@ class SideMenuPane extends Component {
 
   static wrap(expression) {
     return (String(expression).split(" ").length > 1);
+  }
+
+  handleExpressionChoice(expression) {
+    this.props.setExpression(expression);
+    goToAnchor('input'+(this.props.queryID+1));
   }
 
   renderChooseExpression() {
@@ -84,7 +90,7 @@ class SideMenuPane extends Component {
                 height={expressionHeight}
                 expression={expression}
                 wrap={SideMenuPane.wrap(expression)}
-                onClick={()=>this.props.setExpression(expression)}
+                onClick={()=>this.handleExpressionChoice(expression)}
               />
             ))}
           </Layer>

@@ -40,9 +40,7 @@ class BqlStudio extends Component {
 
   handleNewQuery() {
     this.setState({numQueries: this.state.numQueries+1});
-    goToAnchor('section'+(this.state.numQueries+1), true);
-
-    //goToTop();
+    goToAnchor('input'+(this.state.numQueries+1), true);
   }
 
   async getTableData() {
@@ -80,7 +78,7 @@ class BqlStudio extends Component {
         rows.push(<tr height="30px"/>);
         rows.push(
           <tr>
-            <ScrollableAnchor id={'section'+(i+1)}>
+            <ScrollableAnchor id={'input'+(i+1)}>
               <p id='welcome-title-small'>Query {i+1}</p>
             </ScrollableAnchor>
           </tr>);
@@ -92,6 +90,7 @@ class BqlStudio extends Component {
                 columns={this.state.columns}
                 nominalColumns={this.state.nominalColumns}
                 test={this.state.test}
+                queryID={i}
               />
             </td>
           </tr>
