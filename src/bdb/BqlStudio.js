@@ -27,8 +27,8 @@ class BqlStudio extends Component {
     } else {
       this.state = {
         population: 'pop',
-        columns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
-        nominalColumns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+        columns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
+        nominalColumns: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
         loading: false,
         numQueries: 1,
         test: true,
@@ -105,9 +105,9 @@ class BqlStudio extends Component {
                   </td>
                 </tr>);
       return (
-        <div>
+        <div align="center">
           <BQLNavBar/>
-          <table align="center">
+          <table >
             <header id='centered'>
               <p id='welcome-title-big'>Welcome to <Image src={require("./logo.svg")} alt="" width="170" fluid/></p>
               <p id='welcome-title-small'>Data analysis tool that uses MIT's BayesDB to deliver powerful data science capabilities to a wide user base. </p>

@@ -544,7 +544,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 1,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
                   rowName: 'injury',
@@ -558,7 +558,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'CORRELATION',
               dimensions: 2,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
                   rowName: 'speed',
@@ -585,7 +585,7 @@ class QueryPane extends Component {
                   values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'people-involved',
+                  rowName: 'people_involved',
                   values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
                 }
               ]
@@ -614,7 +614,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'SIMILARITY',
               dimensions: 1,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
                   rowName: 'injury',
@@ -628,7 +628,7 @@ class QueryPane extends Component {
               query: 'ESTIMATE',
               expression: 'SIMILARITY',
               dimensions: 2,
-              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+              colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
               rows: [
                 {
                   rowName: 'speed',
@@ -655,7 +655,7 @@ class QueryPane extends Component {
                   values: [0.16, 0.67, 0.17, 0.9, 0.22, 0, 0.18, 0.1, 0.12, 0.15, 0.17, 0.33],
                 },
                 {
-                  rowName: 'people-involved',
+                  rowName: 'people_involved',
                   values: [0.38, 0.102, 0.57, 0.64, 0.2, 0.18, 0, 0, 0.12, 0.15, 0.17],
                 }
               ]
@@ -669,7 +669,7 @@ class QueryPane extends Component {
         query: 'SIMULATE',
         expression: 'Scaled frequency of each outcome',
         dimensions: 1,
-        colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people-involved'],
+        colNames: ['speed', 'injury', 'vehicle', 'fatality', 'area', 'city', 'people_involved'],
         rows: [
           {
             rowName: 'injury',

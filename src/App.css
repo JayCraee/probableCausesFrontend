@@ -41,6 +41,7 @@ header#centered {
   padding-right: auto;
   width: 1000px;
   text-align: center;
+  margin:auto;
 }
 table#query-pane-table { 
   border: 5px solid #e3ecf2;
