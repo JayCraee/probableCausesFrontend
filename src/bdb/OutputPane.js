@@ -145,7 +145,7 @@ class OutputPane extends Component {
           this.state.width=defaultWidth;
           break;
         case 2:
-          if (results.rows.length>5) this.state.height=200+results.rows.length*30;
+          if (results.rows.length>5) this.state.height=200+results.rows.length*40;
           else this.state.height=350;
           if (results.colNames.length>7) this.state.width=420+results.colNames.length*80;
           else this.state.width=defaultWidth;
